@@ -1,3 +1,4 @@
 # Excluded files
 
 .DS_Store
+libraries/**
