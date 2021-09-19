@@ -2,4 +2,4 @@
 
 .DS_Store
 libraries/**
-build/game.app
+*.app
