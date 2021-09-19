@@ -2,6 +2,7 @@
 
 # Using to copy SDL libs to current workspace folder
 
+mkdir libraries
 mkdir libraries/include
 mkdir libraries/lib
 
