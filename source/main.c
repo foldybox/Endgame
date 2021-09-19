@@ -24,15 +24,31 @@ int main(int argc, char *argv[])
 	{
 		scene_prepare(&game);
 
+		if (game.up)
+		{
+			player.y -= 1;
+		}
+
+		if (game.down)
+		{
+			player.y += 1;
+		}
+
+		if (game.left)
+		{
+			player.x -= 1;
+		}
+
+		if (game.right)
+		{
+			player.x += 1;
+		}
+
 		blit(&game, player.texture, player.x, player.y);
 
-		input_handle();
+		input_handle(&game);
 
 		scene_present(&game);
-
-		SDL_Delay(20);
-
-		player.x++;
 	}
 
 	return 0;
