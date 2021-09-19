@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 
 	player.x = 100;
 	player.y = 100;
-	player.texture = loadTexture(&game, "src/images/player.png");
+	player.texture = loadTexture(&game, "assets/sprites/sp_player.png");
 
 	//atexit(cleanup);
 
