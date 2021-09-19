@@ -2,7 +2,9 @@
 
 #include "main.h"
 
-int main(int argc, char *argv[])
+// int argc, char *argv[]
+
+int main()
 {
 	Game game;
 	Entity player;
@@ -17,8 +19,6 @@ int main(int argc, char *argv[])
 	player.texture = loadTexture(&game, "assets/sprites/sp_player.png");
 
 	//atexit(cleanup);
-
-	int i = 0;
 
 	while (1)
 	{
