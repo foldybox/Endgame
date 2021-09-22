@@ -14,8 +14,6 @@ void scene_present(Game *game) {
 SDL_Texture *loadTexture(Game *game, char *filename) {
 	SDL_Texture *texture;
 
-	SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", filename);
-
 	texture = IMG_LoadTexture(game->renderer, filename);
 
 	return texture;

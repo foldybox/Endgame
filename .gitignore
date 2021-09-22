@@ -1,6 +1,8 @@
 # Excluded files
 
 .DS_Store
-libraries/**
+lib
+inc/SDL2
+obj
 *.app
 .vscode
