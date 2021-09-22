@@ -83,10 +83,17 @@ int main()
 			isPressed = true;
 		}
 
+		double pX = 100, pY = 100;
+
+		pX = pX + (player.x - pX) / 5;
+		pY = pY + (player.y - pY) / 5;
+
+		blit(&game, player.texture, pX, pY);
+
 		if (game.control.use && bullet.health == 0)
 		{
-			bullet.x = player.x;
-			bullet.y = player.y;
+			bullet.x = pX;
+			bullet.y = pY;
 			bullet.dx = 1;
 			bullet.dy = 0;
 			bullet.health = 1;
@@ -99,13 +106,6 @@ int main()
 		{
 			bullet.health = 0;
 		}
-
-		double pX = 100, pY = 100;
-
-		pX = pX + (player.x - pX) / 5;
-		pY = pY + (player.y - pY) / 5;
-
-		blit(&game, player.texture, pX, pY);
 
 		if (bullet.health > 0)
 		{
