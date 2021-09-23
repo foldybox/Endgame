@@ -2,16 +2,16 @@
 
 #include "draw.h"
 
-void scene_prepare(Game *game) {
+void scene_prepare(t_game *game) {
 	SDL_SetRenderDrawColor(game->renderer, 76, 0, 255, 255);
 	SDL_RenderClear(game->renderer);
 }
 
-void scene_present(Game *game) {
+void scene_present(t_game *game) {
 	SDL_RenderPresent(game->renderer);
 }
 
-SDL_Texture *loadTexture(Game *game, char *filename) {
+SDL_Texture *loadTexture(t_game *game, char *filename) {
 	SDL_Texture *texture;
 
 	texture = IMG_LoadTexture(game->renderer, filename);
@@ -19,7 +19,7 @@ SDL_Texture *loadTexture(Game *game, char *filename) {
 	return texture;
 }
 
-void blit(Game *game, SDL_Texture *texture, int x, int y) {
+void blit(t_game *game, SDL_Texture *texture, int x, int y) {
 	SDL_Rect dest;
 
 	dest.x = x;

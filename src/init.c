@@ -3,7 +3,12 @@
 #include "common.h"
 #include <SDL2/SDL_image.h>
 
-void game_init(Game *game) {
+t_game *game_init(void) {
+	t_game *game = (t_game *) malloc(sizeof(t_game));
+	if (game == NULL) return NULL;
+
+	memset(game, 0, sizeof(t_game));
+
 	int rendererFlags, windowFlags;
 
 	rendererFlags = SDL_RENDERER_ACCELERATED;
@@ -42,4 +47,6 @@ void game_init(Game *game) {
 		printf("Failed to create renderer: %s\n", SDL_GetError());
 		exit(1);
 	}
+
+	return game;
 }

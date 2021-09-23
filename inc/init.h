@@ -4,6 +4,6 @@
 
 #include "common.h"
 
-void game_init(Game *game);
+t_game *game_init(void);
 
 #endif

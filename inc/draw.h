@@ -6,11 +6,11 @@
 #include "common.h"
 #include "SDL2/SDL_image.h"
 
-void scene_prepare(Game *game);
-void scene_present(Game *game);
+void scene_prepare(t_game *game);
+void scene_present(t_game *game);
 
-SDL_Texture *loadTexture(Game *game, char *filename);
-void blit(Game *game, SDL_Texture *texture, int x, int y);
+SDL_Texture *loadTexture(t_game *game, char *filename);
+void blit(t_game *game, SDL_Texture *texture, int x, int y);
 
 
 #endif
