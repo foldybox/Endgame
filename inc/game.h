@@ -5,5 +5,6 @@
 #include "common.h"
 
 t_game *game_init(void);
+void game_free(t_game* game);
 
 #endif

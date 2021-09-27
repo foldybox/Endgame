@@ -2,15 +2,6 @@
 
 #include "draw.h"
 
-void scene_prepare(t_game *game) {
-	SDL_SetRenderDrawColor(game->renderer, 76, 0, 255, 255);
-	SDL_RenderClear(game->renderer);
-}
-
-void scene_present(t_game *game) {
-	SDL_RenderPresent(game->renderer);
-}
-
 SDL_Texture *loadTexture(t_game *game, char *filename) {
 	SDL_Texture *texture;
 

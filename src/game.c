@@ -1,7 +1,6 @@
 // init.c
 
 #include "common.h"
-#include <SDL2/SDL_image.h>
 
 t_game *game_init(void) {
 	t_game *game = (t_game *) malloc(sizeof(t_game));
@@ -38,7 +37,7 @@ t_game *game_init(void) {
 		exit(1);
 	}
 
-	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "nearest");
 
 	game->renderer = SDL_CreateRenderer(game->window, -1, rendererFlags);
 
@@ -48,5 +47,19 @@ t_game *game_init(void) {
 		exit(1);
 	}
 
+	if (TTF_Init() < 0)
+	{
+		printf("Couldn't initialize SDL TTF: %s\n", SDL_GetError());
+		exit(1);
+	}
+
+	game->is_started = false;
+
 	return game;
+}
+
+void game_free(t_game *game) {
+	TTF_Quit();
+
+	free(game);
 }
