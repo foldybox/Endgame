@@ -47,19 +47,11 @@ t_game *game_init(void) {
 		exit(1);
 	}
 
-	if (TTF_Init() < 0)
-	{
-		printf("Couldn't initialize SDL TTF: %s\n", SDL_GetError());
-		exit(1);
-	}
-
 	game->is_started = false;
 
 	return game;
 }
 
 void game_free(t_game *game) {
-	TTF_Quit();
-
 	free(game);
 }

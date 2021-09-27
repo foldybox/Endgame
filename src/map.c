@@ -40,7 +40,7 @@ void map_draw(t_game* game) {
 			t_tile tile = set_tile(0, 0);
 
 			if (n == 0) {
-				tile = set_tile(1, 1);
+				tile = set_tile(5, 0);
 				blit_tile(game, tile, game->map.offset.x + x * TILE_SIZE * TILE_SCALE, game->map.offset.y + y * TILE_SIZE * TILE_SCALE, false);
 			}
 			else if (n == 1) {

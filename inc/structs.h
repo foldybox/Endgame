@@ -39,7 +39,6 @@ typedef struct s_game {
 	t_map map;
 	t_entity *player;
 	bool is_started;
-	TTF_Font *font;
 } t_game;
 
 #endif

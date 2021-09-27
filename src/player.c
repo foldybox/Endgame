@@ -4,7 +4,7 @@
 
 void player_init(t_game *game, int x, int y) {
     t_entity *player = (t_entity *) malloc(sizeof(t_entity));
-    if (player == NULL) return NULL;
+    if (player == NULL) exit(-1);
 
     memset(player, 0, sizeof(t_entity));
 
