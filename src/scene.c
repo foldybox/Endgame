@@ -5,7 +5,7 @@
 void scene_init(t_game *game) {
 	player_init(game, 0, 0);
 
-	map_init(game, 0, 0);
+	map_init(game, "assets/maps/map.csv");
 
 	tileset_init(game, "assets/sprites/tileset.png");
 }
