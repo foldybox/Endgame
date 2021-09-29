@@ -27,8 +27,9 @@ typedef struct s_entity {
 } t_entity;
 
 typedef struct s_map {
-	int data[MAP_WIDTH][MAP_HEIGHT];
+	int **data;
 	SDL_Point offset;
+	SDL_Point size;
 } t_map;
 
 typedef struct s_game {
@@ -36,9 +37,10 @@ typedef struct s_game {
 	SDL_Window *window;
 	t_control control;
 	SDL_Texture *tileset;
-	t_map map;
+	t_map *map;
 	t_entity *player;
 	bool is_started;
+	SDL_Point scene_offset;
 } t_game;
 
 #endif

@@ -5,8 +5,8 @@
 #define GAME_TITLE "Game"
 #define PLAYER_SPEED 8
 
-#define MAP_WIDTH 19
-#define MAP_HEIGHT 11
+#define MAP_WIDTH 20
+#define MAP_HEIGHT 12
 
 #define MAX_FILENAME_LENGTH 256
 

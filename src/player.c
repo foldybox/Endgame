@@ -83,10 +83,13 @@ void player_move(t_game* game) {
 	int gX = x / (TILE_SIZE * TILE_SCALE);
 	int gY = y / (TILE_SIZE * TILE_SCALE);
 
-	if (game->map.data[gX][gY] <= 10) {
+	if (game->map->data[gX][gY] <= 10) {
 		game->player->x = x;
 		game->player->y = y;
 	}
+
+	game->scene_offset.x = SCREEN_WIDTH / 2 - game->player->x;
+	game->scene_offset.y = SCREEN_HEIGHT / 2 - game->player->y;
 }
 
 void player_logic(t_game *game) {
@@ -101,11 +104,6 @@ void player_logic(t_game *game) {
 }
 
 void player_draw(t_game *game) {
-	double pX = 0, pY = 0;
-
-	pX = game->player->x;
-	pY = game->player->y;
-
 	if (game->player->facing == FACING_LEFT) {
 		game->player->tile = set_tile(4, 4);
 	}
@@ -113,7 +111,7 @@ void player_draw(t_game *game) {
 		game->player->tile = set_tile(4, 3);
 	}
 
-	blit_tile(game, game->player->tile, pX, pY, true);
+	blit_tile(game, game->player->tile, SCREEN_WIDTH / 2, SCREEN_HEIGHT/ 2, BOTTOM_CENTER);
 }
 
 void player_free(t_game *game) {
