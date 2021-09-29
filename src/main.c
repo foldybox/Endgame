@@ -13,7 +13,6 @@ int main()
 	scene_init(game);
 
 	while (1) {
-
 		scene_prepare(game);
 
 		scene_present(game);
