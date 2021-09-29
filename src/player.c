@@ -88,8 +88,8 @@ void player_move(t_game* game) {
 		game->player->y = y;
 	}
 
-	game->scene_offset.x = SCREEN_WIDTH / 2 - x;
-	game->scene_offset.y = SCREEN_HEIGHT / 2 - y;
+	game->scene_offset.x = SCREEN_WIDTH / 2 - game->player->x;
+	game->scene_offset.y = SCREEN_HEIGHT / 2 - game->player->y;
 }
 
 void player_logic(t_game *game) {
@@ -111,7 +111,7 @@ void player_draw(t_game *game) {
 		game->player->tile = set_tile(4, 3);
 	}
 
-	blit_tile(game, game->player->tile, SCREEN_WIDTH / 2, SCREEN_HEIGHT/ 2, true);
+	blit_tile(game, game->player->tile, SCREEN_WIDTH / 2, SCREEN_HEIGHT/ 2, BOTTOM_CENTER);
 }
 
 void player_free(t_game *game) {

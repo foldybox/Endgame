@@ -3,7 +3,7 @@
 #include "scene.h"
 
 void scene_init(t_game *game) {
-	player_init(game, 0, 0);
+	player_init(game, 1 * (TILE_SIZE * TILE_SCALE), 1 * (TILE_SIZE * TILE_SCALE));
 
 	map_init(game, "assets/maps/map.csv");
 
