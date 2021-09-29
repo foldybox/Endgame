@@ -40,6 +40,7 @@ typedef struct s_game {
 	t_map *map;
 	t_entity *player;
 	bool is_started;
+	SDL_Point scene_offset;
 } t_game;
 
 #endif
