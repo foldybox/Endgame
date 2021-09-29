@@ -83,7 +83,7 @@ void player_move(t_game* game) {
 	int gX = x / (TILE_SIZE * TILE_SCALE);
 	int gY = y / (TILE_SIZE * TILE_SCALE);
 
-	if (game->map.data[gX][gY] <= 10) {
+	if (game->map->data[gX][gY] <= 10) {
 		game->player->x = x;
 		game->player->y = y;
 	}
