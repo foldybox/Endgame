@@ -22,9 +22,18 @@ typedef struct s_entity {
 	int y;
 	int w;
 	int h;
+	bool is_death;
 	t_tile tile;
 	t_facing facing;
 } t_entity;
+
+typedef struct s_traps {
+    int x;
+    int y;
+    bool activated;
+	t_tile tile;
+	struct s_traps *next;
+} t_traps;
 
 typedef struct s_map {
 	int data[MAP_WIDTH][MAP_HEIGHT];
@@ -38,7 +47,9 @@ typedef struct s_game {
 	SDL_Texture *tileset;
 	t_map map;
 	t_entity *player;
+	t_traps *trap;
 	bool is_started;
 } t_game;
+
 
 #endif
