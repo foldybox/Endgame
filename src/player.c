@@ -147,7 +147,7 @@ void player_move(t_game* game) {
 			game->player->animation = animation_init(&game->player->tile, set_tile(4, 3), 4, 150);
 		}
 		else {
-			game->player->animation = animation_init(&game->player->tile, set_tile(4, 5), 2, 150);
+			game->player->animation = animation_init(&game->player->tile, set_tile(4, 3), 1, 150);
 		}
 	}
 
@@ -156,7 +156,7 @@ void player_move(t_game* game) {
 			game->player->animation = animation_init(&game->player->tile, set_tile(4, 4), 1, 150);
 		}
 		else if (game->player->facing == FACING_RIGHT) {
-			game->player->animation = animation_init(&game->player->tile, set_tile(4, 5), 1, 150);
+			game->player->animation = animation_init(&game->player->tile, set_tile(4, 3), 1, 150);
 		}
 	}
 
