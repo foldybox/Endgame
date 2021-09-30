@@ -5,6 +5,10 @@
 void player_init(t_game *game, int x, int y) {
     t_entity *player = entity_add(game, ENTYPE_PLAYER, x, y, set_tile(4, 3), FACING_RIGHT);
 	player->animation = animation_init(&player->tile, set_tile(4, 3), 1, 150);
+	for (int i = 0; i < 8; i++) {
+		player->items[i] = 0;
+	}
+	
     game->player = player;
 }
 
@@ -15,9 +19,25 @@ void player_use_door(t_game *game, t_entity *door) {
 	if ((door->x - 1 <= gX) && (gX <= door->x + 1) &&
 		(door->y - 1 <= gY) && (gY <= door->y + 1)) {
 		for (int i = 0; i < 8; i++) {
-			if ((game->player->items[i] == ((t_entdata_door *) door->data)->required_item) || ((t_entdata_door *) door->data)->required_item == ITEM_NOTSET) {
+			printf("item[%d]: %d\t%d\n", i, game->player->items[i], ((t_entdata_door *) door->data)->required_item);
+			if ((game->player->items[i] == ((t_entdata_door *) door->data)->required_item) || (((t_entdata_door *) door->data)->required_item == ITEM_NOTSET)) {
 				((t_entdata_door *) door->data)->is_locked = false;
-				return;
+				break;
+			}
+		}
+	}
+}
+
+void player_use_item(t_game *game, t_entity *item) {
+	int gX = game->player->x / (TILE_SIZE * TILE_SCALE);
+	int gY = game->player->y / (TILE_SIZE * TILE_SCALE);
+
+	if ((item->x == gX) && (item->y == gY) && ((t_entdata_item *) item->data)->is_picked_up == false) {
+		for (int i = 0; i < 8; i++) {
+			if (game->player->items[i] == 0) {
+				game->player->items[i] = ((t_entdata_item *) item->data)->item;
+				((t_entdata_item *) item->data)->is_picked_up = true;
+				break;
 			}
 		}
 	}
@@ -95,9 +115,19 @@ void player_move(t_game* game) {
 
 	t_entity *entity = game->entities;
     while (entity != NULL) {
-        if (entity->type == ENTYPE_DOOR) {
+		switch (entity->type) {
+		case ENTYPE_DOOR:
 			if ((entity->x == gX && entity->y == gY) && ((t_entdata_door *)entity->data)->is_locked) return;
 			if (game->control.use) player_use_door(game, entity);
+			break;
+		
+		case ENTYPE_ITEM:
+			//if ((entity->x == gX && entity->y == gY) && !((t_entdata_item *)entity->data)->is_picked_up) return;
+			if (game->control.use) player_use_item(game, entity);
+			break;
+		
+		default:
+			break;
 		}
         entity = entity->next;
     }

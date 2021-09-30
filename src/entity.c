@@ -46,7 +46,7 @@ void entity_logic(t_game *game) {
             break;
 
         case ENTYPE_ITEM:
-            
+            //item_logic(game, current);
             break;
 
         case ENTYPE_DOOR:
@@ -75,7 +75,7 @@ void entity_draw(t_game *game) {
             break;
 
         case ENTYPE_ITEM:
-            
+            item_draw(game, current);
             break;
 
         case ENTYPE_DOOR:
@@ -88,7 +88,7 @@ void entity_draw(t_game *game) {
 
         current = current->next;
     }
-    
+
     player_draw(game);
 }
 

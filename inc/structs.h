@@ -50,6 +50,12 @@ typedef struct s_entdata_door {
 	t_tile close;
 } t_entdata_door;
 
+typedef struct s_entdata_item {
+	bool is_active;
+	bool is_picked_up;
+	t_item item;
+} t_entdata_item;
+
 typedef struct s_map {
 	int **data;
 	SDL_Point offset;
