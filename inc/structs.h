@@ -15,7 +15,18 @@ typedef struct s_control {
 	int left;
 	int right;
 	int use;
+	bool is_pressed_recently;
 } t_control;
+
+typedef struct s_animation {
+	t_tile *tile;
+	t_tile tileset;
+	int tileset_size;
+	int duration;
+	int current_tile;
+	unsigned int timer_start;
+	//bool pass_first;
+} t_animation;
 
 typedef struct s_entity {
 	int x;
@@ -23,6 +34,7 @@ typedef struct s_entity {
 	int w;
 	int h;
 	t_tile tile;
+	t_animation animation;
 	t_facing facing;
 } t_entity;
 
@@ -40,6 +52,7 @@ typedef struct s_game {
 	t_map *map;
 	t_entity *player;
 	bool is_started;
+	SDL_Point scene_offset;
 } t_game;
 
 #endif

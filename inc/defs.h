@@ -3,7 +3,7 @@
 #define DEFS_H
 
 #define GAME_TITLE "Game"
-#define PLAYER_SPEED 8
+#define PLAYER_SPEED 4
 
 #define MAP_WIDTH 20
 #define MAP_HEIGHT 12

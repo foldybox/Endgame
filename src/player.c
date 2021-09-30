@@ -11,6 +11,7 @@ void player_init(t_game *game, int x, int y) {
 	player->x = x;
 	player->y = y;
     player->tile = set_tile(4, 3);
+	player->animation = animation_init(&player->tile, set_tile(4, 3), 1, 150);
 
     game->player = player;
 }
@@ -83,14 +84,8 @@ void player_move(t_game* game) {
 	int gX = x / (TILE_SIZE * TILE_SCALE);
 	int gY = y / (TILE_SIZE * TILE_SCALE);
 
-	if (game->map->data[gX][gY] <= 10) {
-		game->player->x = x;
-		game->player->y = y;
-	}
-}
+	if (game->map->data[gX][gY] >= 10) return;
 
-void player_logic(t_game *game) {
-	player_move(game);
 
 	if (game->control.left && !game->control.right) {
 		game->player->facing = FACING_LEFT;
@@ -98,22 +93,54 @@ void player_logic(t_game *game) {
 	else if (!game->control.left && game->control.right) {
 		game->player->facing = FACING_RIGHT;
 	}
+
+	if ((game->control.left || game->control.right || game->control.up || game->control.down) && !game->control.is_pressed_recently) {
+		if (game->player->facing == FACING_LEFT) {
+			game->player->animation = animation_init(&game->player->tile, set_tile(4, 4), 4, 150);
+		}
+		else if (game->player->facing == FACING_RIGHT) {
+			game->player->animation = animation_init(&game->player->tile, set_tile(4, 3), 4, 150);
+		}
+		else {
+			game->player->animation = animation_init(&game->player->tile, set_tile(4, 3), 1, 150);
+		}
+	}
+
+	if (!game->control.left && !game->control.right && !game->control.up && !game->control.down) {
+		if (game->player->facing == FACING_LEFT) {
+			game->player->animation = animation_init(&game->player->tile, set_tile(4, 4), 1, 150);
+		}
+		else if (game->player->facing == FACING_RIGHT) {
+			game->player->animation = animation_init(&game->player->tile, set_tile(4, 3), 1, 150);
+		}
+	}
+
+	if (game->control.left || game->control.right || game->control.up || game->control.down) {
+		game->control.is_pressed_recently = true;
+	}
+
+	game->player->x = x;
+	game->player->y = y;
+	
+	game->scene_offset.x = SCREEN_WIDTH / 2 - game->player->x;
+	game->scene_offset.y = SCREEN_HEIGHT / 2 - game->player->y;
+}
+
+void player_logic(t_game *game) {
+	player_move(game);
 }
 
 void player_draw(t_game *game) {
-	double pX = 0, pY = 0;
+	// if (game->player->facing == FACING_LEFT) {
+	// 	game->player->animation = animation_init(&game->player->tile, set_tile(4, 4), 4, 150);
+	// }
+	// else if (game->player->facing == FACING_RIGHT) {
+	// 	game->player->animation = animation_init(&player->tile, set_tile(4, 3), 4, 150);
+	// }
 
-	pX = game->player->x;
-	pY = game->player->y;
+	animate(&game->player->animation);
 
-	if (game->player->facing == FACING_LEFT) {
-		game->player->tile = set_tile(4, 4);
-	}
-	else if (game->player->facing == FACING_RIGHT) {
-		game->player->tile = set_tile(4, 3);
-	}
-
-	blit_tile(game, game->player->tile, pX, pY, true);
+	blit_tile(game, game->player->tile, SCREEN_WIDTH / 2, SCREEN_HEIGHT/ 2, BOTTOM_CENTER);
 }
 
 void player_free(t_game *game) {
