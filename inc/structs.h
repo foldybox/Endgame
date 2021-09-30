@@ -34,9 +34,27 @@ typedef struct s_entity {
 	int w;
 	int h;
 	t_tile tile;
+	t_entity_type type;
 	t_animation animation;
 	t_facing facing;
+	struct s_entity *next;
+	void *data;
+	t_item items[8];
 } t_entity;
+
+typedef struct s_entdata_door {
+	bool is_open;
+	bool is_locked;
+	t_item required_item;
+	t_tile open;
+	t_tile close;
+} t_entdata_door;
+
+typedef struct s_entdata_item {
+	bool is_active;
+	bool is_picked_up;
+	t_item item;
+} t_entdata_item;
 
 typedef struct s_map {
 	int **data;
@@ -51,6 +69,7 @@ typedef struct s_game {
 	SDL_Texture *tileset;
 	t_map *map;
 	t_entity *player;
+	t_entity *entities;
 	bool is_started;
 	SDL_Point scene_offset;
 } t_game;

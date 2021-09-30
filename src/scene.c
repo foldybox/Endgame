@@ -4,6 +4,11 @@
 
 void scene_init(t_game *game) {
 	player_init(game, 17 * (TILE_SIZE * TILE_SCALE), 1 * (TILE_SIZE * TILE_SCALE));
+	door_add(game, set_tile(10, 0), set_tile(9, 0), 17, 4, true, ITEM_NOTSET);
+	door_add(game, set_tile(12, 4), set_tile(11, 4), 14, 3, true, ITEM_PAINT);
+
+	item_add(game, set_tile(2, 3), 20, 5, ITEM_PAINT, true);
+	item_add(game, set_tile(3, 3), 9, 3, ITEM_KEY, true);
 
 	map_init(game, "assets/maps/map.csv");
 
@@ -17,7 +22,7 @@ void scene_prepare(t_game* game) {
 
 void scene_draw(t_game* game) {
 	map_draw(game);
-	player_draw(game);
+	entity_draw(game);
 	map_draw_front(game);
 }
 
@@ -26,10 +31,10 @@ void scene_present(t_game* game) {
 }
 
 void scene_logic(t_game* game) {
-	player_logic(game);
+	entity_logic(game);
 }
 
 void scene_free(t_game* game) {
-	player_free(game);
+	entity_free(game);
 	tileset_free(game);
 }

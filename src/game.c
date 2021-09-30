@@ -48,6 +48,7 @@ t_game *game_init(void) {
 	}
 
 	game->is_started = false;
+	game->entities = NULL;
 
 	return game;
 }
