@@ -3,16 +3,8 @@
 #include "player.h"
 
 void player_init(t_game *game, int x, int y) {
-    t_entity *player = (t_entity *) malloc(sizeof(t_entity));
-    if (player == NULL) exit(-1);
-
-    memset(player, 0, sizeof(t_entity));
-
-	player->x = x;
-	player->y = y;
-    player->tile = set_tile(4, 3);
+    t_entity *player = entity_add(game, PLAYER, x, y, set_tile(4, 3), FACING_RIGHT);
 	player->animation = animation_init(&player->tile, set_tile(4, 3), 1, 150);
-
     game->player = player;
 }
 

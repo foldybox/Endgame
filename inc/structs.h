@@ -34,8 +34,11 @@ typedef struct s_entity {
 	int w;
 	int h;
 	t_tile tile;
+	t_entity_type type;
 	t_animation animation;
 	t_facing facing;
+	struct s_entity *next;
+	t_item items[8];
 } t_entity;
 
 typedef struct s_map {
@@ -51,6 +54,7 @@ typedef struct s_game {
 	SDL_Texture *tileset;
 	t_map *map;
 	t_entity *player;
+	t_entity *entities;
 	bool is_started;
 	SDL_Point scene_offset;
 } t_game;

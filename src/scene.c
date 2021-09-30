@@ -17,7 +17,7 @@ void scene_prepare(t_game* game) {
 
 void scene_draw(t_game* game) {
 	map_draw(game);
-	player_draw(game);
+	entity_draw(game);
 	map_draw_front(game);
 }
 
@@ -26,10 +26,10 @@ void scene_present(t_game* game) {
 }
 
 void scene_logic(t_game* game) {
-	player_logic(game);
+	entity_logic(game);
 }
 
 void scene_free(t_game* game) {
-	player_free(game);
+	entity_free(game);
 	tileset_free(game);
 }

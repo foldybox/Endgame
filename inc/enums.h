@@ -19,4 +19,15 @@ typedef enum e_anchor {
 	BOTTOM_RIGHT
 } t_anchor;
 
+typedef enum e_entity_type {
+	PLAYER,
+	NPC,
+	ITEM,
+	OBJECT
+} t_entity_type;
+
+typedef enum e_item {
+	ITEM_PAINT
+} t_item;
+
 #endif
