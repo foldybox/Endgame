@@ -28,10 +28,15 @@ typedef struct s_entity {
 } t_entity;
 
 typedef struct s_traps {
-    int x;
-    int y;
+    int x1;
+    int y1;
+	int x2;
+    int y2;
+	int delay;
+	unsigned int timer;
     bool activated;
 	t_tile tile;
+	t_trap_type trap_type;
 	struct s_traps *next;
 } t_traps;
 
