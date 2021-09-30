@@ -5,9 +5,9 @@
 void scene_init(t_game *game) {
 	player_init(game, 17 * (TILE_SIZE * TILE_SCALE), 1 * (TILE_SIZE * TILE_SCALE));
 
-	map_init(game, "assets/maps/map2.csv");
+	map_init(game, "assets/maps/map.csv");
 
-	tileset_init(game, "assets/sprites/tileset.png");
+	tileset_init(game, "assets/sprites/tileset2.png");
 }
 
 void scene_prepare(t_game* game) {
