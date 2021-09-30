@@ -4,15 +4,15 @@
 
 void scene_init(t_game *game) {
 	player_init(game, 17 * (TILE_SIZE * TILE_SCALE), 1 * (TILE_SIZE * TILE_SCALE));
-	door_add(game, set_tile(10, 0), set_tile(9, 0), 17, 4, true, ITEM_NOTSET);
-	door_add(game, set_tile(12, 4), set_tile(11, 4), 14, 3, true, ITEM_PAINT);
+	door_add(game, set_tile(10, 0), set_tile(9, 0), 17, 10, true, ITEM_NOTSET);
+	door_add(game, set_tile(12, 5), set_tile(11, 5), 19, 15, true, ITEM_KEY);
 
-	item_add(game, set_tile(2, 3), 20, 5, ITEM_PAINT, true);
+	item_add(game, set_tile(2, 3), 23, 14, ITEM_PAINT, true);
 	item_add(game, set_tile(3, 3), 9, 3, ITEM_KEY, true);
 
 	map_init(game, "assets/maps/map.csv");
 
-	tileset_init(game, "assets/sprites/tileset2.png");
+	tileset_init(game, "assets/sprites/tileset.png");
 }
 
 void scene_prepare(t_game* game) {
