@@ -3,9 +3,24 @@
 #include "player.h"
 
 void player_init(t_game *game, int x, int y) {
-    t_entity *player = entity_add(game, PLAYER, x, y, set_tile(4, 3), FACING_RIGHT);
+    t_entity *player = entity_add(game, ENTYPE_PLAYER, x, y, set_tile(4, 3), FACING_RIGHT);
 	player->animation = animation_init(&player->tile, set_tile(4, 3), 1, 150);
     game->player = player;
+}
+
+void player_use_door(t_game *game, t_entity *door) {
+	int gX = game->player->x / (TILE_SIZE * TILE_SCALE);
+	int gY = game->player->y / (TILE_SIZE * TILE_SCALE);
+	//printf("p[%d:%d]\te[%d:%d]\n", gX, gY, door->x, door->y);
+	if ((door->x - 1 <= gX) && (gX <= door->x + 1) &&
+		(door->y - 1 <= gY) && (gY <= door->y + 1)) {
+		for (int i = 0; i < 8; i++) {
+			if ((game->player->items[i] == ((t_entdata_door *) door->data)->required_item) || ((t_entdata_door *) door->data)->required_item == ITEM_NOTSET) {
+				((t_entdata_door *) door->data)->is_locked = false;
+				return;
+			}
+		}
+	}
 }
 
 void player_move(t_game* game) {
@@ -78,6 +93,14 @@ void player_move(t_game* game) {
 
 	if (game->map->data[gX][gY] >= 10) return;
 
+	t_entity *entity = game->entities;
+    while (entity != NULL) {
+        if (entity->type == ENTYPE_DOOR) {
+			if ((entity->x == gX && entity->y == gY) && ((t_entdata_door *)entity->data)->is_locked) return;
+			if (game->control.use) player_use_door(game, entity);
+		}
+        entity = entity->next;
+    }
 
 	if (game->control.left && !game->control.right) {
 		game->player->facing = FACING_LEFT;
@@ -94,7 +117,7 @@ void player_move(t_game* game) {
 			game->player->animation = animation_init(&game->player->tile, set_tile(4, 3), 4, 150);
 		}
 		else {
-			game->player->animation = animation_init(&game->player->tile, set_tile(4, 3), 1, 150);
+			game->player->animation = animation_init(&game->player->tile, set_tile(4, 5), 2, 150);
 		}
 	}
 
@@ -103,7 +126,7 @@ void player_move(t_game* game) {
 			game->player->animation = animation_init(&game->player->tile, set_tile(4, 4), 1, 150);
 		}
 		else if (game->player->facing == FACING_RIGHT) {
-			game->player->animation = animation_init(&game->player->tile, set_tile(4, 3), 1, 150);
+			game->player->animation = animation_init(&game->player->tile, set_tile(4, 5), 1, 150);
 		}
 	}
 
@@ -132,7 +155,7 @@ void player_draw(t_game *game) {
 
 	animate(&game->player->animation);
 
-	blit_tile(game, game->player->tile, SCREEN_WIDTH / 2, SCREEN_HEIGHT/ 2, BOTTOM_CENTER);
+	blit_tile(game, game->player->tile, SCREEN_WIDTH / 2, SCREEN_HEIGHT/ 2, ANCHOR_BOTTOM_CENTER);
 }
 
 void player_free(t_game *game) {

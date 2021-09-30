@@ -81,16 +81,16 @@ void map_draw(t_game* game) {
 			t_tile tile = set_tile(0, 0);
 
 			if (n == 0) {
-				tile = set_tile(6, 0);
-				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, TOP_LEFT);
+				tile = set_tile(9, 4);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
 			}
 			else if (n == 1) {
-				tile = set_tile(5, 0);
-				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, TOP_LEFT);
+				tile = set_tile(9, 3);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
 			}
 			else if (n == 11) {
-				tile = set_tile(5, 6);
-				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, TOP_LEFT);
+				tile = set_tile(9, 3);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
 			}
 		}
 	}
@@ -107,7 +107,7 @@ void map_draw_front(t_game* game) {
 
 			if (n == 12) {
 				t_tile tile = set_tile(5, 7);
-				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, TOP_LEFT);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
 			}
 		}
 	}

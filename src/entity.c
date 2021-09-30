@@ -37,20 +37,20 @@ void entity_logic(t_game *game) {
 
     while (current != NULL) {
         switch (current->type) {
-        case PLAYER:
+        case ENTYPE_PLAYER:
             player_logic(game);
             break;
 
-        case NPC:
+        case ENTYPE_NPC:
             
             break;
 
-        case ITEM:
+        case ENTYPE_ITEM:
             
             break;
 
-        case OBJECT:
-            
+        case ENTYPE_DOOR:
+            door_logic(game, current);
             break;
         
         default:
@@ -66,20 +66,20 @@ void entity_draw(t_game *game) {
 
     while (current != NULL) {
         switch (current->type) {
-        case PLAYER:
-            player_draw(game);
-            break;
-
-        case NPC:
+        case ENTYPE_PLAYER:
             
             break;
 
-        case ITEM:
+        case ENTYPE_NPC:
             
             break;
 
-        case OBJECT:
+        case ENTYPE_ITEM:
             
+            break;
+
+        case ENTYPE_DOOR:
+            door_draw(game, current);
             break;
         
         default:
@@ -88,9 +88,39 @@ void entity_draw(t_game *game) {
 
         current = current->next;
     }
+    
+    player_draw(game);
 }
 
 void entity_free(t_game *game) {
+    t_entity *current = game->entities;
+
+    while (current != NULL) {
+        switch (current->type) {
+        case ENTYPE_PLAYER:
+
+            break;
+
+        case ENTYPE_NPC:
+            
+            break;
+
+        case ENTYPE_ITEM:
+            
+            break;
+
+        case ENTYPE_DOOR:
+            door_free(current);
+            break;
+        
+        default:
+            break;
+        }
+
+        current = current->next;
+    }
+
+
     while (game->entities != NULL) {
         t_entity *next = NULL;
         next = game->entities->next;

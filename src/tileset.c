@@ -14,15 +14,15 @@ void blit_tile(t_game* game, t_tile tile, int x, int y, t_anchor anchor) {
 	dest.h = TILE_SIZE * TILE_SCALE;
 
 	switch (anchor) {
-	case TOP_LEFT:
+	case ANCHOR_TOP_LEFT:
 		break;
 
-	case CENTER_CENTER:
+	case ANCHOR_CENTER_CENTER:
 		dest.x -= (dest.w / 2);
 		dest.y -= (dest.h / 2);
 		break;
 
-	case BOTTOM_CENTER:
+	case ANCHOR_BOTTOM_CENTER:
 		dest.x -= (dest.w / 2);
 		dest.y -= dest.h;
 		break;

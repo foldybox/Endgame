@@ -38,8 +38,17 @@ typedef struct s_entity {
 	t_animation animation;
 	t_facing facing;
 	struct s_entity *next;
+	void *data;
 	t_item items[8];
 } t_entity;
+
+typedef struct s_entdata_door {
+	bool is_open;
+	bool is_locked;
+	t_item required_item;
+	t_tile open;
+	t_tile close;
+} t_entdata_door;
 
 typedef struct s_map {
 	int **data;
