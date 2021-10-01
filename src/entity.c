@@ -16,6 +16,7 @@ t_entity *entity_add(t_game *game, t_entity_type type, int x, int y, t_tile tile
     entity->facing = facing;
     entity->next = NULL;
     entity->animations = NULL;
+    entity->usable = NULL;
 
     if (current != NULL) {
         while (current->next != NULL) {

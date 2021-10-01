@@ -44,6 +44,7 @@ typedef struct s_entity {
 	struct s_entity *next;
 	void *data;
 	t_item items[8];
+	struct s_entity *usable;
 } t_entity;
 
 typedef struct s_map {

@@ -18,28 +18,18 @@ void player_init(t_game *game, int x, int y) {
 }
 
 void player_use_door(t_game *game, t_entity *door) {
-	int gX = game->player->x / (TILE_SIZE * TILE_SCALE);
-	int gY = game->player->y / (TILE_SIZE * TILE_SCALE);
 	//printf("p[%d:%d]\te[%d:%d]\n", gX, gY, door->x, door->y);
-	if ((door->x - 1 <= gX) && (gX <= door->x + 1) &&
-		(door->y - 1 <= gY) && (gY <= door->y + 1)) {
-		for (int i = 0; i < 8; i++) {
-			//printf("item[%d]: %d\t%d\n", i, game->player->items[i], ((t_entdata_door *) door->data)->required_item);
-			if ((game->player->items[i] == ((t_entdata_door *) door->data)->required_item) || (((t_entdata_door *) door->data)->required_item == ITEM_NOTSET)) {
-				((t_entdata_door *) door->data)->is_locked = false;
-				break;
-			}
+	for (int i = 0; i < 8; i++) {
+		//printf("item[%d]: %d\t%d\n", i, game->player->items[i], ((t_entdata_door *) door->data)->required_item);
+		if ((game->player->items[i] == ((t_entdata_door *) door->data)->required_item) || (((t_entdata_door *) door->data)->required_item == ITEM_NOTSET)) {
+			((t_entdata_door *) door->data)->is_locked = false;
+			break;
 		}
 	}
 }
 
 void player_use_item(t_game *game, t_entity *item) {
-	int gX = game->player->x / (TILE_SIZE * TILE_SCALE);
-	int gY = game->player->y / (TILE_SIZE * TILE_SCALE);
-
-	if ((item->x - 1 <= gX) && (gX <= item->x + 1) &&
-		(item->y - 1 <= gY) && (gY <= item->y + 1) && 
-		((t_entdata_item *) item->data)->is_picked_up == false) {
+	if (((t_entdata_item *) item->data)->is_picked_up == false) {
 		for (int i = 0; i < 8; i++) {
 			if (game->player->items[i] == 0) {
 				game->player->items[i] = ((t_entdata_item *) item->data)->item;
@@ -51,13 +41,7 @@ void player_use_item(t_game *game, t_entity *item) {
 }
 
 void player_use_object(t_game *game, t_entity *obj) {
-	int gX = game->player->x / (TILE_SIZE * TILE_SCALE);
-	int gY = game->player->y / (TILE_SIZE * TILE_SCALE);
-
-	if ((obj->x - 1 <= gX) && (gX <= obj->x + 1) &&
-		(obj->y - 1 <= gY) && (gY <= obj->y + 1) && 
-		!((t_entdata_object *) obj->data)->is_used &&
-		((t_entdata_object *) obj->data)->is_active) {
+	if (!((t_entdata_object *) obj->data)->is_used && ((t_entdata_object *) obj->data)->is_active) {
 		for (int i = 0; i < 8; i++) {
 			if ((game->player->items[i] == ((t_entdata_object *) obj->data)->required_item) || (((t_entdata_object *) obj->data)->required_item == ITEM_NOTSET)) {
 				((t_entdata_object *) obj->data)->is_using = true;
@@ -129,21 +113,30 @@ void player_move(t_game* game) {
     while (entity != NULL) {
 		switch (entity->type) {
 		case ENTYPE_DOOR:
-			if (game->control.use) player_use_door(game, entity);
+			if ((entity->x - 1 <= gX) && (gX <= entity->x + 1) && (entity->y - 1 <= gY) && (gY <= entity->y + 1)) {
+				game->player->usable = entity;
+				if (game->control.use) player_use_door(game, entity);
+			}
 			if ((entity->x == gX && entity->y == gY) && ((t_entdata_door *)entity->data)->is_locked) return;
 			break;
 		
 		case ENTYPE_ITEM:
-			//if ((entity->x == gX && entity->y == gY) && !((t_entdata_item *)entity->data)->is_picked_up) return;
-			if (game->control.use) player_use_item(game, entity);
+			if ((entity->x - 1 <= gX) && (gX <= entity->x + 1) && (entity->y - 1 <= gY) && (gY <= entity->y + 1)) {
+				game->player->usable = entity;
+				if (game->control.use) player_use_item(game, entity);
+			}
 			break;
 
 		case ENTYPE_OBJECT:
-			if (game->control.use) player_use_object(game, entity);
+			if ((entity->x - 1 <= gX) && (gX <= entity->x + 1) && (entity->y - 1 <= gY) && (gY <= entity->y + 1)) {
+				game->player->usable = entity;
+				if (game->control.use) player_use_object(game, entity);
+			}
 			if ((entity->x == gX && entity->y == gY) && ((t_entdata_object *)entity->data)->is_obstacle) return;
 			break;
 		
 		default:
+			game->player->usable = NULL;
 			break;
 		}
         entity = entity->next;
@@ -187,6 +180,64 @@ void player_draw(t_game *game) {
 	animate(game->player);
 
 	blit_tile(game, game->player->tile, SCREEN_WIDTH / 2, SCREEN_HEIGHT/ 2, ANCHOR_BOTTOM_CENTER);
+
+	if (game->player->usable != NULL) {
+		switch (game->player->usable->type) {
+			case ENTYPE_NPC:
+				
+				break;
+
+			case ENTYPE_ITEM:
+				if (!((t_entdata_item *) game->player->usable->data)->is_picked_up) {
+					text_draw(game, "[F] PICK UP", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+				}
+				break;
+
+			case ENTYPE_DOOR:
+				if (((t_entdata_door *) game->player->usable->data)->is_locked) {
+					bool has_key = false;
+					for (int i = 0; i < 8; i++) {
+						if ((game->player->items[i] == ((t_entdata_door *) game->player->usable->data)->required_item) || (((t_entdata_door *) game->player->usable->data)->required_item == ITEM_NOTSET)) {
+							has_key = true;
+							break;
+						}
+					}
+					if (has_key) {
+						text_draw(game, "[F] OPEN", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+					}
+					else {
+						text_draw(game, "NEED A KEY", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+					}
+				}
+				break;
+
+			case ENTYPE_OBJECT:
+				if (!((t_entdata_object *) game->player->usable->data)->is_used) {
+					if (((t_entdata_object *) game->player->usable->data)->is_using) {
+						text_draw(game, "USING...", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+					}
+					else {
+						bool has_key = false;
+						for (int i = 0; i < 8; i++) {
+							if ((game->player->items[i] == ((t_entdata_object *) game->player->usable->data)->required_item) || (((t_entdata_object *) game->player->usable->data)->required_item == ITEM_NOTSET)) {
+								has_key = true;
+								break;
+							}
+						}
+						if (has_key) {
+							text_draw(game, "[F] USE", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+						}
+						else {
+							text_draw(game, "NEED SOMETHING", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+						}
+					}
+				}
+				break;
+			
+			default:
+				break;
+		}
+	}
 }
 
 void player_free(t_game *game) {
