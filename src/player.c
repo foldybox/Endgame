@@ -52,53 +52,41 @@ void player_move(t_game* game) {
 	int dy = 0;
 	bool is_pressed = false;
 
-	if (game->control.up)
-	{
-		if (!is_pressed || game->control.down)
-		{
+	if (game->control.up) {
+		if (!is_pressed || game->control.down) {
 			dy -= PLAYER_SPEED;
 		}
-		else
-		{
+		else {
 			dy -= side_by_diagonal(PLAYER_SPEED);
 		}
 		is_pressed = true;
 	}
 
-	if (game->control.down)
-	{
-		if (!is_pressed || game->control.up)
-		{
+	if (game->control.down) {
+		if (!is_pressed || game->control.up) {
 			dy += PLAYER_SPEED;
 		}
-		else
-		{
+		else {
 			dy += side_by_diagonal(PLAYER_SPEED);
 		}
 		is_pressed = true;
 	}
 
-	if (game->control.left)
-	{
-		if (!is_pressed || game->control.right)
-		{
+	if (game->control.left) {
+		if (!is_pressed || game->control.right) {
 			dx -= PLAYER_SPEED;
 		}
-		else
-		{
+		else {
 			dx -= side_by_diagonal(PLAYER_SPEED);
 		}
 		is_pressed = true;
 	}
 
-	if (game->control.right)
-	{
-		if (!is_pressed || game->control.left)
-		{
+	if (game->control.right) {
+		if (!is_pressed || game->control.left) {
 			dx += PLAYER_SPEED;
 		}
-		else
-		{
+		else {
 			dx += side_by_diagonal(PLAYER_SPEED);
 		}
 		is_pressed = true;

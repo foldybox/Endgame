@@ -43,7 +43,7 @@ typedef struct s_entity {
 	t_item items[8];
 } t_entity;
 
-typedef struct s_traps {
+typedef struct s_trap {
     int x1;
     int y1;
 	int x2;
@@ -52,9 +52,9 @@ typedef struct s_traps {
 	unsigned int timer;
     bool activated;
 	t_tile tile;
-	t_trap_type trap_type;
-	struct s_traps *next;
-} t_traps;
+	t_trap_type type;
+	struct s_trap *next;
+} t_trap;
 
 typedef struct s_entdata_door {
 	bool is_open;
@@ -84,7 +84,7 @@ typedef struct s_game {
 	SDL_Point *spawn;
 	t_map *map;
 	t_entity *player;
-	t_traps *trap;
+	t_trap *traps;
 	bool is_started;
 	unsigned int death_timer;
 	bool game_over_screen;

@@ -13,7 +13,8 @@ void scene_init(t_game *game) {
 	item_add(game, set_tile(2, 3), 23, 14, ITEM_PAINT, true);
 	item_add(game, set_tile(3, 3), 9, 3, ITEM_KEY, true);
   
-  trap_init(game);
+  	trap_add(game, set_tile(2, 4), 17, 4, 18, 4, TRAP_TRIGGER, 0);
+	trap_add(game, set_tile(2, 4), 20, 4, 24, 5, TRAP_GLIMMER, 500);
 
 	map_init(game, "assets/maps/map.csv");
 
@@ -29,7 +30,7 @@ void scene_draw(t_game* game) {
 	map_draw(game);
 	trap_draw(game);
 	entity_draw(game);
-	map_draw_front(game);
+	//map_draw_front(game);
 	death_draw(game, "assets/sprites/death.jpeg");
 }
 
