@@ -28,7 +28,8 @@ typedef enum e_entype {
 	ENTYPE_PLAYER,
 	ENTYPE_NPC,
 	ENTYPE_ITEM,
-	ENTYPE_DOOR
+	ENTYPE_DOOR,
+	ENTYPE_OBJECT
 } t_entity_type;
 
 typedef enum e_item {
