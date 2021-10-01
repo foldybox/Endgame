@@ -35,8 +35,8 @@ void menu_main_draw(t_game *game) {
 
         SDL_RenderFillRect(game->renderer, &rect);
 
-        text_draw(game, "ENDGAME", SCREEN_WIDTH / 2 - 300, SCREEN_HEIGHT / 7, 144);
-        text_draw(game, "Press RETURN for start", SCREEN_WIDTH / 1.2 - 24, SCREEN_HEIGHT - 18, 18);
+        text_draw(game, "ENDGAME", SCREEN_WIDTH / 2,  SCREEN_HEIGHT / 2 - 150, 144, ANCHOR_BOTTOM_CENTER);
+        text_draw(game, "Press [ENTER] to start", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 190, 24, ANCHOR_BOTTOM_CENTER);
 
         rect.y = 0;
         rect.w = SCREEN_WIDTH;
@@ -48,7 +48,7 @@ void menu_main_draw(t_game *game) {
         if (SDL_GetTicks() < game->death_timer + 3000 && game->control.start) {
             SDL_SetRenderDrawColor(game->renderer, 0, 0, 0, 0);
             SDL_RenderFillRect(game->renderer, &rect);
-            text_draw(game, "LOADIG...", SCREEN_WIDTH / 1.1 - 24, SCREEN_HEIGHT - 18, 18);
+            text_draw(game, "LOADING...", SCREEN_WIDTH - 20, SCREEN_HEIGHT - 20, 24, ANCHOR_BOTTOM_RIGHT);
         }
 
         if (SDL_GetTicks() > game->death_timer + 3000) {

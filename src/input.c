@@ -80,7 +80,12 @@ void input_keyup(t_game *game, SDL_KeyboardEvent *event) {
 		}
 
 		if (event->keysym.scancode == SDL_SCANCODE_ESCAPE) {
-			game->is_started = !game->is_started;
+			if (game->control.start) {
+				game->is_started = !game->is_started;
+			}
+			else {
+				exit(0);
+			}
 		}
 
 		if (event->keysym.scancode == SDL_SCANCODE_RETURN) {
