@@ -16,7 +16,7 @@ typedef struct s_control {
 	int right;
 	int use;
 	int start;
-	bool is_pressed_recently;
+	bool is_locked;
 } t_control;
 
 typedef struct s_animation {
@@ -45,7 +45,14 @@ typedef struct s_entity {
 	struct s_entity *next;
 	void *data;
 	t_item items[8];
+	struct s_entity *usable;
 } t_entity;
+
+typedef struct s_map {
+	int **data;
+	SDL_Point offset;
+	SDL_Point size;
+} t_map;
 
 typedef struct s_trap {
     int x1;
@@ -59,26 +66,6 @@ typedef struct s_trap {
 	t_trap_type type;
 	struct s_trap *next;
 } t_trap;
-
-typedef struct s_entdata_door {
-	bool is_open;
-	bool is_locked;
-	t_item required_item;
-	t_tile open;
-	t_tile close;
-} t_entdata_door;
-
-typedef struct s_entdata_item {
-	bool is_active;
-	bool is_picked_up;
-	t_item item;
-} t_entdata_item;
-
-typedef struct s_map {
-	int **data;
-	SDL_Point offset;
-	SDL_Point size;
-} t_map;
 
 typedef struct s_game {
 	SDL_Renderer *renderer;
@@ -95,6 +82,33 @@ typedef struct s_game {
 	t_entity *entities;
 	SDL_Point scene_offset;
 } t_game;
+
+typedef struct s_entdata_door {
+	bool is_open;
+	bool is_locked;
+	t_item required_item;
+	t_tile open;
+	t_tile close;
+} t_entdata_door;
+
+typedef struct s_entdata_item {
+	bool is_active;
+	bool is_picked_up;
+	t_item item;
+} t_entdata_item;
+
+typedef struct s_entdata_object {
+	bool is_active;
+	bool is_used;
+	bool is_using;
+	bool is_obstacle;
+	unsigned int timer;
+	int delay;
+	t_tile start_tile;
+	t_tile finish_tile;
+	t_item required_item;
+	//void (* logic)(t_game *game, t_entity *entity);
+} t_entdata_object;
 
 
 #endif

@@ -11,6 +11,6 @@ void animation_play(t_entity *entity, int id, int start_tile);
 void animation_reload(t_entity *entity, int id);
 void animate(t_entity *entity);
 int animation_gettime(t_entity *entity, int id);
-void animation_free(t_entity *entity);
+void animations_free(t_entity *entity);
 
 #endif

@@ -110,7 +110,7 @@ int animation_gettime(t_entity *entity, int id) {
     return current->duration * current->tileset_size;
 }
 
-void animation_free(t_entity *entity) {
+void animations_free(t_entity *entity) {
     while (entity->animations != NULL) {
         t_animation *next = NULL;
         next = entity->animations->next;

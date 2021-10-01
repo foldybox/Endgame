@@ -7,6 +7,7 @@
 #include "draw.h"
 #include "tileset.h"
 #include "entity.h"
+#include "text.h"
 
 void player_init(t_game* game, int x, int y);
 void player_draw(t_game* game);

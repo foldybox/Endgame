@@ -16,6 +16,7 @@ t_entity *entity_add(t_game *game, t_entity_type type, int x, int y, t_tile tile
     entity->facing = facing;
     entity->next = NULL;
     entity->animations = NULL;
+    entity->usable = NULL;
 
     if (current != NULL) {
         while (current->next != NULL) {
@@ -52,6 +53,10 @@ void entity_logic(t_game *game) {
             door_logic(game, current);
             break;
         
+        case ENTYPE_OBJECT:
+            object_logic(game, current);
+            break;
+        
         default:
             break;
         }
@@ -79,6 +84,10 @@ void entity_draw(t_game *game) {
 
         case ENTYPE_DOOR:
             door_draw(game, current);
+            break;
+
+        case ENTYPE_OBJECT:
+            object_draw(game, current);
             break;
         
         default:
@@ -116,7 +125,7 @@ void entity_free(t_game *game) {
             break;
         }
 
-        animation_free(current);
+        animations_free(current);
 
         current = current->next;
     }
