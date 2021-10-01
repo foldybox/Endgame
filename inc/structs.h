@@ -21,11 +21,14 @@ typedef struct s_control {
 typedef struct s_animation {
 	t_tile *tile;
 	t_tile tileset;
+	int id;
 	int tileset_size;
 	int duration;
 	int current_tile;
 	unsigned int timer_start;
-	//bool pass_first;
+	struct s_animation *next;
+	bool is_playing;
+	bool is_repeated;
 } t_animation;
 
 typedef struct s_entity {
@@ -36,7 +39,7 @@ typedef struct s_entity {
 	bool is_death;
 	t_tile tile;
 	t_entity_type type;
-	t_animation animation;
+	t_animation *animations;
 	t_facing facing;
 	struct s_entity *next;
 	void *data;
