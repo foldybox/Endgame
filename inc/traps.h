@@ -2,6 +2,7 @@
 #ifndef TRAPS_H
 #define TRAPS_H
 
+
 #include "common.h"
 #include "draw.h"
 #include "tileset.h"

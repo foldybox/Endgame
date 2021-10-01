@@ -152,7 +152,6 @@ void trap_glimmer(t_game *game, t_traps *current) {
     int tY1 = current->y1 / to_tile;
     int tX2 = current->x2 / to_tile;
     int tY2 = current->y2 / to_tile;
-    game->player->is_death = false;
 
     if (current->timer == 0) current->timer = SDL_GetTicks();
 

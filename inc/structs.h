@@ -50,10 +50,13 @@ typedef struct s_game {
 	SDL_Window *window;
 	t_control control;
 	SDL_Texture *tileset;
+	SDL_Point *spawn;
 	t_map map;
 	t_entity *player;
 	t_traps *trap;
 	bool is_started;
+	unsigned int death_timer;
+	bool game_over_screen;
 } t_game;
 
 

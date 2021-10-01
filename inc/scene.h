@@ -4,6 +4,7 @@
 
 
 #include "common.h"
+#include "death.h"
 #include "player.h"
 #include "traps.h"
 #include "map.h"
