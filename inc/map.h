@@ -5,7 +5,7 @@
 #include "common.h"
 #include "tileset.h"
 
-void map_init(t_game* game, int oX, int oY);
+void map_init(t_game *game, char *filename);
 void map_draw(t_game* game);
 void map_draw_front(t_game* game);
 

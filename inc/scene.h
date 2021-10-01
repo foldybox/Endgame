@@ -7,6 +7,7 @@
 #include "death.h"
 #include "player.h"
 #include "traps.h"
+#include "entity.h"
 #include "map.h"
 
 void scene_init(t_game* game);

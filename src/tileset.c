@@ -6,16 +6,28 @@ void tileset_init(t_game* game, char *filename) {
 	game->tileset = IMG_LoadTexture(game->renderer, filename);
 }
 
-void blit_tile(t_game* game, t_tile tile, int x, int y, bool is_centered) {
+void blit_tile(t_game* game, t_tile tile, int x, int y, t_anchor anchor) {
 	SDL_Rect dest;
 	dest.x = x;
 	dest.y = y;
 	dest.w = TILE_SIZE * TILE_SCALE;
 	dest.h = TILE_SIZE * TILE_SCALE;
 
-	if (is_centered) {
+	switch (anchor) {
+	case ANCHOR_TOP_LEFT:
+		break;
+
+	case ANCHOR_CENTER_CENTER:
 		dest.x -= (dest.w / 2);
 		dest.y -= (dest.h / 2);
+		break;
+
+	case ANCHOR_BOTTOM_CENTER:
+		dest.x -= (dest.w / 2);
+		dest.y -= dest.h;
+		break;
+	default:
+		break;
 	}
 
 	SDL_RenderCopy(game->renderer, game->tileset, &tile, &dest);
