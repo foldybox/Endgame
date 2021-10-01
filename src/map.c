@@ -32,82 +32,229 @@ void map_init(t_game *game, char *filename) {
     fclose(map_file);
 
 	game->map = map;
-
-	// game->map = (t_map *) malloc(sizeof(t_map));
-	// game->map->size.x = MAP_WIDTH;
-	// game->map->size.y = MAP_HEIGHT;
-	// game->map->offset.x = 0;
-	// game->map->offset.y = 0;
-
-	// game->map->data = (int **) malloc(game->map->size.x * sizeof(int *));
-	// if (game->map->data == NULL) exit(-1);
-	// for (int i = 0; i < game->map->size.x; i++) {
-	// 	game->map->data[i] = (int *) malloc(game->map->size.y * sizeof(int));
-	// 	if (game->map->data[i] == NULL) exit(-1);
-	// }
-
-
-	// srand(141);
-
-	// int x, y;
-	// for (x = 0; x < MAP_WIDTH; x++) {
-	// 	for (y = 0; y < MAP_HEIGHT; y++) {
-	// 		game->map->data[x][y] = TILE_GROUND;
-
-	// 		if (rand() % 25 == 0)
-	// 		{
-	// 			game->map->data[x][y] = TILE_HOLE;
-	// 		}
-
-	// 		if (rand() % 30 == 0)
-	// 		{
-	// 			game->map->data[x][y] = TILE_WALL;
-	// 		}
-	// 	}
-	// }
-	// for (x = 0; x < MAP_WIDTH; x++) {
-	// 	game->map->data[x][MAP_HEIGHT - 1] = TILE_WALL_FRONT;
-	// }
 }
 
 void map_draw(t_game* game) {
 	int x, y, n;
 
-	for (y = 0; y < game->map->size.y; y++)
-	{
-		for (x = 0; x < game->map->size.x; x++)
-		{
+	for (y = 0; y < game->map->size.y; y++) {
+		for (x = 0; x < game->map->size.x; x++) {
 			n = game->map->data[x][y];
 			t_tile tile = set_tile(0, 0);
-
-			if (n == 0) {
+			switch (n) {
+      
+			case TILE_GROUND:
 				tile = set_tile(6, 0);
-				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, TOP_LEFT);
-			}
-			else if (n == 1) {
-				tile = set_tile(5, 0);
-				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, TOP_LEFT);
-			}
-			else if (n == 11) {
-				tile = set_tile(5, 6);
-				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, TOP_LEFT);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE,  ANCHOR_TOP_LEFT);
+				break;
+			case TILE_WALL:
+				tile = set_tile(11, 3);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+     //*********LAB Location sprite*******
+			case TILE_WALL_FRONT:
+				tile = set_tile(9,7);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+
+			case TILE_LAB_LEFT_CORNER_UP :
+				tile = set_tile(8, 3);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+
+			case TILE_LAB_RIGHT_CORNER_DOWN:
+				tile = set_tile(10, 5);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			case TILE_LAB_RIGHT_CORNER_UP:
+				tile = set_tile(10, 3);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+
+			case TILE_LAB_WALL:
+				tile = set_tile(9, 5);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			case TILE_LAB_WALL_FRONT :
+				tile = set_tile(9, 3);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			case TILE_LAB_FLOOR :
+				tile = set_tile(9, 4);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			case TILE_LAB_WALL_LINER_LEFT:
+				tile = set_tile(8, 4);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			case TILE_LAB_WALL_LINER_RIGHT:
+				tile = set_tile(10, 4);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			
+			case TILE_LAB_LEFT_CORNER_DOWN :
+				tile = set_tile(8, 5);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+	//********MIL location sprite*********
+			case TILE_MIL_LEFT_CORNER_UP :
+				tile = set_tile(10, 6);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+
+			case TILE_MIL_RIGHT_CORNER_DOWN:
+				tile = set_tile(10, 5);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			case TILE_MIL_RIGHT_CORNER_UP:
+				tile = set_tile(10, 3);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+
+			case TILE_MIL_WALL:
+				tile = set_tile(11, 6);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			case TILE_MIL_WALL_FRONT :
+				tile = set_tile(9, 3);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			case TILE_MIL_FLOOR :
+				tile = set_tile(9, 4);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			case TILE_MIL_WALL_LINER_LEFT:
+				tile = set_tile(10,7);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			case TILE_MIL_WALL_LINER_RIGHT:
+				tile = set_tile(12, 7);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			
+			case TILE_MIL_LEFT_CORNER_DOWN :
+				tile = set_tile(9, 8);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;	
+
+			case TILE_MILL_ROOF :
+				tile = set_tile(11, 3);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;	
+			default:
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
 			}
 		}
 	}
 }
 
 void map_draw_front(t_game* game) {
-	int x, y, n;
+int x, y, n;
 
-	for (y = 0; y < game->map->size.y; y++)
-	{
-		for (x = 0; x < game->map->size.x; x++)
-		{
+	for (y = 0; y < game->map->size.y; y++) {
+		for (x = 0; x < game->map->size.x; x++) {
 			n = game->map->data[x][y];
+			t_tile tile = set_tile(0, 0);
+			switch (n) {
+      
+			case TILE_WALL:
+				tile = set_tile(11, 3);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+     //*********LAB Location sprite*******
+			case TILE_WALL_FRONT:
+				tile = set_tile(9,7);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
 
-			if (n == 12) {
-				t_tile tile = set_tile(5, 7);
-				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, TOP_LEFT);
+			case TILE_LAB_LEFT_CORNER_UP :
+				tile = set_tile(8, 3);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+
+			case TILE_LAB_RIGHT_CORNER_DOWN:
+				tile = set_tile(10, 5);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			case TILE_LAB_RIGHT_CORNER_UP:
+				tile = set_tile(10, 3);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+
+			case TILE_LAB_WALL:
+				tile = set_tile(9, 5);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			case TILE_LAB_WALL_FRONT :
+				tile = set_tile(9, 3);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			case TILE_LAB_FLOOR :
+				tile = set_tile(9, 4);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			case TILE_LAB_WALL_LINER_LEFT:
+				tile = set_tile(8, 4);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			case TILE_LAB_WALL_LINER_RIGHT:
+				tile = set_tile(10, 4);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			
+			case TILE_LAB_LEFT_CORNER_DOWN :
+				tile = set_tile(8, 5);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+	//********MIL location sprite*********
+			case TILE_MIL_LEFT_CORNER_UP :
+				tile = set_tile(10, 6);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+
+			case TILE_MIL_RIGHT_CORNER_DOWN:
+				tile = set_tile(10, 5);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			case TILE_MIL_RIGHT_CORNER_UP:
+				tile = set_tile(10, 3);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+
+			case TILE_MIL_WALL:
+				tile = set_tile(11, 6);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			case TILE_MIL_WALL_FRONT :
+				tile = set_tile(9, 3);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			case TILE_MIL_FLOOR :
+				tile = set_tile(9, 4);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			case TILE_MIL_WALL_LINER_LEFT:
+				tile = set_tile(10,7);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			case TILE_MIL_WALL_LINER_RIGHT:
+				tile = set_tile(12, 7);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+			
+			case TILE_MIL_LEFT_CORNER_DOWN :
+				tile = set_tile(9, 8);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;	
+
+			case TILE_MILL_ROOF :
+				tile = set_tile(11, 3);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;	
+			default:
+				//blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
 			}
 		}
 	}

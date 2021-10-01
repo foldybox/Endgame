@@ -66,21 +66,25 @@ void input_keyup(t_game *game, SDL_KeyboardEvent *event)
 		if ((event->keysym.scancode == SDL_SCANCODE_UP) || (event->keysym.scancode == SDL_SCANCODE_W))
 		{
 			game->control.up = 0;
+			game->control.is_pressed_recently = false;
 		}
 
 		if ((event->keysym.scancode == SDL_SCANCODE_DOWN) || (event->keysym.scancode == SDL_SCANCODE_S))
 		{
 			game->control.down = 0;
+			game->control.is_pressed_recently = false;
 		}
 
 		if ((event->keysym.scancode == SDL_SCANCODE_LEFT) || (event->keysym.scancode == SDL_SCANCODE_A))
 		{
 			game->control.left = 0;
+			game->control.is_pressed_recently = false;
 		}
 
 		if ((event->keysym.scancode == SDL_SCANCODE_RIGHT) || (event->keysym.scancode == SDL_SCANCODE_D))
 		{
 			game->control.right = 0;
+			game->control.is_pressed_recently = false;
 		}
 
 		if ((event->keysym.scancode == SDL_SCANCODE_RIGHT) || (event->keysym.scancode == SDL_SCANCODE_F))
@@ -91,6 +95,10 @@ void input_keyup(t_game *game, SDL_KeyboardEvent *event)
 		if (event->keysym.scancode == SDL_SCANCODE_ESCAPE)
 		{
 			game->is_started = !game->is_started;
+		}
+		if (event->keysym.scancode == SDL_SCANCODE_SPACE && game->game_over_screen)
+		{
+			game->player->is_death = false;
 		}
 	}
 }

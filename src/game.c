@@ -48,6 +48,8 @@ t_game *game_init(void) {
 	}
 
 	game->is_started = false;
+	game->entities = NULL;
+	game->traps = NULL;
 
 	return game;
 }
