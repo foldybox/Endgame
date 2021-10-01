@@ -7,6 +7,11 @@ typedef enum e_facing {
 	FACING_RIGHT
 } t_facing;
 
+typedef enum e_traps {
+	TRAP_TRIGGER,
+	TRAP_GLIMMER
+} t_trap_type;
+
 typedef enum e_anchor {
 	ANCHOR_TOP_LEFT,
 	ANCHOR_TOP_CENTER,

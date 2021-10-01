@@ -4,9 +4,7 @@
 
 t_entity *entity_add(t_game *game, t_entity_type type, int x, int y, t_tile tile, t_facing facing) {
     t_entity *current = game->entities;
-    t_entity *entity = NULL;
-    
-    entity = (t_entity *) malloc(sizeof(t_entity));
+    t_entity *entity = (t_entity *) malloc(sizeof(t_entity));
     if (entity == NULL) exit(-1);
 
     memset(entity, 0, sizeof(t_entity));
@@ -17,6 +15,7 @@ t_entity *entity_add(t_game *game, t_entity_type type, int x, int y, t_tile tile
     entity->tile = tile;
     entity->facing = facing;
     entity->next = NULL;
+    entity->animations = NULL;
 
     if (current != NULL) {
         while (current->next != NULL) {
@@ -116,6 +115,8 @@ void entity_free(t_game *game) {
         default:
             break;
         }
+
+        animation_free(current);
 
         current = current->next;
     }
