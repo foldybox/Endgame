@@ -50,6 +50,23 @@ void player_use_item(t_game *game, t_entity *item) {
 	}
 }
 
+void player_use_object(t_game *game, t_entity *obj) {
+	int gX = game->player->x / (TILE_SIZE * TILE_SCALE);
+	int gY = game->player->y / (TILE_SIZE * TILE_SCALE);
+
+	if ((obj->x - 1 <= gX) && (gX <= obj->x + 1) &&
+		(obj->y - 1 <= gY) && (gY <= obj->y + 1) && 
+		!((t_entdata_object *) obj->data)->is_used &&
+		((t_entdata_object *) obj->data)->is_active) {
+		for (int i = 0; i < 8; i++) {
+			if ((game->player->items[i] == ((t_entdata_object *) obj->data)->required_item) || (((t_entdata_object *) obj->data)->required_item == ITEM_NOTSET)) {
+				((t_entdata_object *) obj->data)->is_using = true;
+				break;
+			}
+		}
+	}
+}
+
 void player_move(t_game* game) {
 	int x = 0;
 	int y = 0;
@@ -112,13 +129,18 @@ void player_move(t_game* game) {
     while (entity != NULL) {
 		switch (entity->type) {
 		case ENTYPE_DOOR:
-			if ((entity->x == gX && entity->y == gY) && ((t_entdata_door *)entity->data)->is_locked) return;
 			if (game->control.use) player_use_door(game, entity);
+			if ((entity->x == gX && entity->y == gY) && ((t_entdata_door *)entity->data)->is_locked) return;
 			break;
 		
 		case ENTYPE_ITEM:
 			//if ((entity->x == gX && entity->y == gY) && !((t_entdata_item *)entity->data)->is_picked_up) return;
 			if (game->control.use) player_use_item(game, entity);
+			break;
+
+		case ENTYPE_OBJECT:
+			if (game->control.use) player_use_object(game, entity);
+			if ((entity->x == gX && entity->y == gY) && ((t_entdata_object *)entity->data)->is_obstacle) return;
 			break;
 		
 		default:
