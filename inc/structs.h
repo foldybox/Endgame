@@ -15,6 +15,7 @@ typedef struct s_control {
 	int left;
 	int right;
 	int use;
+	int start;
 	bool is_pressed_recently;
 } t_control;
 
