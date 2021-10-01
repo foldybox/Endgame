@@ -2,53 +2,39 @@
 
 #include "traps.h"
 
-void trap_init(t_game *game) {
-    t_traps *trap = (t_traps *) malloc(sizeof(t_traps));
+t_trap *trap_add(t_game *game, t_tile tile, int x1, int y1, int x2, int y2, t_trap_type type, int delay) {
+    t_trap *current = game->traps;
+    t_trap *trap = (t_trap *) malloc(sizeof(t_trap));
     if (trap == NULL) exit(-1);
 
-    memset(trap, 0, sizeof(t_traps));
+    memset(trap, 0, sizeof(t_trap));
 
-	trap->x1 = (0);
-	trap->y1 = (0);
-	trap->x2 = (0);
-	trap->y2 = (0);
+    trap->delay = delay;
+    trap->tile = tile;
+    trap->type = type;
+    trap->x1 = x1 * TILE_SIZE * TILE_SCALE;
+    trap->y1 = y1 * TILE_SIZE * TILE_SCALE;
+    trap->x2 = x2 * TILE_SIZE * TILE_SCALE;
+    trap->y2 = y2 * TILE_SIZE * TILE_SCALE;
     trap->timer = 0;
-    trap->delay = 1000;
+    trap->next = NULL;
 
-    game->trap = trap;
-    game->trap->next = NULL;
+    if (current != NULL) {
+        while (current->next != NULL) {
+            current = current->next;
+        }
 
-    trap_add(game, TRAP_GLIMMER, 3, 5, 3, 7);
-    trap_add(game, TRAP_TRIGGER, 5, 5, 5, 7);
-}
-
-void trap_add(t_game * game, t_trap_type type, int x1, int y1, int x2, int y2) {
-    int to_tile = TILE_SIZE * TILE_SCALE;
-    int tX1 = x1 * to_tile;
-    int tY1 = y1 * to_tile;
-    int tX2 = x2 * to_tile;
-    int tY2 = y2 * to_tile;
-
-    t_traps *current = game->trap;
-
-    while (current->next != NULL) {
-        current = current->next;
+        current->next = trap;
     }
-    
-    current->next = (t_traps *) malloc(sizeof(t_traps));
+    else {
+        game->traps = trap;
+    }
 
-    current->next->delay = game->trap->delay;
-    current->next->trap_type = type;
-    current->next->x1 = tX1;
-    current->next->y1 = tY1;
-    current->next->x2 = tX2;
-    current->next->y2 = tY2;
-    current->next->timer = 0;
-    current->next->next = NULL;
+    return trap;
 }
 
 void trap_logic(t_game *game) {
-    t_traps *current = game->trap;
+    t_trap *current = game->traps;
 
     while (current != NULL) {
         if (current->x1 == (0) || current->y1 == (0) || current->x2 == (0) || current->y2 == (0)) {
@@ -56,8 +42,7 @@ void trap_logic(t_game *game) {
             continue;
         }
 
-        switch (current->trap_type)
-        {
+        switch (current->type) {
         case TRAP_TRIGGER:
             trap_trigger(game, current);
             break;
@@ -77,7 +62,7 @@ void trap_logic(t_game *game) {
 void trap_draw(t_game *game) {
 	double tX1 = 0, tY1 = 0, tX2 = 0, tY2 = 0;
 
-    t_traps *current = game->trap;
+    t_trap *current = game->traps;
 
     while (current != NULL) {
         if (current->x1 == (0) || current->y1 == (0) || current->x2 == (0) || current->y2 == (0)) {
@@ -109,22 +94,22 @@ void trap_draw(t_game *game) {
 }
 
 void trap_free(t_game *game) {
-    while (game->trap != NULL) {
-        t_traps *next_node = NULL;
-        next_node = game->trap->next;
+    while (game->traps != NULL) {
+        t_trap *next_node = NULL;
+        next_node = game->traps->next;
 
-        free(game->trap);
-        game->trap = next_node;
+        free(game->traps);
+        game->traps = next_node;
     }
 
-	game->trap = NULL;
+	game->traps = NULL;
 }
 
 /*==========================================================================
                             Types traps
 ==========================================================================*/
 
-void trap_trigger(t_game *game, t_traps *current) {
+void trap_trigger(t_game *game, t_trap *current) {
     int to_tile = TILE_SIZE * TILE_SCALE;
     int pX = game->player->x / to_tile;
     int pY = game->player->y / to_tile;
@@ -144,7 +129,7 @@ void trap_trigger(t_game *game, t_traps *current) {
     }
 }
 
-void trap_glimmer(t_game *game, t_traps *current) {
+void trap_glimmer(t_game *game, t_trap *current) {
     int to_tile = TILE_SIZE * TILE_SCALE;
     int pX = game->player->x / to_tile;
     int pY = game->player->y / to_tile;

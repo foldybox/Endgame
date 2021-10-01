@@ -21,11 +21,14 @@ typedef struct s_control {
 typedef struct s_animation {
 	t_tile *tile;
 	t_tile tileset;
+	int id;
 	int tileset_size;
 	int duration;
 	int current_tile;
 	unsigned int timer_start;
-	//bool pass_first;
+	struct s_animation *next;
+	bool is_playing;
+	bool is_repeated;
 } t_animation;
 
 typedef struct s_entity {
@@ -36,14 +39,14 @@ typedef struct s_entity {
 	bool is_death;
 	t_tile tile;
 	t_entity_type type;
-	t_animation animation;
+	t_animation *animations;
 	t_facing facing;
 	struct s_entity *next;
 	void *data;
 	t_item items[8];
 } t_entity;
 
-typedef struct s_traps {
+typedef struct s_trap {
     int x1;
     int y1;
 	int x2;
@@ -52,9 +55,9 @@ typedef struct s_traps {
 	unsigned int timer;
     bool activated;
 	t_tile tile;
-	t_trap_type trap_type;
-	struct s_traps *next;
-} t_traps;
+	t_trap_type type;
+	struct s_trap *next;
+} t_trap;
 
 typedef struct s_entdata_door {
 	bool is_open;
@@ -84,7 +87,7 @@ typedef struct s_game {
 	SDL_Point *spawn;
 	t_map *map;
 	t_entity *player;
-	t_traps *trap;
+	t_trap *traps;
 	bool is_started;
 	unsigned int death_timer;
 	bool game_over_screen;
