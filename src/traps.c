@@ -100,7 +100,7 @@ void trap_draw(t_game *game) {
 
         for (int i = tY1; i <= tY2; i++) {
             for (int j = tX1; j <= tX2; j++) {
-                blit_tile(game, current->tile, j * to_tile, i * to_tile, false);
+                blit_tile(game, current->tile, game->scene_offset.x + j * to_tile, game->scene_offset.y + i * to_tile, false);
             }
         }
 

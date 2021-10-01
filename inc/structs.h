@@ -82,7 +82,7 @@ typedef struct s_game {
 	t_control control;
 	SDL_Texture *tileset;
 	SDL_Point *spawn;
-	t_map map;
+	t_map *map;
 	t_entity *player;
 	t_traps *trap;
 	bool is_started;

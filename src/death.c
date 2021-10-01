@@ -22,8 +22,8 @@ void death_logic(t_game *game) {
         if (game->death_timer == 0) game->death_timer = SDL_GetTicks();
 
         if (SDL_GetTicks() > game->death_timer + 3000) {
-            game->player->x = 0;
-            game->player->y = 0;
+            game->player->x = 17 * (TILE_SIZE * TILE_SCALE);
+            game->player->y = 1 * (TILE_SIZE * TILE_SCALE);
             game->game_over_screen = true;
         }
     }
@@ -46,7 +46,7 @@ void death_draw(t_game *game, char *filename) {
         SDL_SetRenderDrawColor(game->renderer, 0, 0, 0, 0);
         SDL_RenderFillRect(game->renderer, &rect);
 
-        blit(game, texture, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+        blit(game, texture, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, ANCHOR_CENTER_CENTER);
     }
 }
 
