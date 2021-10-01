@@ -19,7 +19,7 @@ void player_use_door(t_game *game, t_entity *door) {
 	if ((door->x - 1 <= gX) && (gX <= door->x + 1) &&
 		(door->y - 1 <= gY) && (gY <= door->y + 1)) {
 		for (int i = 0; i < 8; i++) {
-			printf("item[%d]: %d\t%d\n", i, game->player->items[i], ((t_entdata_door *) door->data)->required_item);
+			//printf("item[%d]: %d\t%d\n", i, game->player->items[i], ((t_entdata_door *) door->data)->required_item);
 			if ((game->player->items[i] == ((t_entdata_door *) door->data)->required_item) || (((t_entdata_door *) door->data)->required_item == ITEM_NOTSET)) {
 				((t_entdata_door *) door->data)->is_locked = false;
 				break;
@@ -32,7 +32,9 @@ void player_use_item(t_game *game, t_entity *item) {
 	int gX = game->player->x / (TILE_SIZE * TILE_SCALE);
 	int gY = game->player->y / (TILE_SIZE * TILE_SCALE);
 
-	if ((item->x == gX) && (item->y == gY) && ((t_entdata_item *) item->data)->is_picked_up == false) {
+	if ((item->x - 1 <= gX) && (gX <= item->x + 1) &&
+		(item->y - 1 <= gY) && (gY <= item->y + 1) && 
+		((t_entdata_item *) item->data)->is_picked_up == false) {
 		for (int i = 0; i < 8; i++) {
 			if (game->player->items[i] == 0) {
 				game->player->items[i] = ((t_entdata_item *) item->data)->item;
