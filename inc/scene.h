@@ -9,6 +9,7 @@
 #include "traps.h"
 #include "entity.h"
 #include "map.h"
+#include "text.h"
 
 void scene_init(t_game* game);
 void scene_prepare(t_game* game);

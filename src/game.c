@@ -50,9 +50,12 @@ t_game *game_init(void) {
 	game->is_started = false;
 	game->entities = NULL;
 
+	TTF_Init();
+
 	return game;
 }
 
 void game_free(t_game *game) {
 	free(game);
+	TTF_Quit();
 }
