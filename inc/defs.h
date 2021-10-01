@@ -4,6 +4,7 @@
 
 #define GAME_TITLE "Game"
 #define PLAYER_SPEED 4
+#define TIME_AFTER_DEATH 300
 
 #define MAP_WIDTH 20
 #define MAP_HEIGHT 12

@@ -6,7 +6,6 @@
 #include "common.h"
 #include "draw.h"
 #include "tileset.h"
-#include "animation.h"
 #include "entity.h"
 
 void player_init(t_game* game, int x, int y);

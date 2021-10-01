@@ -3,6 +3,7 @@
 #define ENTITY_H
 
 #include "common.h"
+#include "animation.h"
 #include "player.h"
 #include "door.h"
 #include "item.h"
