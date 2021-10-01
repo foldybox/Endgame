@@ -83,6 +83,10 @@ void input_keyup(t_game *game, SDL_KeyboardEvent *event) {
 			game->is_started = !game->is_started;
 		}
 
+		if (event->keysym.scancode == SDL_SCANCODE_RETURN) {
+			game->control.start = true;
+		}
+
 		if (event->keysym.scancode == SDL_SCANCODE_SPACE && game->game_over_screen) {
 			game->player->is_death = false;
 		}
