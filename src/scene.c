@@ -2,6 +2,8 @@
 
 #include "scene.h"
 
+void traps_init(t_game *game);
+
 void scene_init(t_game *game) {
 	player_init(game, 17, 113);
 	door_add(game, "front_door", set_tile(10, 0), set_tile(9, 0), 17, 10, true, ITEM_NOTSET, false);
@@ -67,6 +69,9 @@ void scene_init(t_game *game) {
 	map_init(game, "resource/maps/map.csv");
 
 	tileset_init(game, "resource/sprites/tileset.png");
+
+	traps_init(game);
+
 	death_init(game);
 
 	questsys_init(game);
@@ -108,4 +113,228 @@ void scene_free(t_game* game) {
 	entity_free(game);
 	tileset_free(game);
 	death_free(game);
+}
+
+void traps_init(t_game *game) {
+	trap_add(game, set_tile(3, 14), set_tile(4, 14), 17, 4, 18, 4, TRAP_TRIGGER, 0);
+	trap_add(game, set_tile(3, 14), set_tile(4, 14), 20, 4, 24, 5, TRAP_GLIMMER, 500);
+    
+	//Первый проход лабиринта старт игры
+    
+  	trap_add(game, set_tile(3, 14), set_tile(4, 14), 17, 4, 18, 4, TRAP_TRIGGER, 0);
+	trap_add(game, set_tile(3, 14), set_tile(4, 14), 20, 4, 24, 5, TRAP_GLIMMER, 500);
+
+	//Первый проход лабиринта старт игры
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 10, 13, 10, 15, TRAP_GLIMMER, 1000);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 10, 16, 10, 17, TRAP_GLIMMER, 1900);
+
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 11, 13, 11, 14, TRAP_GLIMMER, 1900);
+	trap_add(game, set_tile(3, 14), set_tile(4, 14), 11, 15, 11, 15, TRAP_GLIMMER, 2900);
+
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 11, 16, 11, 17, TRAP_GLIMMER, 1000);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 11, 19, 11, 22, TRAP_TRIGGER, 0);
+
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 1, 10, 1, 10, TRAP_TRIGGER, 0);
+
+	trap_add(game, set_tile(3, 14), set_tile(4, 14), 7, 19, 7, 22, TRAP_GLIMMER, 2800);
+
+	trap_add(game, set_tile(3, 14), set_tile(4, 14), 7, 14, 7, 18, TRAP_GLIMMER, 1800);
+
+	trap_add(game, set_tile(3, 14), set_tile(4, 14), 7, 10, 7, 11, TRAP_GLIMMER, 3800);
+
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 1, 12, 1, 14, TRAP_GLIMMER, 2600);
+	trap_add(game, set_tile(3, 14), set_tile(4, 14), 1, 16, 1, 19, TRAP_GLIMMER, 1900);
+  
+
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 2, 12, 2, 15, TRAP_GLIMMER, 3000);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 2, 16, 2, 19, TRAP_GLIMMER, 1900);
+
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 2, 20, 2, 21, TRAP_TRIGGER, 0);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 1, 23, 1, 25, TRAP_TRIGGER, 0);
+
+
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 2, 25, 2, 25, TRAP_GLIMMER, 1900);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 3, 25, 3, 25, TRAP_GLIMMER, 2900);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 4, 25, 4, 25, TRAP_GLIMMER, 5700);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 5, 25, 5, 25, TRAP_GLIMMER, 5700);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 6, 25, 6, 25, TRAP_GLIMMER, 6900);
+
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 13, 47,   13, 47, TRAP_GLIMMER, 3900);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 14, 47,   14, 47, TRAP_GLIMMER, 4300);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 15, 47,   15, 47, TRAP_GLIMMER, 2700);
+   
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 17, 49,  17, 49, TRAP_GLIMMER, 5700);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 18, 49,   18, 49, TRAP_GLIMMER, 3900);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 19, 49,   19, 49, TRAP_GLIMMER, 4300);
+
+
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 17, 54,  17, 54, TRAP_GLIMMER, 4300);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 18, 54,   18, 54, TRAP_GLIMMER, 3900);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 19, 54,   19, 54, TRAP_GLIMMER, 5700);
+
+	  trap_add(game, set_tile(3, 14), set_tile(4, 14), 18, 60,  18, 60, TRAP_GLIMMER, 4300);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 19, 60,   19, 60, TRAP_GLIMMER, 3900);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 20, 60,   20, 60, TRAP_GLIMMER, 5700);
+
+	trap_add(game, set_tile(3, 14), set_tile(4, 14), 21, 61,  21, 61, TRAP_GLIMMER, 4300);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 22, 61,   22, 61, TRAP_GLIMMER, 3900);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 23, 61,   23, 61, TRAP_GLIMMER, 5700);
+
+	trap_add(game, set_tile(3, 14), set_tile(4, 14), 26, 59,  26, 59, TRAP_GLIMMER, 4300);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 27, 59,   27, 59, TRAP_GLIMMER, 3900);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 28, 59,   28, 59, TRAP_GLIMMER, 5700);
+
+	
+	trap_add(game, set_tile(3, 14), set_tile(4, 14), 29, 60, 29, 60, TRAP_GLIMMER, 1800);
+	trap_add(game, set_tile(3, 14), set_tile(4, 14), 29, 61, 29, 61, TRAP_GLIMMER, 4800);
+	trap_add(game, set_tile(3, 14), set_tile(4, 14), 29, 62, 29, 62, TRAP_GLIMMER, 1800);
+
+	trap_add(game, set_tile(3, 14), set_tile(4, 14), 27, 65,  27, 65, TRAP_GLIMMER, 4300);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 28, 65,   28, 65, TRAP_GLIMMER, 3900);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 29, 65,   29, 65, TRAP_GLIMMER, 5700);
+
+
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 22, 55,   22, 55, TRAP_GLIMMER, 5700);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 23, 55,   23, 55, TRAP_GLIMMER, 3900);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 24, 55,   24, 55, TRAP_GLIMMER, 4300);
+
+	  trap_add(game, set_tile(3, 14), set_tile(4, 14), 25, 52,   25, 52, TRAP_GLIMMER, 5700);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 26, 52,   26, 52, TRAP_GLIMMER, 3900);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 27, 52,   27, 52, TRAP_GLIMMER, 4300);
+
+
+    
+
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 9, 47,  9, 47, TRAP_GLIMMER, 4300);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 8, 47,   8, 47, TRAP_GLIMMER, 3900);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 7, 47,   7, 47, TRAP_GLIMMER, 5700);
+
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 13, 55,   13, 55, TRAP_GLIMMER, 4300);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 12, 55,   12, 55, TRAP_GLIMMER, 3900);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 11, 55,   11, 55, TRAP_GLIMMER, 5700);
+
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 9, 53,   9, 53, TRAP_GLIMMER, 4300);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 8, 53,   8, 53, TRAP_GLIMMER, 3900);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 7, 53,   7, 53, TRAP_GLIMMER, 5700);
+
+
+    
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 8, 49,   9, 49, TRAP_GLIMMER, 3900);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 4, 49,   6, 49, TRAP_GLIMMER, 5700);
+
+
+     trap_add(game, set_tile(3, 14), set_tile(4, 14), 1, 49, 1, 56, TRAP_GLIMMER, 6000);
+
+     trap_add(game, set_tile(3, 14), set_tile(4, 14), 5, 58, 5, 60, TRAP_GLIMMER, 2500);
+
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 8, 58, 8, 62 , TRAP_GLIMMER, 3500);
+
+	
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 9, 63, 11, 63 , TRAP_GLIMMER, 3500);
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 10, 57, 13, 57 , TRAP_GLIMMER, 2500);
+
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 15, 62, 15, 66 , TRAP_GLIMMER, 3200);
+
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 19, 63, 15, 72 , TRAP_GLIMMER, 5900);
+
+
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 10, 90, 18, 90 , TRAP_GLIMMER, 7900);
+
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 10, 84, 10, 88 , TRAP_GLIMMER, 5900);
+
+    trap_add(game, set_tile(3, 14), set_tile(4, 14), 1, 84, 1, 97 , TRAP_GLIMMER, 7900);
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 8, 92, 10, 92 , TRAP_GLIMMER, 1500);
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 10, 93, 12, 93 , TRAP_GLIMMER, 3900);
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 8, 86, 8, 89 , TRAP_GLIMMER, 3900);
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 4, 86, 7, 86 , TRAP_GLIMMER, 4900);
+
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 4, 94, 4, 97 , TRAP_GLIMMER, 3900);
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 5, 96 , 6, 96 , TRAP_GLIMMER, 1400);
+
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 1, 101 , 1, 103 , TRAP_GLIMMER, 1900);
+
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 3, 103 , 7, 103 , TRAP_GLIMMER, 2900);
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 15, 72 , 19, 72 , TRAP_GLIMMER, 1900);
+
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 19, 63 , 21, 63 , TRAP_GLIMMER, 1900);
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 23, 67 , 23, 71 , TRAP_GLIMMER, 1900);
+
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 21, 71 , 21, 75 , TRAP_GLIMMER, 3900);
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 28, 71 , 28, 75 , TRAP_GLIMMER, 2900);
+
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 28, 69 , 28, 69 , TRAP_GLIMMER, 200);
+
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 23, 78 , 28, 78 , TRAP_GLIMMER, 4900);
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 23, 83 , 29, 83 , TRAP_GLIMMER, 6900);
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 3, 100 , 10, 100 , TRAP_GLIMMER, 2900);
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 30, 99 , 30, 104 , TRAP_GLIMMER, 3900);
+
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 29, 99 , 29, 102 , TRAP_GLIMMER, 3900);
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 31, 92 , 31, 95 , TRAP_GLIMMER, 3900);
+
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 26, 94 , 28, 94 , TRAP_GLIMMER, 2900);
+
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 24, 90 , 24, 92 , TRAP_GLIMMER, 1900);
+
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 14, 96 , 16, 96 , TRAP_GLIMMER, 2300);
+
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 16, 98 , 17, 96 , TRAP_GLIMMER, 2300);
+
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 15, 101 , 17, 101 , TRAP_GLIMMER, 2300);
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 15, 104 , 20, 104 , TRAP_GLIMMER, 6300);
+
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 20, 100 , 22, 100 , TRAP_GLIMMER, 2100);
+
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 24, 101 , 24, 104 , TRAP_GLIMMER, 2900);
+
+
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 20, 100 , 22, 100 , TRAP_GLIMMER, 2100);
+
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 22, 88 , 22, 92 , TRAP_GLIMMER, 4100);
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 22, 94 , 22, 96 , TRAP_GLIMMER, 3100);
+
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 25, 90 , 27, 90 , TRAP_GLIMMER, 2700);
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 25, 92 , 26, 92 , TRAP_GLIMMER, 2700);
+
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 26, 94 , 28, 94 , TRAP_GLIMMER, 2900);
+
+
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 28, 92 , 30, 92 , TRAP_GLIMMER, 2900);
+
+
+   trap_add(game, set_tile(3, 14), set_tile(4, 14), 32, 94 , 33, 94 , TRAP_GLIMMER, 2100);
 }

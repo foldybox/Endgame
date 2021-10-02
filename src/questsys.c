@@ -134,7 +134,6 @@ void questsys_level01(t_game *game) {
             if (!virtual_guard_data->is_active) {
                 game->questsys.stage = 1;
                 game->is_last_stage = false;
-                printf("DDA\n");
             }
             break;
 
@@ -144,8 +143,6 @@ void questsys_level01(t_game *game) {
 
                 virtual_sarge_data->is_active = true;
                 virtual_sarge_data->current_branch = 0;
-
-                printf("EEA\n");
             }
 
             if (!virtual_sarge_data->is_active) {

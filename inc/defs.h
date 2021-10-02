@@ -2,8 +2,8 @@
 #ifndef DEFS_H
 #define DEFS_H
 
-#define GAME_TITLE "Game"
-#define PLAYER_SPEED 16
+#define GAME_TITLE "Endgame"
+#define PLAYER_SPEED 4
 #define TIME_AFTER_DEATH 300
 
 #define MAP_WIDTH 20
@@ -15,8 +15,9 @@
 #define TILE_SCALE 4
 //Common things
 #define TILE_GROUND 0
-//Sound assets
+
 #define MAX_SND_CHANNELS 8
+
 //Labs assets
 #define TILE_LAB_LEFT_CORNER_UP 13
 #define TILE_LAB_LEFT_CORNER_DOWN 14
@@ -38,16 +39,42 @@
 #define TILE_MIL_WALL_LINER_LEFT 31
 #define TILE_MIL_WALL_LINER_RIGHT 32
 
+
+
+#define MIL_LEFT_CORNER_UP 43
+#define MIL_LEFT_CORNER_DOWN 34
+#define MIL_RIGHT_CORNER_UP 35
+#define MIL_RIGHT_CORNER_DOWN 36
+#define MIL_FLOOR 37
+#define MIL_WALL_FRONT 38
+#define MIL_WALL 39
+#define WALL_LINER_LEFT_I 41
+#define WALL_LINER_RIGHT 42
+
 #define TILE_WALL 11
 
 #define TILE_WALL_FRONT 99
 
+#define ROCK 88
+
 #define TILE_MILL_ROOF 33
+
+
+
+
+//PLANTS AND OTHER THIGS
+#define CACTUS 51
+
+
+#define CACTUS_1 53
+#define CACTUS_2 54
+
+#define PERECATI_POLE 52
 
 
 #define SCREEN_WIDTH   MAP_WIDTH * TILE_SIZE * TILE_SCALE
 #define SCREEN_HEIGHT  MAP_HEIGHT * TILE_SIZE * TILE_SCALE
 
-#define CHARACTER_TIME 10
+#define CHARACTER_TIME 40
 
 #endif
