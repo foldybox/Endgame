@@ -23,8 +23,8 @@ void sound_load(t_game *game) {
 }
 
 void music_load(t_game *game) {
-	game->sound.music[SND_MENU_MUSIC] = Mix_LoadMUS("resource/sounds/main.wav");
-	game->sound.music[SND_LEVEL2_MUSIC] = Mix_LoadMUS("resource/sounds/level02.wav");
+	  game->sound.music[SND_MENU_MUSIC] = Mix_LoadMUS("resource/sounds/main.wav");
+	  game->sound.music[SND_LEVEL2_MUSIC] = Mix_LoadMUS("resource/sounds/level02.wav");
 }
 
 void music_play(t_game *game, int id) {
