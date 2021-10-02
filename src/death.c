@@ -23,22 +23,20 @@ void death_logic(t_game *game) {
         if (game->death_timer == 0) game->death_timer = SDL_GetTicks();
 
         if (SDL_GetTicks() > game->death_timer + animation_gettime(game->player, 4) + TIME_AFTER_DEATH) {
-            game->player->x = 17 * (TILE_SIZE * TILE_SCALE);
-            game->player->y = 1 * (TILE_SIZE * TILE_SCALE);
+            game->player->x = game->spawnpoint.x * (TILE_SIZE * TILE_SCALE);
+            game->player->y = game->spawnpoint.y * (TILE_SIZE * TILE_SCALE);
             game->game_over_screen = true;
             animation_reload(game->player, 4);
         }
     }
     else {
         game->death_timer = SDL_GetTicks();
+        game->is_death_sound = false;
     }
     
 }
 
-void death_draw(t_game *game, char *filename) {
-    SDL_Texture *texture;
-    texture = IMG_LoadTexture(game->renderer, filename);
-
+void death_draw(t_game *game) {
     SDL_Rect rect;
     rect.x = 0;
     rect.y = 0;
@@ -48,7 +46,8 @@ void death_draw(t_game *game, char *filename) {
         SDL_SetRenderDrawColor(game->renderer, 0, 0, 0, 0);
         SDL_RenderFillRect(game->renderer, &rect);
 
-        blit(game, texture, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, ANCHOR_CENTER_CENTER);
+        text_draw(game, "GAME OVER", SCREEN_WIDTH / 2,  SCREEN_HEIGHT / 2 - 20, 144, ANCHOR_BOTTOM_CENTER);
+        text_draw(game, "Нажмите [SPACE] чтобы возродиться", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 20, 24, ANCHOR_TOP_CENTER);
     }
 }
 

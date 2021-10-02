@@ -28,14 +28,34 @@ typedef enum e_entype {
 	ENTYPE_PLAYER,
 	ENTYPE_NPC,
 	ENTYPE_ITEM,
-	ENTYPE_DOOR
+	ENTYPE_DOOR,
+	ENTYPE_OBJECT
 } t_entity_type;
 
 typedef enum e_item {
 	ITEM_NULL,
 	ITEM_NOTSET,
 	ITEM_PAINT,
-	ITEM_KEY
+	ITEM_KEY, 
+	ITEM_FINAL_KEY,
+	ITEM_CAVE_KEY
 } t_item;
+
+typedef enum e_sound_channel {
+	CH_ANY = -1,
+	CH_PLAYER,
+	CH_OTHER
+} t_sound_channel;
+
+typedef enum e_sound_type {
+	SND_PLAYER_RUN,
+	SND_PLAYER_DIE,
+	SND_DOOR_UNLOCK,
+	SND_DOOR_OPEN,
+	SND_NPC_SPEECH,
+	SND_MENU_MUSIC,
+	SND_LEVEL2_MUSIC,
+	SND_MAX
+} t_sound_type;
 
 #endif

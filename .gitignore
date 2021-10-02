@@ -2,7 +2,6 @@
 
 .DS_Store
 lib
-inc/SDL2
 obj
 *.app
 .vscode

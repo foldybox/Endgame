@@ -2,7 +2,7 @@
 
 #include "traps.h"
 
-t_trap *trap_add(t_game *game, t_tile tile, int x1, int y1, int x2, int y2, t_trap_type type, int delay) {
+t_trap *trap_add(t_game * game, t_tile tile, t_tile active_tile, int x1, int y1, int x2, int y2, t_trap_type type, int delay) {
     t_trap *current = game->traps;
     t_trap *trap = (t_trap *) malloc(sizeof(t_trap));
     if (trap == NULL) exit(-1);
@@ -11,6 +11,7 @@ t_trap *trap_add(t_game *game, t_tile tile, int x1, int y1, int x2, int y2, t_tr
 
     trap->delay = delay;
     trap->tile = tile;
+    trap->active_tile = active_tile;
     trap->type = type;
     trap->x1 = x1 * TILE_SIZE * TILE_SCALE;
     trap->y1 = y1 * TILE_SIZE * TILE_SCALE;
@@ -77,15 +78,17 @@ void trap_draw(t_game *game) {
         tY2 = current->y2 / to_tile;
 
         if (current->activated == true) {
-            current->tile = set_tile(3, 3);
+            for (int i = tY1; i <= tY2; i++) {
+                for (int j = tX1; j <= tX2; j++) {
+                    blit_tile(game, current->active_tile, game->scene_offset.x + j * to_tile, game->scene_offset.y + i * to_tile, false);
+                }
+            }
         }
         else {
-            current->tile = set_tile(2, 3);
-        }
-
-        for (int i = tY1; i <= tY2; i++) {
-            for (int j = tX1; j <= tX2; j++) {
-                blit_tile(game, current->tile, game->scene_offset.x + j * to_tile, game->scene_offset.y + i * to_tile, false);
+            for (int i = tY1; i <= tY2; i++) {
+                for (int j = tX1; j <= tX2; j++) {
+                    blit_tile(game, current->tile, game->scene_offset.x + j * to_tile, game->scene_offset.y + i * to_tile, false);
+                }
             }
         }
 

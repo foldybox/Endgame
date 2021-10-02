@@ -16,6 +16,8 @@ t_entity *entity_add(t_game *game, t_entity_type type, int x, int y, t_tile tile
     entity->facing = facing;
     entity->next = NULL;
     entity->animations = NULL;
+    entity->usable = NULL;
+    entity->slag = NULL;
 
     if (current != NULL) {
         while (current->next != NULL) {
@@ -41,7 +43,7 @@ void entity_logic(t_game *game) {
             break;
 
         case ENTYPE_NPC:
-            
+            npc_logic(game, current);
             break;
 
         case ENTYPE_ITEM:
@@ -50,6 +52,10 @@ void entity_logic(t_game *game) {
 
         case ENTYPE_DOOR:
             door_logic(game, current);
+            break;
+        
+        case ENTYPE_OBJECT:
+            object_logic(game, current);
             break;
         
         default:
@@ -70,7 +76,7 @@ void entity_draw(t_game *game) {
             break;
 
         case ENTYPE_NPC:
-            
+            npc_draw(game, current);
             break;
 
         case ENTYPE_ITEM:
@@ -79,6 +85,10 @@ void entity_draw(t_game *game) {
 
         case ENTYPE_DOOR:
             door_draw(game, current);
+            break;
+
+        case ENTYPE_OBJECT:
+            object_draw(game, current);
             break;
         
         default:
@@ -101,22 +111,26 @@ void entity_free(t_game *game) {
             break;
 
         case ENTYPE_NPC:
-            
+            npc_free(current);
             break;
 
         case ENTYPE_ITEM:
-            
+            item_free(current);
             break;
 
         case ENTYPE_DOOR:
             door_free(current);
+            break;
+
+        case ENTYPE_OBJECT:
+            object_free(current);
             break;
         
         default:
             break;
         }
 
-        animation_free(current);
+        animations_free(current);
 
         current = current->next;
     }
@@ -131,4 +145,21 @@ void entity_free(t_game *game) {
     }
 
 	game->entities = NULL;
+}
+
+t_entity *entity_by_slag(t_game *game, const char *slag) {
+    t_entity *current = game->entities;
+    while (current != NULL) {
+        if (current->slag == NULL) {
+            current = current->next;
+            continue;
+        }
+        if (!strcmp(current->slag, slag)) break;
+        if (current->next == NULL) {
+            return NULL;
+        } 
+        current = current->next;
+    }
+
+    return current;
 }
