@@ -56,8 +56,8 @@ void scene_init(t_game *game) {
 	message_add(entity_by_slag(game, "virtual_sarge"), "Сержант Пяточка", "Приветствую тебя, новобранец! я тут увидел, что тебе нужен пропуск, так ведь?", 0);
     message_add(entity_by_slag(game, "virtual_sarge"), "Сержант Пяточка", "У меня как раз есть одно задание специально для тебя, видишь перед мной серую траву...", 0);
     message_add(entity_by_slag(game, "virtual_sarge"), "Сержант Пяточка", "... ее нужно покрасить в зелёную. Как? Краской конечно!", 0);
-    message_add(entity_by_slag(game, "virtual_sarge"), "Сержант Пяточка", "Как раз одна должна быть здесь недалеко за полосой пррепятствий.", 0);
-    message_add(entity_by_slag(game, "virtual_sarge"), "Сержант Пяточка", "Достано краску, покрась траву, и может быть мы договоримся на пропуск.", 0);
+    message_add(entity_by_slag(game, "virtual_sarge"), "Сержант Пяточка", "Как раз одна должна быть здесь недалеко за полосой препятствий.", 0);
+    message_add(entity_by_slag(game, "virtual_sarge"), "Сержант Пяточка", "Достань краску, покрась траву, и может быть мы договоримся на пропуск.", 0);
 	message_add(entity_by_slag(game, "virtual_sarge"), "Сержант Пяточка", "Неужели ты справился? Неплохо, но моя бабушка и то быстрее бы это сделала...", 1);
     message_add(entity_by_slag(game, "virtual_sarge"), "Сержант Пяточка", "..., но так уж и быть, держи пропуск.", 1);
 
