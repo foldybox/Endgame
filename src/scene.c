@@ -53,7 +53,7 @@ void scene_draw(t_game* game) {
 
 	message_draw(game);
 
-	death_draw(game, "assets/sprites/death.jpeg");
+	death_draw(game);
 }
 
 void scene_present(t_game* game) {
