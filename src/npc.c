@@ -2,8 +2,9 @@
 
 #include "npc.h"
 
-t_entity *npc_add(t_game *game, t_tile tile, int x, int y, bool is_active) {
+t_entity *npc_add(t_game *game, char *slag, t_tile tile, int x, int y, bool is_active) {
     t_entity *npc = entity_add(game, ENTYPE_NPC, x, y, tile, FACING_RIGHT);
+    npc->slag = slag;
 
     npc->data = malloc(sizeof(t_entdata_npc));
 

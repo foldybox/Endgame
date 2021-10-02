@@ -38,6 +38,9 @@ void menu_main_draw(t_game *game) {
         text_draw(game, "ENDGAME", SCREEN_WIDTH / 2,  SCREEN_HEIGHT / 2 - 150, 144, ANCHOR_BOTTOM_CENTER);
         text_draw(game, "Press [ENTER] to start", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 190, 24, ANCHOR_BOTTOM_CENTER);
 
+        text_draw(game, "Cop'n'Past Games", 10, 10, 18, ANCHOR_TOP_LEFT);
+        text_draw(game, "version: 0.1-alpha", SCREEN_WIDTH - 10, 10, 18, ANCHOR_TOP_RIGHT);
+
         rect.y = 0;
         rect.w = SCREEN_WIDTH;
         rect.h = SCREEN_HEIGHT;

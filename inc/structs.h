@@ -46,6 +46,7 @@ typedef struct s_entity {
 	void *data;
 	t_item items[8];
 	struct s_entity *usable;
+	char *slag;
 } t_entity;
 
 typedef struct s_map {
@@ -78,6 +79,11 @@ typedef struct s_message {
 	bool is_shown;
 } t_message;
 
+typedef struct s_questsys {
+	int level;
+	int stage;
+} t_questsys;
+
 typedef struct s_game {
 	SDL_Renderer *renderer;
 	SDL_Window *window;
@@ -93,6 +99,9 @@ typedef struct s_game {
 	t_entity *entities;
 	SDL_Point scene_offset;
 	t_entity *message_entity;
+	t_questsys questsys;
+	bool is_last_stage;
+	SDL_Point spawnpoint;
 } t_game;
 
 typedef struct s_entdata_door {

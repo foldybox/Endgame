@@ -16,4 +16,6 @@ void entity_logic(t_game *game);
 void entity_draw(t_game *game);
 void entity_free(t_game *game);
 
+t_entity *entity_by_slag(t_game *game, const char *slag);
+
 #endif

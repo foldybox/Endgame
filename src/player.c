@@ -3,10 +3,14 @@
 #include "player.h"
 
 void player_init(t_game *game, int x, int y) {
-    t_entity *player = entity_add(game, ENTYPE_PLAYER, x, y, set_tile(4, 3), FACING_RIGHT);
+    t_entity *player = entity_add(game, ENTYPE_PLAYER, x  * (TILE_SIZE * TILE_SCALE), y  * (TILE_SIZE * TILE_SCALE), set_tile(4, 3), FACING_RIGHT);
 	for (int i = 0; i < 8; i++) {
 		player->items[i] = 0;
 	}
+
+	player->slag = "player";
+
+	player_set_spawnpoint(game, x, y);
 
 	animation_add(player, 0, set_tile(4, 5), 2, 300, true);
 	animation_add(player, 1, set_tile(6, 5), 2, 300, true);
@@ -21,7 +25,7 @@ void player_use_door(t_game *game, t_entity *door) {
 	//printf("p[%d:%d]\te[%d:%d]\n", gX, gY, door->x, door->y);
 	for (int i = 0; i < 8; i++) {
 		//printf("item[%d]: %d\t%d\n", i, game->player->items[i], ((t_entdata_door *) door->data)->required_item);
-		if ((game->player->items[i] == ((t_entdata_door *) door->data)->required_item) || (((t_entdata_door *) door->data)->required_item == ITEM_NOTSET)) {
+		if (((game->player->items[i] == ((t_entdata_door *) door->data)->required_item) || (((t_entdata_door *) door->data)->required_item == ITEM_NOTSET)) && (((t_entdata_door *) door->data)->required_item != ITEM_NULL)) {
 			((t_entdata_door *) door->data)->is_locked = false;
 			break;
 		}
@@ -212,6 +216,11 @@ void player_draw(t_game *game) {
 
 			case ENTYPE_DOOR:
 				if (((t_entdata_door *) game->player->usable->data)->is_locked) {
+					if (((t_entdata_door *) game->player->usable->data)->required_item == ITEM_NULL) {
+						text_draw(game, "Door is locked", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+						break;
+					}
+
 					bool has_key = false;
 					for (int i = 0; i < 8; i++) {
 						if ((game->player->items[i] == ((t_entdata_door *) game->player->usable->data)->required_item) || (((t_entdata_door *) game->player->usable->data)->required_item == ITEM_NOTSET)) {
@@ -229,7 +238,7 @@ void player_draw(t_game *game) {
 				break;
 
 			case ENTYPE_OBJECT:
-				if (!((t_entdata_object *) game->player->usable->data)->is_used) {
+				if (!((t_entdata_object *) game->player->usable->data)->is_used && ((t_entdata_object *) game->player->usable->data)->is_active) {
 					if (((t_entdata_object *) game->player->usable->data)->is_using) {
 						text_draw(game, "Using...", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
 					}
@@ -260,4 +269,9 @@ void player_draw(t_game *game) {
 void player_free(t_game *game) {
     free(game->player);
 	game->player = NULL;
+}
+
+void player_set_spawnpoint(t_game *game, int x, int y) {
+	game->spawnpoint.x = x;
+	game->spawnpoint.y = y;
 }
