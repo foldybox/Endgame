@@ -3,7 +3,7 @@
 #define DEFS_H
 
 #define GAME_TITLE "Game"
-#define PLAYER_SPEED 4
+#define PLAYER_SPEED 16
 #define TIME_AFTER_DEATH 300
 
 #define MAP_WIDTH 20

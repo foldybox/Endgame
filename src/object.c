@@ -2,7 +2,7 @@
 
 #include "object.h"
 
-t_entity *object_add(t_game *game, char *slag, t_tile start_tile, t_tile finish_tile, int x, int y, bool is_active, t_item required_item, int delay) {
+t_entity *object_add(t_game *game, char *slag, t_tile start_tile, t_tile finish_tile, int x, int y, bool is_active, t_item required_item, int delay, bool is_obstacle) {
     t_entity *obj = entity_add(game, ENTYPE_OBJECT, x, y, start_tile, FACING_RIGHT);
 
     obj->data = malloc(sizeof(t_entdata_object));
@@ -20,6 +20,7 @@ t_entity *object_add(t_game *game, char *slag, t_tile start_tile, t_tile finish_
     data->is_obstacle = true;
     data->delay = delay;
     data->is_using = false;
+    data->is_obstacle = is_obstacle;
 
     return obj;
 }
