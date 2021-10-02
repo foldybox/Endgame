@@ -39,7 +39,9 @@ $(EXEC_FILE): build link
 
 link:
 	@printf "\r\33[2KLink $(EXEC_FILE)\t\t"
+
 	@clang -g obj/* -I inc/ -mwindows -o $(EXEC_FILE) $(SDL_FLAGS) $(SDL)
+
 	@printf "\033[32;1mlinked\033[0m\n"
 
 build: $(OBJ_FILES)

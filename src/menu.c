@@ -7,14 +7,6 @@ void menu_main_init(t_game *game) {
     game->death_timer = 0;
 }
 
-void menu_main_logic(t_game *game) {
-    int x = game->death_timer;
-    x++;
-    // if (game->control.start) {
-    //     menu_loading_to_game(game);
-    // }
-}
-
 void menu_main_draw(t_game *game) {
     SDL_Texture *texture;
     SDL_Rect rect;
@@ -55,6 +47,7 @@ void menu_main_draw(t_game *game) {
         }
 
         if (SDL_GetTicks() > game->death_timer + 3000) {
+            Mix_HaltMusic ();
             game->death_timer = 0;
             game->is_started = true;
         }

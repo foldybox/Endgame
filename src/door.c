@@ -25,6 +25,10 @@ void door_logic(t_game *game, t_entity *door) {
     }
     else {
         door->tile = ((t_entdata_door *)door->data)->open;
+        if (game->is_door_sound) {
+            sound_play(game, SND_DOOR_OPEN, CH_OBJECT);
+            game->is_door_sound = false;
+        }
     }
 }
 

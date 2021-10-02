@@ -31,6 +31,7 @@ void death_logic(t_game *game) {
     }
     else {
         game->death_timer = SDL_GetTicks();
+        game->is_death_sound = false;
     }
     
 }

@@ -1,6 +1,6 @@
 // init.c
 
-#include "common.h"
+#include "game.h"
 
 t_game *game_init(void) {
 	t_game *game = (t_game *) malloc(sizeof(t_game));
@@ -54,6 +54,10 @@ t_game *game_init(void) {
 	game->questsys.stage = 0;
 
 	TTF_Init();
+
+	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+
+	Mix_AllocateChannels(MAX_SND_CHANNELS);
 
 	return game;
 }

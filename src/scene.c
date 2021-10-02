@@ -64,6 +64,7 @@ void scene_logic(t_game* game) {
 	entity_logic(game);
 	trap_logic(game);
 	death_logic(game);
+	sound_logic(game);
 	questsys_logic(game);
 }
 
