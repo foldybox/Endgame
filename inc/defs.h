@@ -80,6 +80,16 @@
 
 #define PERECATI_POLE 52
 
+#define NETRAN 55
+
+#define bottle 56
+
+#define bottle_empty 57
+
+#define trash 58
+#define trash2 59
+#define comp 60
+#define trava 61
 
 #define SCREEN_WIDTH   MAP_WIDTH * TILE_SIZE * TILE_SCALE
 #define SCREEN_HEIGHT  MAP_HEIGHT * TILE_SIZE * TILE_SCALE

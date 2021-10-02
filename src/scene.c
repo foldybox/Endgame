@@ -11,13 +11,7 @@ void scene_init(t_game *game) {
 	// Level 00
 	npc_add(game, "real_general", set_tile(1, 11), 14, 112, true);
 	npc_add(game, "real_scientist", set_tile(0, 11), 7, 116, false);
-	object_add(game, "chair_of_vr0", set_tile(1, 14), set_tile(0, 14), 7, 117, false, ITEM_NOTSET, 1000, true);
 	object_add(game, "chair_of_vr_main", set_tile(0, 14), set_tile(1, 14), 7, 118, false, ITEM_NOTSET, 1000, true);
-	object_add(game, "chair_of_vr1", set_tile(1, 14), set_tile(0, 14), 7, 119, false, ITEM_NOTSET, 1000, true);
-	object_add(game, "chair_of_vr2", set_tile(1, 14), set_tile(0, 14), 7, 120, false, ITEM_NOTSET, 1000, true);
-	object_add(game, "computer0", set_tile(5, 14), set_tile(5, 14), 8, 116, false, ITEM_NOTSET, 1000, true);
-	object_add(game, "computer1", set_tile(5, 14), set_tile(5, 14), 9, 116, false, ITEM_NOTSET, 1000, true);
-	object_add(game, "computer2", set_tile(5, 14), set_tile(5, 14), 10, 116, false, ITEM_NOTSET, 1000, true);
 	door_add(game, "locked_door", set_tile(10, 0), set_tile(9, 0), 17, 111, true, ITEM_NULL, false);
 
 	message_add(entity_by_slag(game, "real_general"), "Генерал Прокофьев", "Сегодня тебе выпал уникальный шанс, ты сможешь испытать на себе инновационную методику подготовки.", 0);
