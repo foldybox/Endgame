@@ -70,6 +70,12 @@ void message_draw(t_game *game) {
 
     text_draw(game, current->header, 20, SCREEN_HEIGHT - 50, 32, ANCHOR_BOTTOM_LEFT);
     text_draw(game, current->text, 20, SCREEN_HEIGHT - 20, 24, ANCHOR_BOTTOM_LEFT);
+    if (game->sound.timer == 0) game->sound.timer = SDL_GetTicks();
+
+    if (SDL_GetTicks() > game->sound.timer + 2000) {
+        sound_play(game, SND_NPC_SPEECH, CH_OTHER);
+        game->sound.timer = 0;
+    }
 
     if (SDL_GetTicks() > current->timer + current->delay) {
         current->is_shown = true;

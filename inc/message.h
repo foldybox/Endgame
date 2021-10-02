@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include "entity.h"
+#include "sound.h"
 
 t_message *message_add(t_entity *entity, char *header, char *text, int branch);
 void message_draw(t_game *game);
