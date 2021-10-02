@@ -7,8 +7,8 @@ void questsys_level01(t_game *game);
 void questsys_level02(t_game *game);
 
 void questsys_init(t_game *game) {
-    game->questsys.level = 0;
-    game->questsys.stage = 0;
+    game->questsys.level = 1;
+    game->questsys.stage = 9;
     game->is_last_stage = false;
 }
 
@@ -123,7 +123,9 @@ void questsys_level01(t_game *game) {
     t_entdata_door *locked_door_data = locked_door->data;
 
     t_entity *portal0 = entity_by_slag(game, "portal0");
+    t_entdata_object *portal0_data = portal0->data;
     t_entity *portal1 = entity_by_slag(game, "portal1");
+    t_entdata_object *portal1_data = portal1->data;
 
     switch (game->questsys.stage) {
         case 0:
@@ -263,6 +265,9 @@ void questsys_level01(t_game *game) {
         case 9:
             if (!game->is_last_stage) {
                 game->is_last_stage = true;
+
+                portal0_data->is_obstacle = false;
+                portal1_data->is_obstacle = false;
             }
 
             if (((game->player->x / (TILE_SCALE * TILE_SIZE) == portal0->x) && (game->player->y / (TILE_SCALE * TILE_SIZE) == portal0->y)) || ((game->player->x / (TILE_SCALE * TILE_SIZE) == portal1->x) && (game->player->y / (TILE_SCALE * TILE_SIZE) == portal1->y))) {
@@ -279,6 +284,8 @@ void questsys_level01(t_game *game) {
 void questsys_level02(t_game *game) {
     t_entity *scientist = entity_by_slag(game, "virtual_scientist");
     t_entdata_npc *scientist_data = scientist->data;
+    t_entity *portal0 = entity_by_slag(game, "final_portal0");
+    t_entity *portal1 = entity_by_slag(game, "final_portal1");
 
     switch (game->questsys.stage) {
         case 0:
@@ -299,12 +306,12 @@ void questsys_level02(t_game *game) {
         case 1:
             if (!game->is_last_stage) {
                 game->is_last_stage = true;
-
+                //scientist->x = -10000;
             }
 
-            if (!scientist_data->is_active) {
-                game->questsys.stage = 2;
-                game->is_last_stage = false;
+            if (((game->player->x / (TILE_SCALE * TILE_SIZE) == portal0->x) && (game->player->y / (TILE_SCALE * TILE_SIZE) == portal0->y)) || ((game->player->x / (TILE_SCALE * TILE_SIZE) == portal1->x) && (game->player->y / (TILE_SCALE * TILE_SIZE) == portal1->y))) {
+                game->control.is_locked = true;
+                game->is_finish = true;
             }
             break;
     }

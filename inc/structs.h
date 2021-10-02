@@ -114,6 +114,7 @@ typedef struct s_game {
 	t_questsys questsys;
 	bool is_last_stage;
 	SDL_Point spawnpoint;
+	bool is_finish;
 } t_game;
 
 typedef struct s_entdata_door {
