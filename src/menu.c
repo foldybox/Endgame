@@ -16,7 +16,7 @@ void menu_main_draw(t_game *game) {
     rect.h = SCREEN_HEIGHT / 3;
 
     if (game->control.start == 0) {
-        texture = IMG_LoadTexture(game->renderer, "assets/sprites/menu_img2.gif");
+        texture = IMG_LoadTexture(game->renderer, "resource/sprites/menu_img2.gif");
         blit(game, texture, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.75, ANCHOR_CENTER_CENTER);
         SDL_SetRenderDrawColor(game->renderer, 0, 0, 0, 0);
         SDL_RenderFillRect(game->renderer, &rect);
@@ -29,6 +29,9 @@ void menu_main_draw(t_game *game) {
 
         text_draw(game, "ENDGAME", SCREEN_WIDTH / 2,  SCREEN_HEIGHT / 2 - 150, 144, ANCHOR_BOTTOM_CENTER);
         text_draw(game, "Press [ENTER] to start", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 190, 24, ANCHOR_BOTTOM_CENTER);
+
+        text_draw(game, "Cop'n'Past Games", 10, 10, 18, ANCHOR_TOP_LEFT);
+        text_draw(game, "version: 0.1-alpha", SCREEN_WIDTH - 10, 10, 18, ANCHOR_TOP_RIGHT);
 
         rect.y = 0;
         rect.w = SCREEN_WIDTH;
