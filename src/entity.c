@@ -42,7 +42,7 @@ void entity_logic(t_game *game) {
             break;
 
         case ENTYPE_NPC:
-            
+            npc_logic(game, current);
             break;
 
         case ENTYPE_ITEM:
@@ -75,7 +75,7 @@ void entity_draw(t_game *game) {
             break;
 
         case ENTYPE_NPC:
-            
+            npc_draw(game, current);
             break;
 
         case ENTYPE_ITEM:
@@ -110,15 +110,19 @@ void entity_free(t_game *game) {
             break;
 
         case ENTYPE_NPC:
-            
+            npc_free(current);
             break;
 
         case ENTYPE_ITEM:
-            
+            item_free(current);
             break;
 
         case ENTYPE_DOOR:
             door_free(current);
+            break;
+
+        case ENTYPE_OBJECT:
+            object_free(current);
             break;
         
         default:

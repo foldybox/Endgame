@@ -51,6 +51,11 @@ void player_use_object(t_game *game, t_entity *obj) {
 	}
 }
 
+void player_use_npc(t_game *game, t_entity *npc) {
+	if (false) game = NULL;
+	((t_entdata_npc *) npc->data)->is_active = false;
+}
+
 void player_move(t_game* game) {
 	int x = 0;
 	int y = 0;
@@ -112,32 +117,40 @@ void player_move(t_game* game) {
 	t_entity *entity = game->entities;
     while (entity != NULL) {
 		switch (entity->type) {
-		case ENTYPE_DOOR:
-			if ((entity->x - 1 <= gX) && (gX <= entity->x + 1) && (entity->y - 1 <= gY) && (gY <= entity->y + 1)) {
-				game->player->usable = entity;
-				if (game->control.use) player_use_door(game, entity);
-			}
-			if ((entity->x == gX && entity->y == gY) && ((t_entdata_door *)entity->data)->is_locked) return;
-			break;
-		
-		case ENTYPE_ITEM:
-			if ((entity->x - 1 <= gX) && (gX <= entity->x + 1) && (entity->y - 1 <= gY) && (gY <= entity->y + 1)) {
-				game->player->usable = entity;
-				if (game->control.use) player_use_item(game, entity);
-			}
-			break;
+			case ENTYPE_DOOR:
+				if ((entity->x - 1 <= gX) && (gX <= entity->x + 1) && (entity->y - 1 <= gY) && (gY <= entity->y + 1)) {
+					game->player->usable = entity;
+					if (game->control.use) player_use_door(game, entity);
+				}
+				if ((entity->x == gX && entity->y == gY) && ((t_entdata_door *)entity->data)->is_locked) return;
+				break;
+			
+			case ENTYPE_ITEM:
+				if ((entity->x - 1 <= gX) && (gX <= entity->x + 1) && (entity->y - 1 <= gY) && (gY <= entity->y + 1)) {
+					game->player->usable = entity;
+					if (game->control.use) player_use_item(game, entity);
+				}
+				break;
 
-		case ENTYPE_OBJECT:
-			if ((entity->x - 1 <= gX) && (gX <= entity->x + 1) && (entity->y - 1 <= gY) && (gY <= entity->y + 1)) {
-				game->player->usable = entity;
-				if (game->control.use) player_use_object(game, entity);
-			}
-			if ((entity->x == gX && entity->y == gY) && ((t_entdata_object *)entity->data)->is_obstacle) return;
-			break;
-		
-		default:
-			game->player->usable = NULL;
-			break;
+			case ENTYPE_OBJECT:
+				if ((entity->x - 1 <= gX) && (gX <= entity->x + 1) && (entity->y - 1 <= gY) && (gY <= entity->y + 1)) {
+					game->player->usable = entity;
+					if (game->control.use) player_use_object(game, entity);
+				}
+				if ((entity->x == gX && entity->y == gY) && ((t_entdata_object *)entity->data)->is_obstacle) return;
+				break;
+
+			case ENTYPE_NPC:
+				if ((entity->x - 1 <= gX) && (gX <= entity->x + 1) && (entity->y - 1 <= gY) && (gY <= entity->y + 1)) {
+					game->player->usable = entity;
+					if (game->control.use) player_use_npc(game, entity);
+				}
+				if ((entity->x == gX && entity->y == gY)) return;
+				break;
+			
+			default:
+				game->player->usable = NULL;
+				break;
 		}
         entity = entity->next;
     }
@@ -184,12 +197,14 @@ void player_draw(t_game *game) {
 	if (game->player->usable != NULL) {
 		switch (game->player->usable->type) {
 			case ENTYPE_NPC:
-				
+				if (((t_entdata_npc *) game->player->usable->data)->is_active) {
+					text_draw(game, "[F] Talk", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+				}
 				break;
 
 			case ENTYPE_ITEM:
 				if (!((t_entdata_item *) game->player->usable->data)->is_picked_up) {
-					text_draw(game, "[F] PICK UP", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+					text_draw(game, "[F] Pick up", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
 				}
 				break;
 
@@ -203,10 +218,10 @@ void player_draw(t_game *game) {
 						}
 					}
 					if (has_key) {
-						text_draw(game, "[F] OPEN", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+						text_draw(game, "[F] Open", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
 					}
 					else {
-						text_draw(game, "NEED A KEY", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+						text_draw(game, "Need a key", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
 					}
 				}
 				break;
@@ -214,7 +229,7 @@ void player_draw(t_game *game) {
 			case ENTYPE_OBJECT:
 				if (!((t_entdata_object *) game->player->usable->data)->is_used) {
 					if (((t_entdata_object *) game->player->usable->data)->is_using) {
-						text_draw(game, "USING...", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+						text_draw(game, "Using...", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
 					}
 					else {
 						bool has_key = false;
@@ -225,10 +240,10 @@ void player_draw(t_game *game) {
 							}
 						}
 						if (has_key) {
-							text_draw(game, "[F] USE", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+							text_draw(game, "[F] Use", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
 						}
 						else {
-							text_draw(game, "NEED SOMETHING", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+							text_draw(game, "Need something", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
 						}
 					}
 				}

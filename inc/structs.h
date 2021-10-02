@@ -106,8 +106,11 @@ typedef struct s_entdata_object {
 	t_tile start_tile;
 	t_tile finish_tile;
 	t_item required_item;
-	//void (* logic)(t_game *game, t_entity *entity);
 } t_entdata_object;
+
+typedef struct s_entdata_npc {
+	bool is_active;
+} t_entdata_npc;
 
 
 #endif

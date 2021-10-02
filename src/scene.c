@@ -15,6 +15,8 @@ void scene_init(t_game *game) {
 
 	object_add(game, set_tile(2, 4), set_tile(1, 4), 26, 4, true, ITEM_KEY, 3000);
 
+	npc_add(game, set_tile(0, 11), 2, 2, true);
+
 	map_init(game, "assets/maps/map.csv");
 
 	tileset_init(game, "assets/sprites/tileset.png");
