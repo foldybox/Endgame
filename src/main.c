@@ -14,14 +14,16 @@ int main()
 
 	menu_main_init(game);
 
+	sound_init(game);
+
+	music_play(game, SND_MENU_MUSIC);
+
 	while (!game->is_started) {
 		scene_prepare(game);
 
 		menu_main_draw(game);
 
 		scene_present(game);
-
-		menu_main_logic(game);
 
 		input_handle(game);
 

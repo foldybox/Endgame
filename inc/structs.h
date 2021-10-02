@@ -67,6 +67,14 @@ typedef struct s_trap {
 	struct s_trap *next;
 } t_trap;
 
+typedef struct s_sound {
+	unsigned int timer;
+	Mix_Chunk *all_sounds[SND_MAX];
+	Mix_Music *music[SND_MAX];
+	t_sound_channel sound_channel;
+	t_sound_type sound_type;
+} t_sound;
+
 typedef struct s_game {
 	SDL_Renderer *renderer;
 	SDL_Window *window;
@@ -81,6 +89,9 @@ typedef struct s_game {
 	bool game_over_screen;
 	t_entity *entities;
 	SDL_Point scene_offset;
+	t_sound sound;
+	bool is_death_sound;
+	bool is_door_sound;
 } t_game;
 
 typedef struct s_entdata_door {

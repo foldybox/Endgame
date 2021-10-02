@@ -23,6 +23,7 @@ void player_use_door(t_game *game, t_entity *door) {
 		//printf("item[%d]: %d\t%d\n", i, game->player->items[i], ((t_entdata_door *) door->data)->required_item);
 		if ((game->player->items[i] == ((t_entdata_door *) door->data)->required_item) || (((t_entdata_door *) door->data)->required_item == ITEM_NOTSET)) {
 			((t_entdata_door *) door->data)->is_locked = false;
+			game->is_door_sound = true;
 			break;
 		}
 	}

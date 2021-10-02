@@ -39,4 +39,19 @@ typedef enum e_item {
 	ITEM_KEY
 } t_item;
 
+typedef enum e_sound_channel {
+	CH_ANY = -1,
+	CH_PLAYER,
+	CH_OBJECT
+} t_sound_channel;
+
+typedef enum e_sound_type {
+	SND_PLAYER_RUN,
+	SND_PLAYER_DIE,
+	SND_DOOR_UNLOCK,
+	SND_DOOR_OPEN,
+	SND_MENU_MUSIC,
+	SND_MAX
+} t_sound_type;
+
 #endif

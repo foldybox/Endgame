@@ -15,7 +15,8 @@
 #define TILE_SCALE 4
 //Common things
 #define TILE_GROUND 0
-
+//Sound assets
+#define MAX_SND_CHANNELS 8
 //Labs assets
 #define TILE_LAB_LEFT_CORNER_UP 13
 #define TILE_LAB_LEFT_CORNER_DOWN 14

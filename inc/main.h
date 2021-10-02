@@ -6,6 +6,7 @@
 
 #include "common.h"
 #include "menu_main.h"
+#include "sound.h"
 #include "draw.h"
 #include "input.h"
 #include "player.h"

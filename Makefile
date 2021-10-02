@@ -28,7 +28,7 @@ $(EXEC_FILE): build link
 
 link:
 	@printf "\r\33[2KLink $(EXEC_FILE)\t\t"
-	@clang -g obj/* -I inc/ -L lib -lSDL2-2.0.0 -lSDL2_image -lSDL2_ttf -mwindows -o $(EXEC_FILE)
+	@clang -g obj/* -I inc/ -L lib -lSDL2-2.0.0 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -mwindows -o $(EXEC_FILE)
 	@printf "\033[32;1mlinked\033[0m\n"
 
 build: $(OBJ_FILES)

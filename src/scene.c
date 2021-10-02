@@ -46,6 +46,7 @@ void scene_logic(t_game* game) {
 	entity_logic(game);
 	trap_logic(game);
 	death_logic(game);
+	sound_logic(game);
 }
 
 void scene_free(t_game* game) {

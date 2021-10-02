@@ -18,3 +18,9 @@ cp ~/.brew/opt/sdl2_ttf/lib/libSDL2_ttf-2.0.0.dylib lib/
 cp ~/.brew/opt/sdl2_ttf/lib/libSDL2_ttf.a lib/
 cp ~/.brew/opt/sdl2_ttf/lib/libSDL2_ttf.dylib lib/
 cp ~/.brew/opt/sdl2_ttf/lib/pkgconfig/SDL2_ttf.pc lib/pkgconfig/
+
+cp ~/.brew/opt/sdl2_mixer/include/SDL2/SDL_mixer.h inc/SDL2/
+cp ~/.brew/opt/sdl2_mixer/lib/libSDL2_mixer-2.0.0.dylib lib/
+cp ~/.brew/opt/sdl2_mixer/lib/libSDL2_mixer.a lib/
+cp ~/.brew/opt/sdl2_mixer/lib/libSDL2_mixer.dylib lib/
+cp ~/.brew/opt/sdl2_mixer/lib/pkgconfig/SDL2_mixer.pc lib/pkgconfig/
