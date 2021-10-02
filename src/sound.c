@@ -19,6 +19,7 @@ void sound_load(t_game *game) {
     game->sound.all_sounds[SND_PLAYER_RUN] = Mix_LoadWAV("sounds/walking.wav");
     game->sound.all_sounds[SND_PLAYER_DIE] = Mix_LoadWAV("sounds/death.wav");
     game->sound.all_sounds[SND_DOOR_OPEN] = Mix_LoadWAV("sounds/open_door.wav");
+    game->sound.all_sounds[SND_NPC_SPEECH] = Mix_LoadWAV("sounds/speech-announce.wav");
 }
 
 void music_load(t_game *game) {
