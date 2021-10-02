@@ -4,23 +4,27 @@
 
 void questsys_level00(t_game *game);
 void questsys_level01(t_game *game);
+void questsys_level02(t_game *game);
 
 void questsys_init(t_game *game) {
-    game->questsys.level = 0;
-    game->questsys.stage = 0;
+    game->questsys.level = 1;
+    game->questsys.stage = 9;
     game->is_last_stage = false;
 }
 
 void questsys_logic(t_game *game) {
-    switch (game->questsys.level)
-    {
-    case 0:
-        questsys_level00(game);
-        break;
+    switch (game->questsys.level) {
+        case 0:
+            questsys_level00(game);
+            break;
 
-    case 1:
-        questsys_level01(game);
-        break;
+        case 1:
+            questsys_level01(game);
+            break;
+
+        case 2:
+            questsys_level02(game);
+            break;
     }
 }
 
@@ -119,12 +123,15 @@ void questsys_level01(t_game *game) {
     t_entdata_door *locked_door_data = locked_door->data;
 
     t_entity *portal0 = entity_by_slag(game, "portal0");
+    t_entdata_object *portal0_data = portal0->data;
     t_entity *portal1 = entity_by_slag(game, "portal1");
+    t_entdata_object *portal1_data = portal1->data;
 
     switch (game->questsys.stage) {
         case 0:
             if (!game->is_last_stage) {
                 game->is_last_stage = true;
+                music_play(game, SND_LEVEL2_MUSIC);
 
                 virtual_guard_data->is_active = true;
                 virtual_guard_data->current_branch = 0;
@@ -258,6 +265,9 @@ void questsys_level01(t_game *game) {
         case 9:
             if (!game->is_last_stage) {
                 game->is_last_stage = true;
+
+                portal0_data->is_obstacle = false;
+                portal1_data->is_obstacle = false;
             }
 
             if (((game->player->x / (TILE_SCALE * TILE_SIZE) == portal0->x) && (game->player->y / (TILE_SCALE * TILE_SIZE) == portal0->y)) || ((game->player->x / (TILE_SCALE * TILE_SIZE) == portal1->x) && (game->player->y / (TILE_SCALE * TILE_SIZE) == portal1->y))) {
@@ -266,6 +276,42 @@ void questsys_level01(t_game *game) {
                 game->player->x = 11 * (TILE_SCALE * TILE_SIZE);
                 game->player->y = 47 * (TILE_SCALE * TILE_SIZE);
                 player_set_spawnpoint(game, 11, 47);
+            }
+            break;
+    }
+}
+
+void questsys_level02(t_game *game) {
+    t_entity *scientist = entity_by_slag(game, "virtual_scientist");
+    t_entdata_npc *scientist_data = scientist->data;
+    t_entity *portal0 = entity_by_slag(game, "final_portal0");
+    t_entity *portal1 = entity_by_slag(game, "final_portal1");
+
+    switch (game->questsys.stage) {
+        case 0:
+            if (!game->is_last_stage) {
+                game->is_last_stage = true;
+
+
+                scientist_data->is_active = true;
+                scientist_data->current_branch = 0;
+            }
+
+            if (!scientist_data->is_active) {
+                game->questsys.stage = 1;
+                game->is_last_stage = false;
+            }
+            break;
+
+        case 1:
+            if (!game->is_last_stage) {
+                game->is_last_stage = true;
+                //scientist->x = -10000;
+            }
+
+            if (((game->player->x / (TILE_SCALE * TILE_SIZE) == portal0->x) && (game->player->y / (TILE_SCALE * TILE_SIZE) == portal0->y)) || ((game->player->x / (TILE_SCALE * TILE_SIZE) == portal1->x) && (game->player->y / (TILE_SCALE * TILE_SIZE) == portal1->y))) {
+                game->control.is_locked = true;
+                game->is_finish = true;
             }
             break;
     }

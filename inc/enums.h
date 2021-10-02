@@ -36,7 +36,9 @@ typedef enum e_item {
 	ITEM_NULL,
 	ITEM_NOTSET,
 	ITEM_PAINT,
-	ITEM_KEY
+	ITEM_KEY, 
+	ITEM_FINAL_KEY,
+	ITEM_CAVE_KEY
 } t_item;
 
 typedef enum e_sound_channel {

@@ -16,15 +16,15 @@ void sound_init(t_game *game) {
 }
 
 void sound_load(t_game *game) {
-    game->sound.all_sounds[SND_PLAYER_RUN] = Mix_LoadWAV("sounds/walking.wav");
-    game->sound.all_sounds[SND_PLAYER_DIE] = Mix_LoadWAV("sounds/death.wav");
-    game->sound.all_sounds[SND_DOOR_OPEN] = Mix_LoadWAV("sounds/open_door.wav");
-    game->sound.all_sounds[SND_NPC_SPEECH] = Mix_LoadWAV("sounds/speech-announce.wav");
+    game->sound.all_sounds[SND_PLAYER_RUN] = Mix_LoadWAV("resource/sounds/walking.wav");
+    game->sound.all_sounds[SND_PLAYER_DIE] = Mix_LoadWAV("resource/sounds/death.wav");
+    game->sound.all_sounds[SND_DOOR_OPEN] = Mix_LoadWAV("resource/sounds/open_door.wav");
+    game->sound.all_sounds[SND_NPC_SPEECH] = Mix_LoadWAV("resource/sounds/speech-announce.wav");
 }
 
 void music_load(t_game *game) {
-	game->sound.music[SND_MENU_MUSIC] = Mix_LoadMUS("sounds/main.wav");
-	game->sound.music[SND_LEVEL2_MUSIC] = Mix_LoadMUS("sounds/level02.wav");
+	  game->sound.music[SND_MENU_MUSIC] = Mix_LoadMUS("resource/sounds/main.wav");
+	  game->sound.music[SND_LEVEL2_MUSIC] = Mix_LoadMUS("resource/sounds/level02.wav");
 }
 
 void music_play(t_game *game, int id) {

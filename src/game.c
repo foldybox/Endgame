@@ -52,6 +52,7 @@ t_game *game_init(void) {
 	game->traps = NULL;
 	game->questsys.level = 0;
 	game->questsys.stage = 0;
+	game->is_finish = false;
 
 	TTF_Init();
 

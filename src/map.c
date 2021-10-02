@@ -234,6 +234,61 @@ void map_draw(t_game* game) {
 				tile = set_tile(5, 13);
 				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
 				break;
+				case ROCK   :
+				tile = set_tile(9, 12);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+				case ROCK_FLOOR   :
+				tile = set_tile(11, 13);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+
+				case ROCK_WALL_FRONT   :
+				tile = set_tile(11, 14);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+					case ROCK_WALL_FRONT_L_CORNNER :
+				tile = set_tile(11, 13);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+
+					case ROCK_WALL_LEFT :
+				tile = set_tile(11, 13);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+
+					case ROCK_WALL_RIGH :
+				tile = set_tile(12, 13);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+				case NETRAN   :
+				tile = set_tile(1, 14);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+	            case bottle   :
+				tile = set_tile(0, 12);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+				case bottle_empty   :
+				tile = set_tile(1, 12);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+				case trash   :
+				tile = set_tile(1, 13);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+				case trash2   :
+				tile = set_tile(4, 12);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+				case comp   :
+				tile = set_tile(5 ,14);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+				case trava   :
+				tile = set_tile(4 ,13);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
 
 
 			default:
