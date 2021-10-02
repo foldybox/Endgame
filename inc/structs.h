@@ -46,6 +46,7 @@ typedef struct s_entity {
 	void *data;
 	t_item items[8];
 	struct s_entity *usable;
+	char *slag;
 } t_entity;
 
 typedef struct s_map {
@@ -63,6 +64,7 @@ typedef struct s_trap {
 	unsigned int timer;
     bool activated;
 	t_tile tile;
+	t_tile active_tile;
 	t_trap_type type;
 	struct s_trap *next;
 } t_trap;
@@ -77,6 +79,11 @@ typedef struct s_message {
 	struct s_message *next;
 	bool is_shown;
 } t_message;
+
+typedef struct s_questsys {
+	int level;
+	int stage;
+} t_questsys;
 
 typedef struct s_game {
 	SDL_Renderer *renderer;
@@ -93,10 +100,13 @@ typedef struct s_game {
 	t_entity *entities;
 	SDL_Point scene_offset;
 	t_entity *message_entity;
+	t_questsys questsys;
+	bool is_last_stage;
+	SDL_Point spawnpoint;
 } t_game;
 
 typedef struct s_entdata_door {
-	bool is_open;
+	bool is_hidden;
 	bool is_locked;
 	t_item required_item;
 	t_tile open;

@@ -23,8 +23,8 @@ void death_logic(t_game *game) {
         if (game->death_timer == 0) game->death_timer = SDL_GetTicks();
 
         if (SDL_GetTicks() > game->death_timer + animation_gettime(game->player, 4) + TIME_AFTER_DEATH) {
-            game->player->x = 17 * (TILE_SIZE * TILE_SCALE);
-            game->player->y = 1 * (TILE_SIZE * TILE_SCALE);
+            game->player->x = game->spawnpoint.x * (TILE_SIZE * TILE_SCALE);
+            game->player->y = game->spawnpoint.y * (TILE_SIZE * TILE_SCALE);
             game->game_over_screen = true;
             animation_reload(game->player, 4);
         }

@@ -14,4 +14,6 @@ void player_draw(t_game* game);
 void player_logic(t_game* game);
 void player_free(t_game* game);
 
+void player_set_spawnpoint(t_game *game, int x, int y);
+
 #endif

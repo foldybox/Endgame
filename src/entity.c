@@ -17,6 +17,7 @@ t_entity *entity_add(t_game *game, t_entity_type type, int x, int y, t_tile tile
     entity->next = NULL;
     entity->animations = NULL;
     entity->usable = NULL;
+    entity->slag = NULL;
 
     if (current != NULL) {
         while (current->next != NULL) {
@@ -144,4 +145,21 @@ void entity_free(t_game *game) {
     }
 
 	game->entities = NULL;
+}
+
+t_entity *entity_by_slag(t_game *game, const char *slag) {
+    t_entity *current = game->entities;
+    while (current != NULL) {
+        if (current->slag == NULL) {
+            current = current->next;
+            continue;
+        }
+        if (!strcmp(current->slag, slag)) break;
+        if (current->next == NULL) {
+            return NULL;
+        } 
+        current = current->next;
+    }
+
+    return current;
 }

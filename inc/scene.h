@@ -10,6 +10,7 @@
 #include "entity.h"
 #include "map.h"
 #include "text.h"
+#include "questsys.h"
 
 void scene_init(t_game* game);
 void scene_prepare(t_game* game);
