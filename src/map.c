@@ -234,6 +234,34 @@ void map_draw(t_game* game) {
 				tile = set_tile(5, 13);
 				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
 				break;
+				case ROCK   :
+				tile = set_tile(9, 12);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+				case ROCK_FLOOR   :
+				tile = set_tile(11, 13);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+
+				case ROCK_WALL_FRONT   :
+				tile = set_tile(11, 14);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+					case ROCK_WALL_FRONT_L_CORNNER :
+				tile = set_tile(11, 13);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+
+					case ROCK_WALL_LEFT :
+				tile = set_tile(11, 13);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+
+					case ROCK_WALL_RIGH :
+				tile = set_tile(12, 13);
+				blit_tile(game, tile, game->scene_offset.x + x * TILE_SIZE * TILE_SCALE, game->scene_offset.y + y * TILE_SIZE * TILE_SCALE - TILE_SCALE, ANCHOR_TOP_LEFT);
+				break;
+
 
 
 			default:

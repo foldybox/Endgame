@@ -8,8 +8,6 @@ void scene_init(t_game *game) {
 	player_init(game, 17, 113);
 	door_add(game, "front_door", set_tile(10, 0), set_tile(9, 0), 17, 10, true, ITEM_NOTSET, false);
 
-	item_add(game, set_tile(2, 13), 23, 6, ITEM_PAINT, true);
-
 	// Level 00
 	npc_add(game, "real_general", set_tile(1, 11), 14, 112, true);
 	npc_add(game, "real_scientist", set_tile(0, 11), 7, 116, false);
@@ -34,18 +32,19 @@ void scene_init(t_game *game) {
 	npc_add(game, "virtual_general", set_tile(1, 11), 28, 35, false);
 	npc_add(game, "virtual_guard", set_tile(4, 11), 18, 16, true);
 	npc_add(game, "virtual_sarge", set_tile(5, 11), 10, 1, false);
-	npc_add(game, "virtual_tumbleweed", set_tile(7, 12), 10, 112, true);
+	npc_add(game, "virtual_tumbleweed", set_tile(7, 12), 16, 7, true);
 	object_add(game, "virtual_grass00", set_tile(3, 13), set_tile(4, 13), 2, 2, false, ITEM_PAINT, 1000, false);
 	object_add(game, "virtual_grass01", set_tile(3, 13), set_tile(4, 13), 5, 7, false, ITEM_PAINT, 1000, false);
 	object_add(game, "virtual_grass02", set_tile(3, 13), set_tile(4, 13), 9, 4, false, ITEM_PAINT, 1000, false);
 	object_add(game, "virtual_grass03", set_tile(3, 13), set_tile(4, 13), 2, 5, false, ITEM_PAINT, 1000, false);
 	object_add(game, "virtual_grass04", set_tile(3, 13), set_tile(4, 13), 5, 2, false, ITEM_PAINT, 1000, false);
-	object_add(game, "virtual_potato00", set_tile(3, 13), set_tile(4, 13), 25, 12, false, ITEM_NOTSET, 1000, false);
-	object_add(game, "virtual_potato01", set_tile(3, 13), set_tile(4, 13), 26, 14, false, ITEM_NOTSET, 1000, false);
-	object_add(game, "virtual_potato02", set_tile(3, 13), set_tile(4, 13), 29, 13, false, ITEM_NOTSET, 1000, false);
-	object_add(game, "portal0", set_tile(-1, -1), set_tile(-1, -1), 17, 1, false, ITEM_NOTSET, 1000, false);
-	object_add(game, "portal1", set_tile(-1, -1), set_tile(-1, -1), 18, 1, false, ITEM_NOTSET, 1000, false);
+	object_add(game, "virtual_potato00", set_tile(8, 14), set_tile(5, 0), 25, 12, false, ITEM_NOTSET, 1000, false);
+	object_add(game, "virtual_potato01", set_tile(8, 14), set_tile(5, 0), 26, 14, false, ITEM_NOTSET, 1000, false);
+	object_add(game, "virtual_potato02", set_tile(8, 14), set_tile(5, 0), 29, 13, false, ITEM_NOTSET, 1000, false);
+	object_add(game, "portal0", set_tile(11, 0), set_tile(11, 0), 17, 0, false, ITEM_NOTSET, 1000, true);
+	object_add(game, "portal1", set_tile(12, 0), set_tile(12, 0), 18, 0, false, ITEM_NOTSET, 1000, true);
 	door_add(game, "mil_locked_door", set_tile(-1, -1), set_tile(-1, -1), 17, 16, true, ITEM_NULL, true);
+    item_add(game, set_tile(2, 13), 10, 25, ITEM_PAINT, true);
 
 	message_add(entity_by_slag(game, "virtual_guard"), "Dev", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.", 0);
 	message_add(entity_by_slag(game, "virtual_guard"), "Dev", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.", 1);
@@ -59,11 +58,22 @@ void scene_init(t_game *game) {
 	message_add(entity_by_slag(game, "virtual_sarge"), "Dev", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.", 1);
 	message_add(entity_by_slag(game, "virtual_sarge"), "Dev", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.", 2);
 
-	message_add(entity_by_slag(game, "virtual_tumbleweed"), "Dev", "hh", 0);
-	message_add(entity_by_slag(game, "virtual_tumbleweed"), "Dev", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.", 1);
-	message_add(entity_by_slag(game, "virtual_tumbleweed"), "Dev", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.", 2);
+	message_add(entity_by_slag(game, "virtual_tumbleweed"), "Dev", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt", 0);
+	message_add(entity_by_slag(game, "virtual_tumbleweed"), "Dev", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.", 0);
+	message_add(entity_by_slag(game, "virtual_tumbleweed"), "Dev", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.", 0);
 
+    // Level 02
+    npc_add(game, "virtual_scientist", set_tile(0, 11), 12, 46, true);
+    door_add(game, "locked_door", set_tile(10, 0), set_tile(9, 0), 32, 75, true, ITEM_FINAL_KEY, false);
+    door_add(game, "locked_door", set_tile(12, 4), set_tile(11, 4), 2, 47, true, ITEM_CAVE_KEY, false);
+    item_add(game, set_tile(9, 14), 7, 94, ITEM_FINAL_KEY, true);
+    item_add(game, set_tile(2, 14), 30, 55, ITEM_CAVE_KEY, true);
+    object_add(game, "final_portal0", set_tile(11, 0), set_tile(11, 0), 31, 72, false, ITEM_NOTSET, 1000, false);
+	object_add(game, "final_portal1", set_tile(12, 0), set_tile(12, 0), 32, 72, false, ITEM_NOTSET, 1000, false);
 
+    message_add(entity_by_slag(game, "virtual_tumbleweed"), "Dev", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt", 0);
+	message_add(entity_by_slag(game, "virtual_tumbleweed"), "Dev", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.", 0);
+	message_add(entity_by_slag(game, "virtual_tumbleweed"), "Dev", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.", 0);
 
 
 	map_init(game, "resource/maps/map.csv");

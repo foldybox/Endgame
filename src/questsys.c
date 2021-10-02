@@ -4,6 +4,7 @@
 
 void questsys_level00(t_game *game);
 void questsys_level01(t_game *game);
+void questsys_level02(t_game *game);
 
 void questsys_init(t_game *game) {
     game->questsys.level = 0;
@@ -12,15 +13,18 @@ void questsys_init(t_game *game) {
 }
 
 void questsys_logic(t_game *game) {
-    switch (game->questsys.level)
-    {
-    case 0:
-        questsys_level00(game);
-        break;
+    switch (game->questsys.level) {
+        case 0:
+            questsys_level00(game);
+            break;
 
-    case 1:
-        questsys_level01(game);
-        break;
+        case 1:
+            questsys_level01(game);
+            break;
+
+        case 2:
+            questsys_level02(game);
+            break;
     }
 }
 
@@ -125,6 +129,7 @@ void questsys_level01(t_game *game) {
         case 0:
             if (!game->is_last_stage) {
                 game->is_last_stage = true;
+                music_play(game, SND_LEVEL2_MUSIC);
 
                 virtual_guard_data->is_active = true;
                 virtual_guard_data->current_branch = 0;
@@ -266,6 +271,40 @@ void questsys_level01(t_game *game) {
                 game->player->x = 11 * (TILE_SCALE * TILE_SIZE);
                 game->player->y = 47 * (TILE_SCALE * TILE_SIZE);
                 player_set_spawnpoint(game, 11, 47);
+            }
+            break;
+    }
+}
+
+void questsys_level02(t_game *game) {
+    t_entity *scientist = entity_by_slag(game, "virtual_scientist");
+    t_entdata_npc *scientist_data = scientist->data;
+
+    switch (game->questsys.stage) {
+        case 0:
+            if (!game->is_last_stage) {
+                game->is_last_stage = true;
+
+
+                scientist_data->is_active = true;
+                scientist_data->current_branch = 0;
+            }
+
+            if (!scientist_data->is_active) {
+                game->questsys.stage = 1;
+                game->is_last_stage = false;
+            }
+            break;
+
+        case 1:
+            if (!game->is_last_stage) {
+                game->is_last_stage = true;
+
+            }
+
+            if (!scientist_data->is_active) {
+                game->questsys.stage = 2;
+                game->is_last_stage = false;
             }
             break;
     }
