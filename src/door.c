@@ -2,7 +2,7 @@
 
 #include "door.h"
 
-t_entity *door_add(t_game *game, char *slag, t_tile otile, t_tile ctile, int x, int y, bool is_locked, t_item required_item) {
+t_entity *door_add(t_game *game, char *slag, t_tile otile, t_tile ctile, int x, int y, bool is_locked, t_item required_item, bool is_hidden) {
     t_entity *door = entity_add(game, ENTYPE_DOOR, x, y, ctile, FACING_RIGHT);
 
     door->slag = slag;
@@ -12,6 +12,7 @@ t_entity *door_add(t_game *game, char *slag, t_tile otile, t_tile ctile, int x, 
     ((t_entdata_door *)door->data)->close = ctile;
     ((t_entdata_door *)door->data)->is_locked = is_locked;
     ((t_entdata_door *)door->data)->required_item = required_item;
+    ((t_entdata_door *)door->data)->is_hidden = is_hidden;
 
     return door;
 }

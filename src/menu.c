@@ -24,7 +24,7 @@ void menu_main_draw(t_game *game) {
     rect.h = SCREEN_HEIGHT / 3;
 
     if (game->control.start == 0) {
-        texture = IMG_LoadTexture(game->renderer, "assets/sprites/menu_img2.gif");
+        texture = IMG_LoadTexture(game->renderer, "resource/sprites/menu_img2.gif");
         blit(game, texture, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.75, ANCHOR_CENTER_CENTER);
         SDL_SetRenderDrawColor(game->renderer, 0, 0, 0, 0);
         SDL_RenderFillRect(game->renderer, &rect);

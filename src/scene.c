@@ -3,19 +3,21 @@
 #include "scene.h"
 
 void scene_init(t_game *game) {
-	player_init(game, 17, 1);
-	door_add(game, "front_door", set_tile(10, 0), set_tile(9, 0), 17, 10, true, ITEM_NULL);
-	door_add(game, "locked_door", set_tile(12, 5), set_tile(11, 5), 19, 15, true, ITEM_NULL);
+	player_init(game, 17, 113);
+	door_add(game, "front_door", set_tile(10, 0), set_tile(9, 0), 17, 10, true, ITEM_NOTSET, false);
+	door_add(game, "locked_door", set_tile(-1, -1), set_tile(-1, -1), 18, 16, true, ITEM_NULL, true);
+	door_add(game, "locked_door", set_tile(10, 0), set_tile(9, 0), 17, 111, true, ITEM_NULL, false);
 
 	item_add(game, set_tile(2, 3), 23, 14, ITEM_PAINT, true);
 	item_add(game, set_tile(3, 3), 9, 3, ITEM_KEY, true);
   
-  	trap_add(game, set_tile(2, 4), 17, 4, 18, 4, TRAP_TRIGGER, 0);
-	trap_add(game, set_tile(2, 4), 20, 4, 24, 5, TRAP_GLIMMER, 500);
+  	trap_add(game, set_tile(3, 14), set_tile(4, 14), 17, 4, 17, 4, TRAP_TRIGGER, 0);
+	trap_add(game, set_tile(4, 14), set_tile(4, 14), 19, 4, 19, 4, TRAP_TRIGGER, 0);
+	trap_add(game, set_tile(3, 14), set_tile(4, 14), 20, 4, 24, 5, TRAP_GLIMMER, 500);
 
 	object_add(game, "stone", set_tile(2, 4), set_tile(1, 4), 26, 4, false, ITEM_KEY, 3000);
 
-	npc_add(game, "general", set_tile(1, 11), 4, 2, true);
+	npc_add(game, "general", set_tile(1, 11), 17, 16, true);
 	npc_add(game, "scientist", set_tile(0, 11), 26, 2, false);
 
 	message_add(entity_by_slag(game, "general"), "Dev", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.", 0);
@@ -27,9 +29,9 @@ void scene_init(t_game *game) {
 	message_add(entity_by_slag(game, "scientist"), "Bill", "Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero.", 0);
 	message_add(entity_by_slag(game, "scientist"), "David", "All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.", 0);
 
-	map_init(game, "assets/maps/map.csv");
+	map_init(game, "resource/maps/map.csv");
 
-	tileset_init(game, "assets/sprites/tileset.png");
+	tileset_init(game, "resource/sprites/tileset.png");
 	death_init(game);
 
 	questsys_init(game);

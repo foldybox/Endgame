@@ -16,9 +16,20 @@ LIB_FILES = /lib
 SRC_FILES = $(wildcard src/*.c)
 OBJ_FILES = $(addprefix obj/, $(notdir $(SRC_FILES:%.c=%.o)))
 INC_FILES = $(wildcard inc/*.h)
-EXEC_FILE = game.app
+EXEC_FILE = endgame
 
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
+
+SDL = -F resource/framework -I resource/framework/SDL2.framework/SDL2 -I resource/framework/SDL2_image.framework/SDL2_image \
+	-I resource/framework/SDL2_mixer.framework/SDL2_mixer -I resource/framework/SDL2_ttf.framework/SDL2_ttf
+
+SDL_FLAGS = -rpath resource/framework -framework SDL2 \
+		-framework SDL2_image \
+		-I resource/framework/SDL2_image.framework/Headers \
+		-framework SDL2_mixer \
+		-I resource/framework/SDL2_mixer.framework/Headers \
+		-framework SDL2_ttf \
+		-I resource/framework/SDL2_ttf.framework/Headers \
 
 all: $(EXEC_FILE)
 	@printf "Starting $(EXEC_FILE)\n"
@@ -28,7 +39,7 @@ $(EXEC_FILE): build link
 
 link:
 	@printf "\r\33[2KLink $(EXEC_FILE)\t\t"
-	@clang -g obj/* -I inc/ -L lib -lSDL2-2.0.0 -lSDL2_image -lSDL2_ttf -mwindows -o $(EXEC_FILE)
+	@clang -g obj/* -I inc/ -mwindows -o $(EXEC_FILE) $(SDL_FLAGS) $(SDL)
 	@printf "\033[32;1mlinked\033[0m\n"
 
 build: $(OBJ_FILES)

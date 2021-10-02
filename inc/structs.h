@@ -64,6 +64,7 @@ typedef struct s_trap {
 	unsigned int timer;
     bool activated;
 	t_tile tile;
+	t_tile active_tile;
 	t_trap_type type;
 	struct s_trap *next;
 } t_trap;
@@ -105,7 +106,7 @@ typedef struct s_game {
 } t_game;
 
 typedef struct s_entdata_door {
-	bool is_open;
+	bool is_hidden;
 	bool is_locked;
 	t_item required_item;
 	t_tile open;

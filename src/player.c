@@ -3,7 +3,7 @@
 #include "player.h"
 
 void player_init(t_game *game, int x, int y) {
-    t_entity *player = entity_add(game, ENTYPE_PLAYER, x  * (TILE_SIZE * TILE_SCALE), y  * (TILE_SIZE * TILE_SCALE), set_tile(4, 3), FACING_RIGHT);
+    t_entity *player = entity_add(game, ENTYPE_PLAYER, x  * (TILE_SIZE * TILE_SCALE), y  * (TILE_SIZE * TILE_SCALE), set_tile(4, 3), FACING_LEFT);
 	for (int i = 0; i < 8; i++) {
 		player->items[i] = 0;
 	}
@@ -118,12 +118,16 @@ void player_move(t_game* game) {
 	int gX = x / (TILE_SIZE * TILE_SCALE);
 	int gY = y / (TILE_SIZE * TILE_SCALE);
 
-	if (game->map->data[gX][gY] >= 10) return;
+	if ((game->map->data[gX][gY] >= 10) && (game->map->data[gX][gY] != 18)) return;
 
 	t_entity *entity = game->entities;
     while (entity != NULL) {
 		switch (entity->type) {
 			case ENTYPE_DOOR:
+				if (((t_entdata_door *) entity->data)->is_hidden) {
+					if ((entity->x == gX && entity->y == gY) && ((t_entdata_door *)entity->data)->is_locked) return;
+					break;
+				}
 				if ((entity->x - 1 <= gX) && (gX <= entity->x + 1) && (entity->y - 1 <= gY) && (gY <= entity->y + 1)) {
 					game->player->usable = entity;
 					if (game->control.use) player_use_door(game, entity);
