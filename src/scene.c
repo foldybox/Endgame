@@ -35,7 +35,7 @@ void scene_draw(t_game* game) {
 	sprintf(coords, "x: %d    y:%d", game->player->x / (TILE_SCALE * TILE_SIZE), game->player->y / (TILE_SCALE * TILE_SIZE));
 	text_draw(game, coords, 10, 10, 24, ANCHOR_TOP_LEFT);
 
-	death_draw(game, "assets/sprites/death.jpeg");
+	death_draw(game);
 }
 
 void scene_present(t_game* game) {

@@ -35,10 +35,7 @@ void death_logic(t_game *game) {
     
 }
 
-void death_draw(t_game *game, char *filename) {
-    SDL_Texture *texture;
-    texture = IMG_LoadTexture(game->renderer, filename);
-
+void death_draw(t_game *game) {
     SDL_Rect rect;
     rect.x = 0;
     rect.y = 0;
@@ -48,7 +45,8 @@ void death_draw(t_game *game, char *filename) {
         SDL_SetRenderDrawColor(game->renderer, 0, 0, 0, 0);
         SDL_RenderFillRect(game->renderer, &rect);
 
-        blit(game, texture, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, ANCHOR_CENTER_CENTER);
+        text_draw(game, "GAME OVER", SCREEN_WIDTH / 2,  SCREEN_HEIGHT / 2 - 20, 144, ANCHOR_BOTTOM_CENTER);
+        text_draw(game, "Press [SPACE] to respawn", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 20, 24, ANCHOR_TOP_CENTER);
     }
 }
 
