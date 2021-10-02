@@ -61,16 +61,15 @@ void message_draw(t_game *game) {
 
     SDL_Rect message_rect;
     message_rect.w = SCREEN_WIDTH;
-    message_rect.h = 100;
+    message_rect.h = 90;
     message_rect.x = 0;
     message_rect.y = SCREEN_HEIGHT - message_rect.h;
 
     SDL_SetRenderDrawColor(game->renderer, 0, 0, 0, 0);
 	SDL_RenderFillRect(game->renderer, &message_rect);
 
-    char text[256];
-    sprintf(text, "[%s] %s", current->header, current->text);
-    text_draw(game, text, 20, SCREEN_HEIGHT - 20, 24, ANCHOR_BOTTOM_LEFT);
+    text_draw(game, current->header, 20, SCREEN_HEIGHT - 50, 32, ANCHOR_BOTTOM_LEFT);
+    text_draw(game, current->text, 20, SCREEN_HEIGHT - 20, 24, ANCHOR_BOTTOM_LEFT);
 
     if (SDL_GetTicks() > current->timer + current->delay) {
         current->is_shown = true;
