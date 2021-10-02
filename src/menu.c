@@ -47,7 +47,8 @@ void menu_main_draw(t_game *game) {
         }
 
         if (SDL_GetTicks() > game->death_timer + 3000) {
-            Mix_HaltMusic ();
+            Mix_PauseMusic();
+            music_play(game, SND_LEVEL2_MUSIC);
             game->death_timer = 0;
             game->is_started = true;
         }
@@ -63,7 +64,7 @@ void menu_main_draw(t_game *game) {
 //     SDL_Rect rect;
 //     rect.x = 0;
 //     rect.y = 0;
-//     rect.w = SCREEN_WIDTH;
+//     rect.w = SCREEN_WIDTH;z
 //     rect.h = SCREEN_HEIGHT;
 
 

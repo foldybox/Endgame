@@ -52,6 +52,7 @@ typedef enum e_sound_type {
 	SND_DOOR_OPEN,
 	SND_NPC_SPEECH,
 	SND_MENU_MUSIC,
+	SND_LEVEL2_MUSIC,
 	SND_MAX
 } t_sound_type;
 
