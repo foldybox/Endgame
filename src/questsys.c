@@ -7,8 +7,8 @@ void questsys_level01(t_game *game);
 void questsys_level02(t_game *game);
 
 void questsys_init(t_game *game) {
-    game->questsys.level = 1;
-    game->questsys.stage = 9;
+    game->questsys.level = 0;
+    game->questsys.stage = 0;
     game->is_last_stage = false;
 }
 

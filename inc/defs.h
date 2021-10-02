@@ -3,7 +3,7 @@
 #define DEFS_H
 
 #define GAME_TITLE "Game"
-#define PLAYER_SPEED 18
+#define PLAYER_SPEED 4
 #define TIME_AFTER_DEATH 300
 
 #define MAP_WIDTH 20
@@ -68,7 +68,7 @@
 #define ROCK_WALL_RIGH 92
 
 #define MAX_SND_CHANNELS 8
-#define CHARACTER_TIME 30
+#define CHARACTER_TIME 50
 
 
 //PLANTS AND OTHER THIGS
