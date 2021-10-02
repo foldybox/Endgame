@@ -52,8 +52,10 @@ void player_use_object(t_game *game, t_entity *obj) {
 }
 
 void player_use_npc(t_game *game, t_entity *npc) {
-	if (false) game = NULL;
-	((t_entdata_npc *) npc->data)->is_active = false;
+	if (((t_entdata_npc *) npc->data)->is_active) {
+		((t_entdata_npc *) npc->data)->is_talk = true;
+		game->message_entity = npc;
+	}
 }
 
 void player_move(t_game* game) {

@@ -10,18 +10,16 @@ t_entity *npc_add(t_game *game, t_tile tile, int x, int y, bool is_active) {
     t_entdata_npc *data = (t_entdata_npc *)npc->data;
 
     data->is_active = is_active;
+    data->messages = NULL;
+    data->current_branch = 0;
+    data->is_talk = false;
 
     return npc;
 }
 
 void npc_logic(t_game *game, t_entity *npc) {
-    // temp
-    if (false)
-    {
-        game->control.left = 0;
-        npc->is_death = true;
-    }
-    
+    if(((t_entdata_npc *)npc->data)->is_talk)
+        message_show(game, npc);
 }
 
 void npc_draw(t_game *game, t_entity *npc) {
@@ -29,6 +27,7 @@ void npc_draw(t_game *game, t_entity *npc) {
 }
 
 void npc_free(t_entity *npc) {
+    messages_free(npc);
     free(npc->data);
     npc->data = NULL;
 }

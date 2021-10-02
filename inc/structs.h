@@ -66,6 +66,17 @@ typedef struct s_trap {
 	struct s_trap *next;
 } t_trap;
 
+typedef struct s_message {
+	char *header;
+	char *text;
+	int branch;
+	bool is_current;
+	unsigned int timer;
+	int delay;
+	struct s_message *next;
+	bool is_shown;
+} t_message;
+
 typedef struct s_game {
 	SDL_Renderer *renderer;
 	SDL_Window *window;
@@ -80,6 +91,7 @@ typedef struct s_game {
 	bool game_over_screen;
 	t_entity *entities;
 	SDL_Point scene_offset;
+	t_entity *message_entity;
 } t_game;
 
 typedef struct s_entdata_door {
@@ -110,6 +122,9 @@ typedef struct s_entdata_object {
 
 typedef struct s_entdata_npc {
 	bool is_active;
+	t_message *messages;
+	int current_branch;
+	bool is_talk;
 } t_entdata_npc;
 
 

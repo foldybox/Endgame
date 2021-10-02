@@ -15,7 +15,21 @@ void scene_init(t_game *game) {
 
 	object_add(game, set_tile(2, 4), set_tile(1, 4), 26, 4, true, ITEM_KEY, 3000);
 
-	npc_add(game, set_tile(0, 11), 2, 2, true);
+	t_entity *john = npc_add(game, set_tile(0, 11), 2, 2, true);
+
+	//((t_entdata_npc *)john->data)->current_branch = 1;
+
+	message_add(john, "John", "Hi yo yoyoyoyoyo yoyoyoyyoyoyo", 0);
+	message_add(john, "John", "Hi rt trtrt rwetwet twetwe", 0);
+	message_add(john, "John", "Fg dfgdfgdfg dfgdddff fffff ffg", 0);
+
+	message_add(john, "John", "Hi rt trtrt rwetwet twefghfghhftwe", 1);
+	message_add(john, "John", "Fg dfgdfgdfg dfgutrutyurtyurtydddff ffffffff ffg", 1);
+
+	t_entity *dev = npc_add(game, set_tile(1, 11), 4, 2, true);
+
+	message_add(dev, "Dev", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.", 0);
+	message_add(dev, "Dev", "Qui officia deserunt mollit anim id est laborum.", 0);
 
 	map_init(game, "assets/maps/map.csv");
 
@@ -32,10 +46,12 @@ void scene_draw(t_game* game) {
 	map_draw(game);
 	trap_draw(game);
 	entity_draw(game);
-	
+
 	char coords[16];
 	sprintf(coords, "x: %d    y:%d", game->player->x / (TILE_SCALE * TILE_SIZE), game->player->y / (TILE_SCALE * TILE_SIZE));
 	text_draw(game, coords, 10, 10, 24, ANCHOR_TOP_LEFT);
+
+	message_draw(game);
 
 	death_draw(game, "assets/sprites/death.jpeg");
 }
