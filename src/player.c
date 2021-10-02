@@ -119,7 +119,7 @@ void player_move(t_game* game) {
 	int gX = x / (TILE_SIZE * TILE_SCALE);
 	int gY = y / (TILE_SIZE * TILE_SCALE);
 
-	if ((game->map->data[gX][gY] >= 10) && (game->map->data[gX][gY] != 18)) return;
+	//if ((game->map->data[gX][gY] >= 10) && (game->map->data[gX][gY] != 18)) return;
 
 	t_entity *entity = game->entities;
     while (entity != NULL) {
