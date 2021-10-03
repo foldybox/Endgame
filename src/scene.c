@@ -109,9 +109,9 @@ void scene_draw(t_game* game) {
 	trap_draw(game);
 	entity_draw(game);
 
-	char coords[16];
-	sprintf(coords, "x: %d    y:%d", game->player->x / (TILE_SCALE * TILE_SIZE), game->player->y / (TILE_SCALE * TILE_SIZE));
-	text_draw(game, coords, 10, 10, 24, ANCHOR_TOP_LEFT);
+	// char coords[16];
+	// sprintf(coords, "x: %d    y:%d", game->player->x / (TILE_SCALE * TILE_SIZE), game->player->y / (TILE_SCALE * TILE_SIZE));
+	// text_draw(game, coords, 10, 10, 24, ANCHOR_TOP_LEFT);
 
 	message_draw(game);
 

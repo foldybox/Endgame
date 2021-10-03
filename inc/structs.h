@@ -115,6 +115,7 @@ typedef struct s_game {
 	bool is_last_stage;
 	SDL_Point spawnpoint;
 	bool is_finish;
+	SDL_Texture *main_menu_texture;
 } t_game;
 
 typedef struct s_entdata_door {
