@@ -17,6 +17,9 @@ typedef struct s_control {
 	int use;
 	int start;
 	bool is_locked;
+	bool D;
+	bool E;
+	bool V;
 } t_control;
 
 typedef struct s_animation {
@@ -116,6 +119,10 @@ typedef struct s_game {
 	SDL_Point spawnpoint;
 	bool is_finish;
 	SDL_Texture *main_menu_texture;
+	bool im_dev;
+	bool god;
+	bool noclip;
+	int acceleration;
 } t_game;
 
 typedef struct s_entdata_door {
