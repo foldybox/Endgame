@@ -70,4 +70,5 @@ void text_draw(t_game *game, char *text, int x, int y, int size, t_anchor anchor
 
     SDL_QueryTexture(image, NULL, NULL, &dest.w, &dest.h);
     SDL_RenderCopy(game->renderer, image, NULL, &dest);
+    SDL_DestroyTexture(image);
 }

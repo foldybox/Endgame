@@ -124,7 +124,7 @@ void trap_trigger(t_game *game, t_trap *current) {
 
     for (int i = tY1; i <= tY2; i++) {
         for (int j = tX1; j <= tX2; j++) {
-            if (pX == j && pY == i) {
+            if (pX == j && pY == i && game->dev_mode.god == false) {
                 current->activated = true;
                 game->player->is_death = true;
             }
@@ -154,7 +154,7 @@ void trap_glimmer(t_game *game, t_trap *current) {
 
     for (int i = tY1; i <= tY2; i++) {
         for (int j = tX1; j <= tX2; j++) {
-            if (pX == j && pY == i && current->activated == true) {
+            if (pX == j && pY == i && current->activated == true && game->dev_mode.god == false) {
                 game->player->is_death = true;
             }
         }

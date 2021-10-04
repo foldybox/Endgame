@@ -5,10 +5,10 @@
 void menu_main_init(t_game *game) {
     game->control.start = 0;
     game->death_timer = 0;
+    game->main_menu_texture = IMG_LoadTexture(game->renderer, "resource/sprites/menu_background.jpg");
 }
 
 void menu_main_draw(t_game *game) {
-    SDL_Texture *texture;
     SDL_Rect rect;
     rect.x = 0;
     rect.y = 0;
@@ -16,8 +16,7 @@ void menu_main_draw(t_game *game) {
     rect.h = SCREEN_HEIGHT / 3;
 
     if (game->control.start == 0) {
-        texture = IMG_LoadTexture(game->renderer, "resource/sprites/menu_background.jpg");
-        blit(game, texture, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.75, ANCHOR_CENTER_CENTER);
+        blit(game, game->main_menu_texture, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.75, ANCHOR_CENTER_CENTER);
         SDL_SetRenderDrawColor(game->renderer, 0, 0, 0, 0);
         SDL_RenderFillRect(game->renderer, &rect);
 

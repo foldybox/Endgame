@@ -72,40 +72,40 @@ void player_move(t_game* game) {
 
 	if (game->control.up) {
 		if (!is_pressed || game->control.down) {
-			dy -= PLAYER_SPEED;
+			dy -= PLAYER_SPEED + game->dev_mode.acceleration;
 		}
 		else {
-			dy -= side_by_diagonal(PLAYER_SPEED);
+			dy -= side_by_diagonal(PLAYER_SPEED + game->dev_mode.acceleration);
 		}
 		is_pressed = true;
 	}
 
 	if (game->control.down) {
 		if (!is_pressed || game->control.up) {
-			dy += PLAYER_SPEED;
+			dy += PLAYER_SPEED + game->dev_mode.acceleration;
 		}
 		else {
-			dy += side_by_diagonal(PLAYER_SPEED);
+			dy += side_by_diagonal(PLAYER_SPEED + game->dev_mode.acceleration);
 		}
 		is_pressed = true;
 	}
 
 	if (game->control.left) {
 		if (!is_pressed || game->control.right) {
-			dx -= PLAYER_SPEED;
+			dx -= PLAYER_SPEED + game->dev_mode.acceleration;
 		}
 		else {
-			dx -= side_by_diagonal(PLAYER_SPEED);
+			dx -= side_by_diagonal(PLAYER_SPEED + game->dev_mode.acceleration);
 		}
 		is_pressed = true;
 	}
 
 	if (game->control.right) {
 		if (!is_pressed || game->control.left) {
-			dx += PLAYER_SPEED;
+			dx += PLAYER_SPEED + game->dev_mode.acceleration;
 		}
 		else {
-			dx += side_by_diagonal(PLAYER_SPEED);
+			dx += side_by_diagonal(PLAYER_SPEED + game->dev_mode.acceleration);
 		}
 		is_pressed = true;
 	}
@@ -116,10 +116,13 @@ void player_move(t_game* game) {
 	if (x < 0) x = 0;
 	if (y < 0) y = 0;
 
+	if (x >= game->map->size.x * (TILE_SIZE * TILE_SCALE)) x = game->map->size.x * (TILE_SIZE * TILE_SCALE) - 1;
+	if (y >= game->map->size.y * (TILE_SIZE * TILE_SCALE)) y = game->map->size.y * (TILE_SIZE * TILE_SCALE) - 1;
+
 	int gX = x / (TILE_SIZE * TILE_SCALE);
 	int gY = y / (TILE_SIZE * TILE_SCALE);
 
-	if ((game->map->data[gX][gY] >= 10) && (game->map->data[gX][gY] != 18)) return;
+	if ((game->map->data[gX][gY] >= 10) && (game->map->data[gX][gY] != 18) && !game->dev_mode.noclip) return;
 
 	t_entity *entity = game->entities;
     while (entity != NULL) {

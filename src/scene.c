@@ -109,10 +109,30 @@ void scene_draw(t_game* game) {
 	trap_draw(game);
 	entity_draw(game);
 
-	char coords[16];
-	sprintf(coords, "x: %d    y:%d", game->player->x / (TILE_SCALE * TILE_SIZE), game->player->y / (TILE_SCALE * TILE_SIZE));
-	text_draw(game, coords, 10, 10, 24, ANCHOR_TOP_LEFT);
+    if (game->dev_mode.im_dev) {
+        char coords[16];
+        char move_speed[16];
+        sprintf(coords, "x: %d    y: %d", game->player->x / (TILE_SCALE * TILE_SIZE), game->player->y / (TILE_SCALE * TILE_SIZE));
+        sprintf(move_speed, "Move speed: %d", PLAYER_SPEED + game->dev_mode.acceleration);
+        text_draw(game, coords, 10, 10, 24, ANCHOR_TOP_LEFT);
+        text_draw(game, move_speed, 10, 85, 24, ANCHOR_TOP_LEFT);
+        text_draw(game, "Hold [K] to skip message", 10, 110, 24, ANCHOR_TOP_LEFT);
 
+        if (game->dev_mode.god) {
+            text_draw(game, "God: on", 10, 35, 24, ANCHOR_TOP_LEFT);
+        }
+        else {
+            text_draw(game, "God: off", 10, 35, 24, ANCHOR_TOP_LEFT);
+        }
+        
+        if (game->dev_mode.noclip) {
+            text_draw(game, "No-clip: on", 10, 60, 24, ANCHOR_TOP_LEFT);
+        }
+        else {
+            text_draw(game, "No-clip: off", 10, 60, 24, ANCHOR_TOP_LEFT);
+        }
+    }
+    
 	message_draw(game);
 
 	death_draw(game);

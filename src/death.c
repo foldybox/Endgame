@@ -12,7 +12,7 @@ void death_init(t_game *game) {
 
 void death_logic(t_game *game) {
 
-    if (game->player->is_death) {
+    if (game->player->is_death && game->dev_mode.god == false) {
         animation_play(game->player, 4, -1);
         game->game_over_screen = false;
         game->control.down = 0;
