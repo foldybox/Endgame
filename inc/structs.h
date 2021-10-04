@@ -122,6 +122,7 @@ typedef struct s_game {
 	bool im_dev;
 	bool god;
 	bool noclip;
+	bool skip;
 	int acceleration;
 } t_game;
 

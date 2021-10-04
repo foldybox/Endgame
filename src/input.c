@@ -70,6 +70,10 @@ void input_keydown(t_game *game, SDL_KeyboardEvent *event) {
 		if (game->control.D && game->control.E && game->control.V) {
 			game->im_dev = true;
 		}
+
+		if (event->keysym.scancode == SDL_SCANCODE_K && game->im_dev) {
+			game->skip = true;
+		}
 	}
 }
 
@@ -125,6 +129,10 @@ void input_keyup(t_game *game, SDL_KeyboardEvent *event) {
 
 		if (event->keysym.scancode == SDL_SCANCODE_N && game->im_dev) {
 			game->noclip = !game->noclip;
+		}
+
+		if (event->keysym.scancode == SDL_SCANCODE_K && game->im_dev) {
+			game->skip = false;
 		}
 
 		if (event->keysym.scancode == SDL_SCANCODE_KP_PLUS && game->im_dev) {
