@@ -68,11 +68,11 @@ void input_keydown(t_game *game, SDL_KeyboardEvent *event) {
 		}
 
 		if (game->control.D && game->control.E && game->control.V) {
-			game->im_dev = true;
+			game->dev_mode.im_dev = true;
 		}
 
-		if (event->keysym.scancode == SDL_SCANCODE_K && game->im_dev) {
-			game->skip = true;
+		if (event->keysym.scancode == SDL_SCANCODE_K && game->dev_mode.im_dev) {
+			game->dev_mode.skip = true;
 		}
 	}
 }
@@ -124,23 +124,23 @@ void input_keyup(t_game *game, SDL_KeyboardEvent *event) {
 		}
 
 		if (event->keysym.scancode == SDL_SCANCODE_G && !game->player->is_death) {
-			game->god = !game->god;
+			game->dev_mode.god = !game->dev_mode.god;
 		}
 
-		if (event->keysym.scancode == SDL_SCANCODE_N && game->im_dev) {
-			game->noclip = !game->noclip;
+		if (event->keysym.scancode == SDL_SCANCODE_N && game->dev_mode.im_dev) {
+			game->dev_mode.noclip = !game->dev_mode.noclip;
 		}
 
-		if (event->keysym.scancode == SDL_SCANCODE_K && game->im_dev) {
-			game->skip = false;
+		if (event->keysym.scancode == SDL_SCANCODE_K && game->dev_mode.im_dev) {
+			game->dev_mode.skip = false;
 		}
 
-		if (event->keysym.scancode == SDL_SCANCODE_KP_PLUS && game->im_dev) {
-			game->acceleration += 5;
+		if (event->keysym.scancode == SDL_SCANCODE_KP_PLUS && game->dev_mode.im_dev) {
+			game->dev_mode.acceleration += 5;
 		}
 
-		if (event->keysym.scancode == SDL_SCANCODE_KP_MINUS && game->im_dev) {
-			game->acceleration -= 5;
+		if (event->keysym.scancode == SDL_SCANCODE_KP_MINUS && game->dev_mode.im_dev) {
+			game->dev_mode.acceleration -= 5;
 		}
 	}
 }

@@ -96,6 +96,14 @@ typedef struct s_questsys {
 	int stage;
 } t_questsys;
 
+typedef struct s_dev_mode {
+	bool im_dev;
+	bool god;
+	bool noclip;
+	bool skip;
+	int acceleration;
+} t_dev_mode;
+
 typedef struct s_game {
 	SDL_Renderer *renderer;
 	SDL_Window *window;
@@ -119,11 +127,7 @@ typedef struct s_game {
 	SDL_Point spawnpoint;
 	bool is_finish;
 	SDL_Texture *main_menu_texture;
-	bool im_dev;
-	bool god;
-	bool noclip;
-	bool skip;
-	int acceleration;
+	t_dev_mode dev_mode;
 } t_game;
 
 typedef struct s_entdata_door {
