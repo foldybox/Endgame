@@ -1,8 +1,10 @@
 # Excluded files
 
 .DS_Store
-lib
 obj
 *.app
 .vscode
 endgame
+Game.exe
+Game.pdb
+.vs
