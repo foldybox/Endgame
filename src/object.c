@@ -46,10 +46,10 @@ void object_logic(t_game *game, t_entity *obj) {
 
 void object_draw(t_game *game, t_entity *obj) {
     if (!((t_entdata_object *)obj->data)->is_used) {
-        blit_tile(game, ((t_entdata_object *)obj->data)->start_tile, game->scene_offset.x + obj->x * (TILE_SIZE * TILE_SCALE), game->scene_offset.y + obj->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, ANCHOR_TOP_LEFT);
+        blit_tile(game, ((t_entdata_object *)obj->data)->start_tile, game->scene_offset.x + obj->x * (TILE_SIZE * TILE_SCALE), game->scene_offset.y + obj->y * (TILE_SIZE * TILE_SCALE), ANCHOR_TOP_LEFT);
     }
     else {
-        blit_tile(game, ((t_entdata_object *)obj->data)->finish_tile, game->scene_offset.x + obj->x * (TILE_SIZE * TILE_SCALE), game->scene_offset.y + obj->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, ANCHOR_TOP_LEFT);
+        blit_tile(game, ((t_entdata_object *)obj->data)->finish_tile, game->scene_offset.x + obj->x * (TILE_SIZE * TILE_SCALE), game->scene_offset.y + obj->y * (TILE_SIZE * TILE_SCALE), ANCHOR_TOP_LEFT);
     }
 }
 

@@ -71,6 +71,7 @@ void animation_reload(t_entity *entity, int id) {
 
 void animate(t_entity *entity) {
     t_animation *current = entity->animations;
+    if (current == NULL) return;
     while (current != NULL) {
         if (current->is_playing == true) break;
         if (current->next == NULL) return;

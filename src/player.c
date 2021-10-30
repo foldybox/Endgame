@@ -17,6 +17,8 @@ void player_init(t_game *game, int x, int y) {
 	animation_add(player, 2, set_tile(4, 3), 4, 150, true);
 	animation_add(player, 3, set_tile(4, 4), 4, 150, true);
 	animation_add(player, 4, set_tile(0, 10), 7, 150, false);
+	animation_add(player, 5, set_tile(0, 9), 2, 400, true);
+	animation_add(player, 6, set_tile(2, 9), 2, 400, true);
 	
     game->player = player;
 }
@@ -110,6 +112,13 @@ void player_move(t_game* game) {
 		is_pressed = true;
 	}
 
+	if (game->control.left && !game->control.right) {
+		game->player->facing = FACING_LEFT;
+	}
+	else if (!game->control.left && game->control.right) {
+		game->player->facing = FACING_RIGHT;
+	}
+
 	x = game->player->x + dx;
 	y = game->player->y + dy;
 
@@ -122,7 +131,127 @@ void player_move(t_game* game) {
 	int gX = x / (TILE_SIZE * TILE_SCALE);
 	int gY = y / (TILE_SIZE * TILE_SCALE);
 
-	if ((game->map->data[gX][gY] >= 10) && (game->map->data[gX][gY] != 18) && !game->dev_mode.noclip) return;
+	SDL_Point collision;
+	collision.x = 4 * TILE_SCALE;
+	collision.y = 1 * TILE_SCALE;
+	SDL_Rect wall;
+	wall.w = (TILE_SIZE * TILE_SCALE);
+	wall.h = (TILE_SIZE * TILE_SCALE);
+
+	// noclip handler
+	if (game->dev_mode.noclip) {
+		game->player->x = x;
+		game->player->y = y;
+		game->scene_offset.x = SCREEN_WIDTH / 2 - game->player->x;
+		game->scene_offset.y = SCREEN_HEIGHT / 2 - game->player->y;
+		if (game->player->facing == FACING_RIGHT) animation_play(game->player, 5, 0);
+		else if (game->player->facing == FACING_LEFT) animation_play(game->player, 6, 0);
+		return;
+	}
+
+	for (unsigned int i = 0; i < game->map->size.x; i++)
+		for (unsigned int j = 0; j < game->map->size.y; j++) {
+			if (!((game->map->data[i][j] >= 10) && (game->map->data[i][j] != 18))) continue;
+
+			wall.x = i * (TILE_SIZE * TILE_SCALE);
+			wall.y = j * (TILE_SIZE * TILE_SCALE);
+
+			if ((x + collision.x > wall.x) && (wall.x + wall.w > x + collision.x) &&
+				(y + collision.y > wall.y) && (wall.y + wall.h > y + collision.y)) {
+				bool is_horizontal = false;
+				bool is_vertical = false;
+
+				if ((x + collision.x > wall.x) && (wall.x + wall.w > x + collision.x) &&
+					(game->player->y + collision.y > wall.y) && (wall.y + wall.h > game->player->y + collision.y)) {
+					is_horizontal = true;
+				}
+				if ((y + collision.y > wall.y) && (wall.y + wall.h > y + collision.y) &&
+					(game->player->x + collision.x > wall.x) && (wall.x + wall.w > game->player->x + collision.x)) {
+					is_vertical = true;
+				}
+
+				if (is_horizontal && is_vertical) {
+					x = game->player->x;
+					y = game->player->y;
+				} else if (is_horizontal) {
+					x = game->player->x;
+				} else if (is_vertical) {
+					y = game->player->y;
+				}
+			}
+
+			if ((x + collision.x > wall.x) && (wall.x + wall.w > x + collision.x) &&
+				(y - collision.y > wall.y) && (wall.y + wall.h > y - collision.y)) {
+				bool is_horizontal = false;
+				bool is_vertical = false;
+
+				if ((x + collision.x > wall.x) && (wall.x + wall.w > x + collision.x) &&
+					(game->player->y - collision.y > wall.y) && (wall.y + wall.h > game->player->y - collision.y)) {
+					is_horizontal = true;
+				}
+				if ((y - collision.y > wall.y) && (wall.y + wall.h > y - collision.y) &&
+					(game->player->x + collision.x > wall.x) && (wall.x + wall.w > game->player->x + collision.x)) {
+					is_vertical = true;
+				}
+
+				if (is_horizontal && is_vertical) {
+					x = game->player->x;
+					y = game->player->y;
+				} else if (is_horizontal) {
+					x = game->player->x;
+				} else if (is_vertical) {
+					y = game->player->y;
+				}
+			}
+
+			if ((x - collision.x > wall.x) && (wall.x + wall.w > x - collision.x) &&
+				(y + collision.y > wall.y) && (wall.y + wall.h > y + collision.y)) {
+				bool is_horizontal = false;
+				bool is_vertical = false;
+
+				if ((x - collision.x > wall.x) && (wall.x + wall.w > x - collision.x) &&
+					(game->player->y + collision.y > wall.y) && (wall.y + wall.h > game->player->y + collision.y)) {
+					is_horizontal = true;
+				}
+				if ((y + collision.y > wall.y) && (wall.y + wall.h > y + collision.y) &&
+					(game->player->x - collision.x > wall.x) && (wall.x + wall.w > game->player->x - collision.x)) {
+					is_vertical = true;
+				}
+
+				if (is_horizontal && is_vertical) {
+					x = game->player->x;
+					y = game->player->y;
+				} else if (is_horizontal) {
+					x = game->player->x;
+				} else if (is_vertical) {
+					y = game->player->y;
+				}
+			}
+
+			if ((x - collision.x > wall.x) && (wall.x + wall.w > x - collision.x) &&
+				(y - collision.y > wall.y) && (wall.y + wall.h > y - collision.y)) {
+				bool is_horizontal = false;
+				bool is_vertical = false;
+
+				if ((x - collision.x > wall.x) && (wall.x + wall.w > x - collision.x) &&
+					(game->player->y - collision.y > wall.y) && (wall.y + wall.h > game->player->y - collision.y)) {
+					is_horizontal = true;
+				}
+				if ((y - collision.y > wall.y) && (wall.y + wall.h > y - collision.y) &&
+					(game->player->x - collision.x > wall.x) && (wall.x + wall.w > game->player->x - collision.x)) {
+					is_vertical = true;
+				}
+
+				if (is_horizontal && is_vertical) {
+					x = game->player->x;
+					y = game->player->y;
+				} else if (is_horizontal) {
+					x = game->player->x;
+				} else if (is_vertical) {
+					y = game->player->y;
+				}
+			}
+		}
 
 	t_entity *entity = game->entities;
     while (entity != NULL) {
@@ -168,13 +297,6 @@ void player_move(t_game* game) {
 		}
         entity = entity->next;
     }
-
-	if (game->control.left && !game->control.right) {
-		game->player->facing = FACING_LEFT;
-	}
-	else if (!game->control.left && game->control.right) {
-		game->player->facing = FACING_RIGHT;
-	}
 
 	if (game->control.left || game->control.right || game->control.up || game->control.down) {
 		if (game->player->facing == FACING_RIGHT) animation_play(game->player, 2, 1);
@@ -262,7 +384,7 @@ void player_draw(t_game *game) {
 							text_draw(game, "[F] Использовать", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
 						}
 						else {
-							text_draw(game, "Чего-то необходимо", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+							text_draw(game, "Что-то необходимо", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
 						}
 					}
 				}

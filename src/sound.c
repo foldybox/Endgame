@@ -38,7 +38,7 @@ void sound_play(t_game *game, int id, int channel) {
 void sound_logic(t_game *game) {
     if (game->sound.timer == 0) game->sound.timer = SDL_GetTicks();
 
-    if (game->control.down == 1 || game->control.up == 1 || game->control.left == 1 || game->control.right == 1) {
+    if ((game->control.down == 1 || game->control.up == 1 || game->control.left == 1 || game->control.right == 1) && !game->dev_mode.noclip) {
         if (SDL_GetTicks() > game->sound.timer + 400) {
             sound_play(game, SND_PLAYER_RUN, CH_PLAYER);
             game->sound.timer = 0;

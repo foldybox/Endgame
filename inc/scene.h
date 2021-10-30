@@ -12,6 +12,7 @@
 #include "text.h"
 #include "sound.h"
 #include "questsys.h"
+#include "animation.h"
 
 
 void scene_init(t_game* game);

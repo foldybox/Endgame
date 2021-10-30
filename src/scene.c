@@ -10,6 +10,8 @@ void scene_init(t_game *game) {
 
 	// Level 00
 	npc_add(game, "real_general", set_tile(1, 11), 14, 112, true);
+    animation_add(entity_by_slag(game, "real_general"), 0, set_tile(1, 11), 2, 300, true);
+    animation_play(entity_by_slag(game, "real_general"), 0, 0);
 	npc_add(game, "real_scientist", set_tile(0, 11), 7, 116, false);
 	object_add(game, "chair_of_vr_main", set_tile(0, 14), set_tile(1, 14), 7, 118, false, ITEM_NOTSET, 1000, true);
 	door_add(game, "locked_door", set_tile(10, 0), set_tile(9, 0), 17, 111, true, ITEM_NULL, false);
