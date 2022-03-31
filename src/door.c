@@ -33,7 +33,7 @@ void door_logic(t_game *game, t_entity *door) {
 }
 
 void door_draw(t_game *game, t_entity *door) {
-    blit_tile(game, door->tile, game->scene_offset.x + door->x * (TILE_SIZE * TILE_SCALE), game->scene_offset.y + door->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, ANCHOR_TOP_LEFT);
+    blit_tile(game, door->tile, game->scene_offset.x + door->x * (TILE_SIZE * TILE_SCALE), game->scene_offset.y + door->y * (TILE_SIZE * TILE_SCALE), ANCHOR_TOP_LEFT);
 }
 
 void door_free(t_entity *door) {

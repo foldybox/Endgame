@@ -24,7 +24,8 @@ void npc_logic(t_game *game, t_entity *npc) {
 }
 
 void npc_draw(t_game *game, t_entity *npc) {
-    blit_tile(game, npc->tile, game->scene_offset.x + npc->x * (TILE_SIZE * TILE_SCALE), game->scene_offset.y + npc->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, ANCHOR_TOP_LEFT);
+    animate(npc);
+    blit_tile(game, npc->tile, game->scene_offset.x + npc->x * (TILE_SIZE * TILE_SCALE), game->scene_offset.y + npc->y * (TILE_SIZE * TILE_SCALE), ANCHOR_TOP_LEFT);
 }
 
 void npc_free(t_entity *npc) {
