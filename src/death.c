@@ -47,7 +47,7 @@ void death_draw(t_game *game) {
         SDL_RenderFillRect(game->renderer, &rect);
 
         text_draw(game, "GAME OVER", SCREEN_WIDTH / 2,  SCREEN_HEIGHT / 2 - 20, 144, ANCHOR_BOTTOM_CENTER);
-        text_draw(game, "Нажмите [SPACE] чтобы возродиться", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 20, 24, ANCHOR_TOP_CENTER);
+        text_draw(game, "Press [Space] to respawn", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 20, 24, ANCHOR_TOP_CENTER);
     }
 }
 

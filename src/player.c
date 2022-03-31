@@ -334,20 +334,20 @@ void player_draw(t_game *game) {
 		switch (game->player->usable->type) {
 			case ENTYPE_NPC:
 				if (((t_entdata_npc *) game->player->usable->data)->is_active) {
-					text_draw(game, "[F] Говорить", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+					text_draw(game, "[F] Talk", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
 				}
 				break;
 
 			case ENTYPE_ITEM:
 				if (!((t_entdata_item *) game->player->usable->data)->is_picked_up) {
-					text_draw(game, "[F] Взять", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+					text_draw(game, "[F] Pick up", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
 				}
 				break;
 
 			case ENTYPE_DOOR:
 				if (((t_entdata_door *) game->player->usable->data)->is_locked) {
 					if (((t_entdata_door *) game->player->usable->data)->required_item == ITEM_NULL) {
-						text_draw(game, "Дверь закрыта", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+						text_draw(game, "Door is locked", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
 						break;
 					}
 
@@ -359,10 +359,10 @@ void player_draw(t_game *game) {
 						}
 					}
 					if (has_key) {
-						text_draw(game, "[F] Открыть", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+						text_draw(game, "[F] Open", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
 					}
 					else {
-						text_draw(game, "Нужен ключ", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+						text_draw(game, "Need a key", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
 					}
 				}
 				break;
@@ -370,7 +370,7 @@ void player_draw(t_game *game) {
 			case ENTYPE_OBJECT:
 				if (!((t_entdata_object *) game->player->usable->data)->is_used && ((t_entdata_object *) game->player->usable->data)->is_active) {
 					if (((t_entdata_object *) game->player->usable->data)->is_using) {
-						text_draw(game, "Используется...", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+						text_draw(game, "Using...", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
 					}
 					else {
 						bool has_key = false;
@@ -381,10 +381,10 @@ void player_draw(t_game *game) {
 							}
 						}
 						if (has_key) {
-							text_draw(game, "[F] Использовать", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+							text_draw(game, "[F] Use", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
 						}
 						else {
-							text_draw(game, "Что-то необходимо", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
+							text_draw(game, "Something is need", game->scene_offset.x + game->player->usable->x * (TILE_SIZE * TILE_SCALE) + (TILE_SIZE * TILE_SCALE) / 2, game->scene_offset.y + game->player->usable->y * (TILE_SIZE * TILE_SCALE) - TILE_SCALE, 24, ANCHOR_BOTTOM_CENTER);
 						}
 					}
 				}

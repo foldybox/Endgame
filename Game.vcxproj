@@ -215,8 +215,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\FoldyBox\Documents\GitHub\game\inc\SDL2;D:\SDL2\include;$(MSBuildProjectDirectory)\inc;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\SDL2\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(MSBuildProjectDirectory)\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>$(MSBuildProjectDirectory)\lib;$(LibraryPath)</LibraryPath>
     <SourcePath>$(MSBuildProjectDirectory)\src;$(SourcePath)</SourcePath>
     <OutDir>$(SolutionDir)</OutDir>
     <IntDir>$(SolutionDir)obj</IntDir>
@@ -272,7 +272,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <ObjectFileName>$(MSBuildProjectDirectory)\obj\</ObjectFileName>
-      <AdditionalIncludeDirectories>C:\Users\FoldyBox\Documents\GitHub\game\inc\SDL2;C:\Users\FoldyBox\Documents\GitHub\game\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

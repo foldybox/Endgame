@@ -10,25 +10,24 @@ void scene_init(t_game *game) {
 
 	// Level 00
 	npc_add(game, "real_general", set_tile(1, 11), 14, 112, true);
-    animation_add(entity_by_slag(game, "real_general"), 0, set_tile(1, 11), 2, 300, true);
-    animation_play(entity_by_slag(game, "real_general"), 0, 0);
 	npc_add(game, "real_scientist", set_tile(0, 11), 7, 116, false);
 	object_add(game, "chair_of_vr_main", set_tile(0, 14), set_tile(1, 14), 7, 118, false, ITEM_NOTSET, 1000, true);
 	door_add(game, "locked_door", set_tile(10, 0), set_tile(9, 0), 17, 111, true, ITEM_NULL, false);
 
-	message_add(entity_by_slag(game, "real_general"), "Генерал Прокофьев", "Сегодня тебе выпал уникальный шанс, ты сможешь испытать на себе инновационную методику подготовки.", 0);
-    message_add(entity_by_slag(game, "real_general"), "Генерал Прокофьев", "Не скажу что ты чем-то выделяешься на фоне остальных, просто все отряды уже были сформированы полностью.", 0);
-    message_add(entity_by_slag(game, "real_general"), "Генерал Прокофьев", "Если справишься, то закончишь военную подготовку всего за несколько дней и снова станешь свободными человеком.", 0);
-	message_add(entity_by_slag(game, "real_general"), "Генерал Прокофьев", "Подойти к профессору Штрамену, он подробнее расскажет что делать.", 0);
+	message_add(entity_by_slag(game, "real_general"), "General Prokofiev", "Today you have a unique chance, you are one of the first cadets in our Internet battalion.", 0);
+    message_add(entity_by_slag(game, "real_general"), "General Prokofiev", "You have the honor of serving the country and protecting its web borders.", 0);
+    message_add(entity_by_slag(game, "real_general"), "General Prokofiev", "Thanks to people like you, our citizens will be able to sleep well.", 0);
+	message_add(entity_by_slag(game, "real_general"), "General Prokofiev", "They will be assured that not one byte of enemy information will enter our network.", 0);
+    message_add(entity_by_slag(game, "real_general"), "General Prokofiev", "Approach Professor Solovyov, he will tell you more about what to do.", 0);
 
-	message_add(entity_by_slag(game, "real_scientist"), "Профессор Штрамен", "Здравствуй, я один из тех кто занимался разработкой этой программы обучения.", 0);
-    message_add(entity_by_slag(game, "real_scientist"), "Профессор Штрамен", "С помощью компьютерной симуляции была построена виртуальная полоса препятствий...", 0);
-    message_add(entity_by_slag(game, "real_scientist"), "Профессор Штрамен", "... это инновационная разработка, которой я лично горжусь. Система полностью рабочая...", 0);
-    message_add(entity_by_slag(game, "real_scientist"), "Профессор Штрамен", "... хоть и не до конца протестирована, но я уверен, она сильно улучшит твои навыки передвижения и реакции.", 0);
-    message_add(entity_by_slag(game, "real_scientist"), "Профессор Штрамен", "Не обращай внимания на низко детализированную графику, это всего лишь бета версия.", 0);
-    message_add(entity_by_slag(game, "real_scientist"), "Профессор Штрамен", "Садись на вон то кресло, что светиться синим цветом, надевай шлем и мы начнем.", 0);
-    message_add(entity_by_slag(game, "real_scientist"), "Профессор Штрамен", "Запомни, тебе нужно найти Генерала Прокофьева, но в виртуальной реальности. Он даст дальнейшие указания.", 0);
-
+	message_add(entity_by_slag(game, "real_scientist"), "Professor Solovyov", "Hello, I'm one of the people who developed this system that will protect our native network.", 0);
+    message_add(entity_by_slag(game, "real_scientist"), "Professor Solovyov", "Using computer simulation, a virtual obstacle course...", 0);
+    message_add(entity_by_slag(game, "real_scientist"), "Professor Solovyov", "... is an innovative development of which I am personally proud. The system is completely working...", 0);
+    message_add(entity_by_slag(game, "real_scientist"), "Professor Solovyov", "...though not fully tested, but I'm sure it will greatly improve your skills of navigating the network.", 0);
+    message_add(entity_by_slag(game, "real_scientist"), "Professor Solovyov", "Ignore the low-detail graphics and don't trust everything you see...", 0);
+    message_add(entity_by_slag(game, "real_scientist"), "Professor Solovyov", "... it's all tricks of the enemy Special Forces who are interfering with our training.", 0);
+    message_add(entity_by_slag(game, "real_scientist"), "Professor Solovyov", "Sit in that blue chair over there, put on your helmet and we'll get started.", 0);
+    message_add(entity_by_slag(game, "real_scientist"), "Professor Solovyov", "Remember, you need to find General Prokofiev, but on the virtual network. He will give you further instructions.", 0);
 
 	// Level 01
 	npc_add(game, "virtual_general", set_tile(1, 11), 28, 35, false);
@@ -48,32 +47,34 @@ void scene_init(t_game *game) {
 	door_add(game, "mil_locked_door", set_tile(-1, -1), set_tile(-1, -1), 17, 16, true, ITEM_NULL, true);
     item_add(game, set_tile(2, 13), 10, 25, ITEM_PAINT, true);
 
-	message_add(entity_by_slag(game, "virtual_guard"), "Охранник", "Куда идешь!? Сюда только по пропуску! Без него не пущу.", 0);
-	message_add(entity_by_slag(game, "virtual_guard"), "Охранник", "Неплохая работа, пропуск и впрямь выглядит как настоящий. Только вот...", 1);
-    message_add(entity_by_slag(game, "virtual_guard"), "Охранник", "...редко тут можно встретить 80 летнюю женщину указанную в пропуске...", 1);
-    message_add(entity_by_slag(game, "virtual_guard"), "Охранник", "Тебе крупно повезло, есть у меня недалеко от базы кусочек огорода... ", 1);
-    message_add(entity_by_slag(game, "virtual_guard"), "Охранник", "Если ты соберешь оставшуюся картошку, то я закрою глаза на липовый пропуск.", 1);
-	message_add(entity_by_slag(game, "virtual_guard"), "Охранник", "Вижу ты сделал то, что я тебе поручил, ладно проходи, но чтобы я тебя больше здесь не видел.", 2);
+	message_add(entity_by_slag(game, "virtual_guard"), "Security guard", "Where are you going!? You need a pass to get in here! I can't let you in without one.", 0);
+	message_add(entity_by_slag(game, "virtual_guard"), "Security guard", "Not bad, the pass does look real. Except...", 1);
+    message_add(entity_by_slag(game, "virtual_guard"), "Security guard", "...it's rare to see an 80-year-old woman listed on a pass...", 1);
+    message_add(entity_by_slag(game, "virtual_guard"), "Security guard", "You're in luck, I have a piece of virtual vegetable garden near the base.", 1);
+    message_add(entity_by_slag(game, "virtual_guard"), "Security guard", "I recently purchased it to grow crypto potatoes, but right now I don't have time to do that.", 1);
+	message_add(entity_by_slag(game, "virtual_guard"), "Security guard", "If you harvest the rest of crypto potatoes, I'll turn a blind eye to the fake pass.", 1);
+    message_add(entity_by_slag(game, "virtual_guard"), "Security guard", "I see you did what I told you to do, all right, but I don't want to witness you here again.", 2);
 
-	message_add(entity_by_slag(game, "virtual_sarge"), "Сержант Пяточка", "Приветствую тебя, новобранец! я тут увидел, что тебе нужен пропуск, так ведь?", 0);
-    message_add(entity_by_slag(game, "virtual_sarge"), "Сержант Пяточка", "У меня как раз есть одно задание специально для тебя, видишь перед мной серую траву...", 0);
-    message_add(entity_by_slag(game, "virtual_sarge"), "Сержант Пяточка", "... ее нужно покрасить в зелёную. Как? Краской конечно!", 0);
-    message_add(entity_by_slag(game, "virtual_sarge"), "Сержант Пяточка", "Как раз одна должна быть здесь недалеко за полосой препятствий.", 0);
-    message_add(entity_by_slag(game, "virtual_sarge"), "Сержант Пяточка", "Достань краску, покрась траву, и может быть мы договоримся на пропуск.", 0);
-	message_add(entity_by_slag(game, "virtual_sarge"), "Сержант Пяточка", "Неужели ты справился? Неплохо, но моя бабушка и то быстрее бы это сделала...", 1);
-    message_add(entity_by_slag(game, "virtual_sarge"), "Сержант Пяточка", "..., но так уж и быть, держи пропуск.", 1);
+	message_add(entity_by_slag(game, "virtual_sarge"), "Sergeant Pyatochka", "Greetings, rookie! I saw that you need a pass, right?", 0);
+    message_add(entity_by_slag(game, "virtual_sarge"), "Sergeant Pyatochka", "I've got an assignment just for you, see the gray grass in front of me...", 0);
+    message_add(entity_by_slag(game, "virtual_sarge"), "Sergeant Pyatochka", "...that needs to be dyed green. How? With paint, of course!", 0);
+    message_add(entity_by_slag(game, "virtual_sarge"), "Sergeant Pyatochka", "There should be one right here behind the obstacle course.", 0);
+    message_add(entity_by_slag(game, "virtual_sarge"), "Sergeant Pyatochka", "Get the paint, paint the grass, and maybe we can deal with your pass.", 0);
+	message_add(entity_by_slag(game, "virtual_sarge"), "Sergeant Pyatochka", "You really did that? Not bad, but my granny would have done it a lot faster...", 1);
+    message_add(entity_by_slag(game, "virtual_sarge"), "Sergeant Pyatochka", "...but okay, here's your pass.", 1);
 
-	message_add(entity_by_slag(game, "virtual_general"), "Виртуальный Генерал Прокофьев", "Солдат, ты должен был быть здесь уже 2 часа назад! Ты там что, траву красил?", 0);
-    message_add(entity_by_slag(game, "virtual_general"), "Виртуальный Генерал Прокофьев", "Тебя ждет важная миссия по спасению заложников от террористов.", 0);
-    message_add(entity_by_slag(game, "virtual_general"), "Виртуальный Генерал Прокофьев", "Ты будешь работать в команде с професионалами которые уже закочили подготовку.", 0);
-    message_add(entity_by_slag(game, "virtual_general"), "Виртуальный Генерал Прокофьев", "Отправляйся немедленно! Тебя будут ждать по ту сторону портала из которого ты вошел.", 0);
+	message_add(entity_by_slag(game, "virtual_general"), "Virtual General Prokofiev", "Soldier, you were supposed to be here two hours ago! Were you painting the grass out there?", 0);
+    message_add(entity_by_slag(game, "virtual_general"), "Virtual General Prokofiev", "You're on an important mission to find a lost Internet soldier, commander of a platoon of Internet couch troops.", 0);
+    message_add(entity_by_slag(game, "virtual_general"), "Virtual General Prokofiev", "It's a secret mission that only you can do.", 0);
+    message_add(entity_by_slag(game, "virtual_general"), "Virtual General Prokofiev", "Move on right now! Unfortunately, you're going alone, because everyone else is still are busy with virtual vegetable gardens.", 0);
+    message_add(entity_by_slag(game, "virtual_general"), "Virtual General Prokofiev", "Go to the portal that teleported you here.", 0);
 
-	message_add(entity_by_slag(game, "virtual_tumbleweed"), "Генерал Тамбэлвид", "Знаешь... Я тоже был генералом... А потом...", 0);
-	message_add(entity_by_slag(game, "virtual_tumbleweed"), "Генерал Тамбэлвид", "...", 0);
-	message_add(entity_by_slag(game, "virtual_tumbleweed"), "Генерал Тамбэлвид", "...", 0);
-    message_add(entity_by_slag(game, "virtual_tumbleweed"), "Генерал Тамбэлвид", "...", 0);
-    message_add(entity_by_slag(game, "virtual_tumbleweed"), "Генерал Тамбэлвид", "...", 0);
-    message_add(entity_by_slag(game, "virtual_tumbleweed"), "Генерал Тамбэлвид", "Не важно.", 0);
+	message_add(entity_by_slag(game, "virtual_tumbleweed"), "Tumbelweed", "You know... I used to be a couch general, too... And then...", 0);
+	message_add(entity_by_slag(game, "virtual_tumbleweed"), "Tumbelweed", "...", 0);
+	message_add(entity_by_slag(game, "virtual_tumbleweed"), "General Tumbelweed", "...", 0);
+    message_add(entity_by_slag(game, "virtual_tumbleweed"), "Tumbelweed", "two percent sh#t.", 0);
+    message_add(entity_by_slag(game, "virtual_tumbleweed"), "General Tumbelweed", "...", 0);
+    message_add(entity_by_slag(game, "virtual_tumbleweed"), "Tumbelweed", "Never mind.", 0);
 
     // Level 02
     npc_add(game, "virtual_scientist", set_tile(6, 11), 12, 46, true);
@@ -84,10 +85,10 @@ void scene_init(t_game *game) {
     object_add(game, "final_portal0", set_tile(11, 0), set_tile(11, 0), 31, 72, false, ITEM_NOTSET, 1000, false);
 	object_add(game, "final_portal1", set_tile(12, 0), set_tile(12, 0), 32, 72, false, ITEM_NOTSET, 1000, false);
 
-    message_add(entity_by_slag(game, "virtual_scientist"), "Виртуальный Профессор Штрамен", "Оo, здравствуй! Мы наконец-то тебя нашли, голубчик. Извини, в последнее время у нас проблемы с серверами...", 0);
-	message_add(entity_by_slag(game, "virtual_scientist"), "Виртуальный Профессор Штрамен", "Мы пока не можем оппределить где ты оказался, по этому будь осторожен!", 0);
-	message_add(entity_by_slag(game, "virtual_scientist"), "Виртуальный Профессор Штрамен", "Скорее всего где-то здесь тоже есть выходной портал, но я бы советовал тебе подождать помощи.", 0);
-    message_add(entity_by_slag(game, "virtual_scientist"), "Виртуальный Профессор Штрамен", "Мы уже отправили репорт в столицу, думаю тебе скоро помогут... До связи...", 0);
+    message_add(entity_by_slag(game, "virtual_scientist"), "Virtual Professor Solovyov", "Oh, hello! We finally found you, dear. Sorry, we've been having problems with the servers lately...", 0);
+	message_add(entity_by_slag(game, "virtual_scientist"), "Virtual Professor Solovyov", "We can't tell where you are yet, so be careful!", 0);
+	message_add(entity_by_slag(game, "virtual_scientist"), "Virtual Professor Solovyov", "There's probably an exit portal somewhere around here, but I'd advise you to wait for help.", 0);
+    message_add(entity_by_slag(game, "virtual_scientist"), "Virtual Professor Solovyov", "We've already sent a report to Cheburnet's office, I think you'll get help soon... See you...", 0);
 
 
 	map_init(game, "resource/maps/map.csv");
@@ -148,8 +149,8 @@ void scene_draw(t_game* game) {
         SDL_SetRenderDrawColor(game->renderer, 0, 0, 0, 0);
         SDL_RenderFillRect(game->renderer, &rect);
 
-        text_draw(game, "Глава 2", SCREEN_WIDTH / 2,  SCREEN_HEIGHT / 2 - 20, 144, ANCHOR_BOTTOM_CENTER);
-        text_draw(game, "Скоро...", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 20, 24, ANCHOR_TOP_CENTER);
+        text_draw(game, "Chapter II", SCREEN_WIDTH / 2,  SCREEN_HEIGHT / 2 - 20, 144, ANCHOR_BOTTOM_CENTER);
+        text_draw(game, "Soon...", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 20, 24, ANCHOR_TOP_CENTER);
     }
 }
 
@@ -175,13 +176,11 @@ void scene_free(t_game* game) {
 void traps_init(t_game *game) {
 	trap_add(game, set_tile(3, 14), set_tile(4, 14), 17, 4, 18, 4, TRAP_TRIGGER, 0);
 	trap_add(game, set_tile(3, 14), set_tile(4, 14), 20, 4, 24, 5, TRAP_GLIMMER, 500);
-    
-	//Первый проход лабиринта старт игры
+   
     
   	trap_add(game, set_tile(3, 14), set_tile(4, 14), 17, 4, 18, 4, TRAP_TRIGGER, 0);
 	trap_add(game, set_tile(3, 14), set_tile(4, 14), 20, 4, 24, 5, TRAP_GLIMMER, 500);
 
-	//Первый проход лабиринта старт игры
     trap_add(game, set_tile(3, 14), set_tile(4, 14), 10, 13, 10, 15, TRAP_GLIMMER, 1000);
     trap_add(game, set_tile(3, 14), set_tile(4, 14), 10, 16, 10, 17, TRAP_GLIMMER, 1900);
 
